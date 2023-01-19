@@ -19,4 +19,13 @@ public class HelloController {
                 .data("hello "+user)
                 .build());
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<Response<String>> helloLogin(){
+        return ResponseEntity.ok(Response.<String>builder()
+                .code(ResponseCode.SUCCESS)
+                .message("성공")
+                .data("로그인 하면 보인다~")
+                .build());
+    }
 }
