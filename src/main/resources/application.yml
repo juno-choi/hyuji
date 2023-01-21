@@ -8,11 +8,18 @@ logging:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     root: info
-    com.molu.molu: debug
+    com.juno.normalapi: info
 
 server:
   port: 8000
 --- #local
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    root: info
+    com.juno.normalapi: debug
+
 spring:
   config:
     activate:
