@@ -7,6 +7,7 @@ import com.juno.normalapi.domain.EmptyDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,15 +30,27 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         log.info("인증 요청");
-        return super.attemptAuthentication(request, response);
+        Authentication authenticate = null;
+        authenticate = getAuthenticationManager().authenticate(
+            new UsernamePasswordAuthenticationToken("유저", "비밀번호", new ArrayList<>())
+        );
+        return authenticate;
     }
 
     // 인증에 성공 했을 경우
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("인증 성공");
+        response.setStatus(HttpStatus.OK.value());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        PrintWriter writer = response.getWriter();
+        Response<EmptyDto> responseDto = Response.<EmptyDto>builder()
+                .code(ResponseCode.SUCCESS)
+                .message("로그인 성공")
+                .data(EmptyDto.of("토큰 데이터가 들어갈 자리"))
+                .build();
+        writer.write(objectMapper.writeValueAsString(responseDto));
         // 성공시 jwt 토큰 발급해주면 됨!
-        super.successfulAuthentication(request, response, chain, authResult);
     }
 
     // 인증에 실패했을 때

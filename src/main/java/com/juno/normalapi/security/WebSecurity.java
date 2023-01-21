@@ -2,15 +2,19 @@ package com.juno.normalapi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final ObjectMapper objectMapper;
+    private final AuthService authService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +33,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private AuthFilter getAuthFilter() throws Exception {
         AuthFilter auth = new AuthFilter(objectMapper);
         auth.setAuthenticationManager(authenticationManager());
-        auth.setFilterProcessesUrl("/hello/login");
+        auth.setFilterProcessesUrl("/v1/member/login");
         return auth;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(authService).passwordEncoder(passwordEncoder);
     }
 }
