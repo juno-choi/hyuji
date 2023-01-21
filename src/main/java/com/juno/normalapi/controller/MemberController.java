@@ -3,6 +3,7 @@ package com.juno.normalapi.controller;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
+import com.juno.normalapi.domain.dto.RequestLoginMember;
 import com.juno.normalapi.domain.vo.JoinMember;
 import com.juno.normalapi.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response<String>> login(){
+    public ResponseEntity<Response<String>> login(@RequestBody RequestLoginMember loginMember){
         return ResponseEntity.ok(Response.<String>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")

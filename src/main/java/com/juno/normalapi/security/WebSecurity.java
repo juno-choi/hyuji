@@ -1,6 +1,7 @@
 package com.juno.normalapi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juno.normalapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final ObjectMapper objectMapper;
     private final AuthService authService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     // 로그인 요청시 filter
     private AuthFilter getAuthFilter() throws Exception {
-        AuthFilter auth = new AuthFilter(objectMapper);
+        AuthFilter auth = new AuthFilter(objectMapper, memberRepository);
         auth.setAuthenticationManager(authenticationManager());
         auth.setFilterProcessesUrl("/v1/member/login");
         return auth;

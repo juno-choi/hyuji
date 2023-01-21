@@ -2,22 +2,32 @@ package com.juno.normalapi.controller;
 
 import com.juno.normalapi.docs.TestSupport;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
+import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class MemberControllerTest extends TestSupport {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private MemberRepository memberRepository;
 
     private final String URL = "/v1/member";
 
@@ -43,9 +53,27 @@ class MemberControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("로그인 테스트")
-    void loginTest1() throws Exception {
-        ResultActions perform = mock.perform(get(URL + "/login"));
-        perform.andDo(print());
+    @DisplayName("로그인 성공")
+    void loginMemberSuccess1() throws Exception {
+        String email = "test@test.com";
+        String password = "password";
+        Map<String, String> map = new HashMap<>();
+        map.put("email", email);
+        map.put("password", password);
+
+        Member member = Member.builder()
+                .email(email)
+                .password(password)
+                .name("tester")
+                .nickname("테스터")
+                .role("TESTER")
+                .build();
+        member.encryptPassword(member, passwordEncoder);
+        memberRepository.save(member);
+
+        ResultActions perform = mock.perform(
+                post(URL + "/login").contentType(MediaType.APPLICATION_JSON)
+                        .content(convertToString(map))
+        ).andDo(print());
     }
 }
