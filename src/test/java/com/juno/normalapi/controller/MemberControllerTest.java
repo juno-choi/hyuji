@@ -1,14 +1,12 @@
 package com.juno.normalapi.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juno.normalapi.docs.TestSupport;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,12 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MemberControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
+class MemberControllerTest extends TestSupport {
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private final String URL = "/v1/member";
 
@@ -41,9 +35,9 @@ class MemberControllerTest {
                 .addressDetail("상세 주소")
                 .build();
 
-        ResultActions perform = mockMvc.perform(
+        ResultActions perform = mock.perform(
                 post(URL + "/join").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(requestJoinMember))
+                .content(convertToString(requestJoinMember))
         );
         perform.andDo(print());
     }
@@ -51,7 +45,7 @@ class MemberControllerTest {
     @Test
     @DisplayName("로그인 테스트")
     void loginTest1() throws Exception {
-        ResultActions perform = mockMvc.perform(get(URL + "/login"));
+        ResultActions perform = mock.perform(get(URL + "/login"));
         perform.andDo(print());
     }
 }

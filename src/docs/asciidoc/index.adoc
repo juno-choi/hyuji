@@ -1,0 +1,30 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+:toc: left
+:toclevels: 2
+:toc-title: molu api
+:doctype: book
+:source-highlighter: highlightjs
+:sectlinks:
+
+= 👏 normal API
+
+== 📗 회원
+
+### 📄 회원 가입
+
+==== ✅ REQUEST
+include::{snippets}/member-controller-docs/join-member-success/http-request.adoc[]
+
+==== ✅ REQUEST FIELD
+
+include::{snippets}/member-controller-docs/join-member-success/request-fields.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/member-controller-docs/join-member-success/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/member-controller-docs/join-member-success/response-fields.adoc[]
