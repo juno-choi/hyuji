@@ -3,7 +3,7 @@ package com.juno.normalapi.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
-import com.juno.normalapi.domain.EmptyDto;
+import com.juno.normalapi.domain.dto.EmptyDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

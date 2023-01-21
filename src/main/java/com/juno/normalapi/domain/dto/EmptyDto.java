@@ -1,4 +1,4 @@
-package com.juno.normalapi.domain;
+package com.juno.normalapi.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
