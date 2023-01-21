@@ -1,33 +1,35 @@
 package com.juno.normalapi.security;
 
-import com.juno.normalapi.filter.SecurityFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurity {
-    private final SecurityFilter securityFilter;
+public class WebSecurity extends WebSecurityConfigurerAdapter {
+    private final ObjectMapper objectMapper;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.cors().disable();
+        http.headers().frameOptions().disable();
+        http.formLogin().disable();
+        http.httpBasic().disable();
 
+        http.authorizeRequests().antMatchers("/**").permitAll()
+        .and().addFilter(getAuthFilter());
+    }
 
-        return http
-                .httpBasic().disable()
-                .cors().disable()
-                .formLogin().disable()
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests().antMatchers("/**").permitAll()
-
-        .and().build();
+    // 로그인 요청시 filter
+    private AuthFilter getAuthFilter() throws Exception {
+        AuthFilter auth = new AuthFilter(objectMapper);
+        auth.setAuthenticationManager(authenticationManager());
+        auth.setFilterProcessesUrl("/hello/login");
+        return auth;
     }
 }
