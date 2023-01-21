@@ -1,11 +1,14 @@
 package com.juno.normalapi.domain.vo;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.juno.normalapi.domain.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JoinMember {
     private Long memberId;
     private String email;
