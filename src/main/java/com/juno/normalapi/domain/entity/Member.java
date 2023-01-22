@@ -1,13 +1,11 @@
 package com.juno.normalapi.domain.entity;
 
 import com.juno.normalapi.domain.dto.RequestJoinMember;
+import com.juno.normalapi.domain.enums.JoinType;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -20,18 +18,25 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String nickname;
+    @Column(nullable = false)
     private String tel;
+
+    private JoinType type;
     private String zipCode;
     private String address;
     private String addressDetail;
     private String role;
 
     // 일반 유저
-    public static Member of(RequestJoinMember requestJoinMember){
+    public static Member of(RequestJoinMember requestJoinMember, JoinType joinType){
         return Member.builder()
                 .email(requestJoinMember.getEmail())
                 .password(requestJoinMember.getPassword())
@@ -41,6 +46,7 @@ public class Member {
                 .zipCode(requestJoinMember.getZipCode())
                 .address(requestJoinMember.getAddress())
                 .addressDetail(requestJoinMember.getAddressDetail())
+                .type(joinType)
                 .role("ROLE_MEMBER")
                 .build();
     }

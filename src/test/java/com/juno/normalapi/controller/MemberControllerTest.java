@@ -66,7 +66,8 @@ class MemberControllerTest extends TestSupport {
                 .password(password)
                 .name("tester")
                 .nickname("테스터")
-                .role("TESTER")
+                .tel("01012341234")
+                .role("USER")
                 .build();
         member.encryptPassword(member, passwordEncoder);
         memberRepository.save(member);

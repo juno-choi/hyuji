@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,28 +54,16 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         );
     }
 
-    private void onError(HttpServletResponse response, HttpStatus httpStatus, String message, String dataMessage) {
-        try {
-            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-            response.setStatus(httpStatus.value());
-            PrintWriter writer = response.getWriter();
-            Response<EmptyDto> responseDto = Response.<EmptyDto>builder()
-                    .code(ResponseCode.FAIL)
-                    .message(message)
-                    .data(EmptyDto.of(dataMessage))
-                    .build();
-            writer.write(objectMapper.writeValueAsString(responseDto));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
-
     // 인증에 성공 했을 경우
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("인증 성공");
         // member db 조회
-
+        User user = (User) authResult.getPrincipal();
+        String memberId = user.getUsername();
+        //권한
+        Collection<GrantedAuthority> authorities = user.getAuthorities();
+        log.debug("memberId = {}", memberId);
         // jwt 토큰 생성
         // redis 토큰 등록
 
@@ -105,5 +95,21 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
                 .build();
 
         writer.write(objectMapper.writeValueAsString(responseDto));
+    }
+
+    private void onError(HttpServletResponse response, HttpStatus httpStatus, String message, String dataMessage) {
+        try {
+            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+            response.setStatus(httpStatus.value());
+            PrintWriter writer = response.getWriter();
+            Response<EmptyDto> responseDto = Response.<EmptyDto>builder()
+                    .code(ResponseCode.FAIL)
+                    .message(message)
+                    .data(EmptyDto.of(dataMessage))
+                    .build();
+            writer.write(objectMapper.writeValueAsString(responseDto));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 }

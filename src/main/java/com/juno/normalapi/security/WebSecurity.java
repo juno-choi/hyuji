@@ -28,7 +28,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable();
 
         http.authorizeRequests().antMatchers("/**").permitAll()
-        .and().addFilter(getAuthFilter());
+        .and().addFilter(getAuthFilter())
+        ;
     }
 
     // 로그인 요청시 filter

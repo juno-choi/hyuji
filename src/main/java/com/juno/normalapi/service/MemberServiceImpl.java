@@ -2,6 +2,7 @@ package com.juno.normalapi.service;
 
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.domain.vo.JoinMember;
 import com.juno.normalapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
     @Transactional
     @Override
     public JoinMember join(RequestJoinMember requestJoinMember) {
-        Member member = Member.of(requestJoinMember);
+        Member member = Member.of(requestJoinMember, JoinType.EMAIL);
         member.encryptPassword(member, passwordEncoder);
         Member saveMember = memberRepository.save(member);
         return JoinMember.of(saveMember);
