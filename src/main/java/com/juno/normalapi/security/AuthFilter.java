@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -102,6 +103,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         // 반환 정보 생성
         response.setStatus(HttpStatus.OK.value());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         PrintWriter writer = response.getWriter();
         Response<LoginMember> responseDto = Response.<LoginMember>builder()
                 .code(ResponseCode.SUCCESS)
@@ -119,6 +121,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         PrintWriter writer = response.getWriter();
         Response<EmptyDto> responseDto = Response.<EmptyDto>builder()
                 .code(ResponseCode.UNAUTHORIZED)
@@ -133,6 +136,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         try {
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
             response.setStatus(httpStatus.value());
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             PrintWriter writer = response.getWriter();
             Response<EmptyDto> responseDto = Response.<EmptyDto>builder()
                     .code(ResponseCode.FAIL)
