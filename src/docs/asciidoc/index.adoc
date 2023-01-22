@@ -15,16 +15,34 @@ endif::[]
 ### 📄 회원 가입
 
 ==== ✅ REQUEST
-include::{snippets}/member-controller-docs/join-member-success/http-request.adoc[]
+include::{snippets}/member-controller-docs/join-member/http-request.adoc[]
 
 ==== ✅ REQUEST FIELD
 
-include::{snippets}/member-controller-docs/join-member-success/request-fields.adoc[]
+include::{snippets}/member-controller-docs/join-member/request-fields.adoc[]
 
 ==== ✅ RESPONSE
 
-include::{snippets}/member-controller-docs/join-member-success/http-response.adoc[]
+include::{snippets}/member-controller-docs/join-member/http-response.adoc[]
 
 ==== ✅ RESPONSE FIELD
 
-include::{snippets}/member-controller-docs/join-member-success/response-fields.adoc[]
+include::{snippets}/member-controller-docs/join-member/response-fields.adoc[]
+
+
+### 📄 로그인
+
+==== ✅ REQUEST
+include::{snippets}/member-controller-docs/login-member/http-request.adoc[]
+
+==== ✅ REQUEST FIELD
+
+include::{snippets}/member-controller-docs/login-member/request-fields.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/member-controller-docs/login-member/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/member-controller-docs/login-member/response-fields.adoc[]
