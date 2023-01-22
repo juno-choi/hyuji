@@ -48,4 +48,7 @@ spring:
       jdbc-url: jdbc:h2:mem:normal
       username: sa
       password:
+  redis:
+    host: localhost
+    port: 6379
 --- #dev
