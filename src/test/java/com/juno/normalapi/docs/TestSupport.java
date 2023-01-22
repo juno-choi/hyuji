@@ -2,19 +2,21 @@ package com.juno.normalapi.docs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juno.normalapi.security.WebSecurity;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.test.web.servlet.MockMvc;
 
 @Disabled
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @ExtendWith(MockitoExtension.class)
-public class TestSupport {
+public class TestSupport extends WebSecurityConfigurerAdapter {
     @Autowired
     protected ObjectMapper objectMapper;
 

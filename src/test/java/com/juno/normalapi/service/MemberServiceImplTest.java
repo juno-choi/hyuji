@@ -25,7 +25,7 @@ class MemberServiceImplTest {
     @DisplayName("회원가입 성공")
     void join1(){
         RequestJoinMember requestJoinMember = RequestJoinMember.builder()
-                .email("test@naver.com")
+                .email("test2@naver.com")
                 .password("test123!")
                 .name("테스터")
                 .nickname("닉네임")

@@ -27,13 +27,4 @@ public class MemberController {
                 .data(memberService.join(joinMember))
                 .build());
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<Response<String>> login(@RequestBody RequestLoginMember loginMember){
-        return ResponseEntity.ok(Response.<String>builder()
-                .code(ResponseCode.SUCCESS)
-                .message("성공")
-                .data("로그인 성공")
-                .build());
-    }
 }
