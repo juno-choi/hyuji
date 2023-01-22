@@ -1,7 +1,6 @@
 package com.juno.normalapi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juno.normalapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
