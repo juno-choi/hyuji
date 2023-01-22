@@ -1,18 +1,23 @@
 package com.juno.normalapi.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.juno.normalapi.api.Response;
 import com.juno.normalapi.docs.TestSupport;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.vo.LoginMember;
 import com.juno.normalapi.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 class MemberControllerTest extends TestSupport {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RedisTemplate<String, ?> redisTemplate;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -70,11 +78,21 @@ class MemberControllerTest extends TestSupport {
                 .role("USER")
                 .build();
         member.encryptPassword(member, passwordEncoder);
-        memberRepository.save(member);
+        Member saveMember = memberRepository.save(member);
 
         ResultActions perform = mock.perform(
                 post(URL + "/login").contentType(MediaType.APPLICATION_JSON)
                         .content(convertToString(map))
         ).andDo(print());
+
+        String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        Response<LoginMember> response = objectMapper.readValue(contentAsString, new TypeReference<Response<LoginMember>>() {});
+        LoginMember loginMember = response.getData();
+
+        String accessToken = (String) redisTemplate.opsForHash().get(loginMember.getAccessToken(), "access_token");
+        String refreshToken = (String) redisTemplate.opsForHash().get(loginMember.getRefreshToken(), "refresh_token");
+
+        assertEquals(Long.valueOf(accessToken) ,saveMember.getMemberId());
+        assertEquals(Long.valueOf(refreshToken) ,saveMember.getMemberId());
     }
 }

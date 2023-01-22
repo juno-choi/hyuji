@@ -6,12 +6,16 @@ import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.domain.dto.EmptyDto;
 import com.juno.normalapi.domain.dto.RequestLoginMember;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.vo.LoginMember;
 import com.juno.normalapi.repository.MemberRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,14 +33,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 public class AuthFilter extends UsernamePasswordAuthenticationFilter {
-    private final ObjectMapper objectMapper;
-    private final MemberRepository memberRepository;
     private final Environment env;
+    private final ObjectMapper objectMapper;
+    private final RedisTemplate<String, ?> redisTemplate;
+
 
     // 인증 요청을 보냈을 경우
     @Override
@@ -79,20 +85,28 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
                 .compact();
 
-        Map<String, String> map = new HashMap<>();
-        map.put("access_token", accessToken);
-        map.put("refresh_token", refreshToken);
+        LoginMember loginMember = LoginMember.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
 
         // redis 토큰 등록
+        log.info("redis token 등록");
+
+        HashOperations<String, Object, Object> opsHash = redisTemplate.opsForHash();
+        opsHash.put(accessToken, "access_token", memberId);
+        opsHash.put(refreshToken, "refresh_token", memberId);
+        redisTemplate.expire(accessToken, 1L, TimeUnit.HOURS);
+        redisTemplate.expire(refreshToken, 30L, TimeUnit.DAYS);
 
         // 반환 정보 생성
         response.setStatus(HttpStatus.OK.value());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         PrintWriter writer = response.getWriter();
-        Response<Map> responseDto = Response.<Map>builder()
+        Response<LoginMember> responseDto = Response.<LoginMember>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("로그인 성공")
-                .data(map)
+                .data(loginMember)
                 .build();
         writer.write(objectMapper.writeValueAsString(responseDto));
     }

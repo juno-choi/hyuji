@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,8 +18,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final ObjectMapper objectMapper;
     private final AuthService authService;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final MemberRepository memberRepository;
     private final Environment env;
+    private final RedisTemplate<String, ?> redisTemplate;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     // 로그인 요청시 filter
     private AuthFilter getAuthFilter() throws Exception {
-        AuthFilter auth = new AuthFilter(objectMapper, memberRepository, env);
+        AuthFilter auth = new AuthFilter(env, objectMapper, redisTemplate);
         auth.setAuthenticationManager(authenticationManager());
         auth.setFilterProcessesUrl("/v1/member/login");
         return auth;
