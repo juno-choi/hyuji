@@ -20,6 +20,13 @@ logging:
     root: info
     com.juno.normalapi: debug
 
+token:
+  secret: juno-secret-key-value
+  access:
+    expiration: 3600 # 1시간
+  refresh:
+    expiration: 2592000 # 1달
+
 spring:
   config:
     activate:
