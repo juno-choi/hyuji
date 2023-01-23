@@ -47,7 +47,7 @@ public class Member {
                 .address(requestJoinMember.getAddress())
                 .addressDetail(requestJoinMember.getAddressDetail())
                 .type(joinType)
-                .role("ROLE_MEMBER")
+                .role("USER")
                 .build();
     }
 
