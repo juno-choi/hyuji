@@ -5,6 +5,7 @@ import com.juno.normalapi.api.Response;
 import com.juno.normalapi.docs.TestSupport;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.domain.vo.LoginMember;
 import com.juno.normalapi.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
@@ -94,5 +96,33 @@ class MemberControllerTest extends TestSupport {
 
         assertEquals(Long.valueOf(accessToken) ,saveMember.getMemberId());
         assertEquals(Long.valueOf(refreshToken) ,saveMember.getMemberId());
+    }
+
+    @Test
+    @DisplayName("토큰 재발급 성공")
+    void refreshSuccess() throws Exception {
+        //given
+        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+                .email("refresh_temp@mail.com")
+                .password("test123!")
+                .name("테스터")
+                .nickname("닉네임")
+                .tel("01012341234")
+                .zipCode("12345")
+                .address("경기도 성남시 중원구 자혜로17번길 16")
+                .addressDetail("상세 주소")
+                .build();
+        Member member = memberRepository.save(Member.of(requestJoinMember, JoinType.EMAIL));
+
+        String token = "refresh_temp_token";
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+
+        //when
+        ResultActions perform = mock.perform(
+                get(URL + "/refresh/{token}", token).contentType(MediaType.APPLICATION_JSON)
+        ).andDo(print());
+        //then
+        String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertTrue(contentAsString.contains("토큰 재발급 성공"));
     }
 }

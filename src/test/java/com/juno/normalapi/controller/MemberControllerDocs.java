@@ -13,7 +13,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.ResultActions;
@@ -21,6 +23,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.StandardCharsets;
 
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
@@ -32,6 +36,9 @@ class MemberControllerDocs extends DocsSupport {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private RedisTemplate<String, ?> redisTemplate;
 
     private final String URL = "/v1/member";
     private final String EMAIL = "docs@email.com";
@@ -54,7 +61,7 @@ class MemberControllerDocs extends DocsSupport {
 
     @Test
     @DisplayName(URL+"/join")
-    void joinMember() throws Exception {
+    void join() throws Exception {
         RequestJoinMember requestJoinMember = RequestJoinMember.builder()
                 .email("docs1@email.com")
                 .password(PASSWORD)
@@ -100,7 +107,7 @@ class MemberControllerDocs extends DocsSupport {
 
     @Test
     @DisplayName(URL+"/login")
-    void loginMember() throws Exception {
+    void login() throws Exception {
         RequestLoginMember requestLoginMember = RequestLoginMember.builder()
                 .email(EMAIL)
                 .password(PASSWORD)
@@ -125,6 +132,44 @@ class MemberControllerDocs extends DocsSupport {
                         fieldWithPath("data.access_token").type(JsonFieldType.STRING).description("access token 1시간"),
                         fieldWithPath("data.refresh_token").type(JsonFieldType.STRING).description("refresh token 30일")
                 )
+        ));
+    }
+
+
+    @Test
+    @DisplayName(URL+"/refresh")
+    void refresh() throws Exception {
+        //given
+        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+                .email("refresh@mail.com")
+                .password("test123!")
+                .name("테스터")
+                .nickname("닉네임")
+                .tel("01012341234")
+                .zipCode("12345")
+                .address("경기도 성남시 중원구 자혜로17번길 16")
+                .addressDetail("상세 주소")
+                .build();
+        Member member = memberRepository.save(Member.of(requestJoinMember, JoinType.EMAIL));
+
+        String token = "refresh_token";
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+
+        //when
+        ResultActions perform = mock.perform(
+                RestDocumentationRequestBuilders.get(URL + "/refresh/{token}", token).contentType(MediaType.APPLICATION_JSON)
+        );
+        //then
+        perform.andDo(docs.document(
+            pathParameters(
+                parameterWithName("token").description("refresh token")
+            ),
+            responseFields(
+                    fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                    fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                    fieldWithPath("data.access_token").type(JsonFieldType.STRING).description("access token 1시간 (재발급)"),
+                    fieldWithPath("data.refresh_token").type(JsonFieldType.STRING).description("refresh token 30일 (기존 토큰)")
+            )
         ));
     }
 }

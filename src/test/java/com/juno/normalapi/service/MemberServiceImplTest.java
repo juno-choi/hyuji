@@ -53,7 +53,7 @@ class MemberServiceImplTest {
     void refreshFail1(){
         // given & when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> memberService.refresh("token")
+                () -> memberService.refresh("invalid_token")
         );
 
         // then

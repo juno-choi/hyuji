@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
         }
 
         Member findMember = memberRepository.findById(Long.valueOf(memberIdStr)).orElseThrow(
-                () -> new IllegalArgumentException("유효하지 않은 회원입니다. 관리자에게 문의해주세요!")
+            () -> new IllegalArgumentException("유효하지 않은 회원입니다. 관리자에게 문의해주세요!")
         );
 
         Long memberId = findMember.getMemberId();
@@ -58,15 +58,11 @@ public class MemberServiceImpl implements MemberService{
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
                 .compact();
 
-        String refreshToken = Jwts.builder()
-                .setSubject(String.valueOf(memberId))
-                .setExpiration(new Date(System.currentTimeMillis() + (Long.parseLong(env.getProperty("token.refresh.expiration")) * 1000L))) //파기일
-                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
-                .compact();
+        redisTemplate.opsForHash().put(accessToken, "access_token", String.valueOf(memberId));
 
         LoginMember loginMember = LoginMember.builder()
                 .accessToken(accessToken)
-                .refreshToken(refreshToken)
+                .refreshToken(token)
                 .build();
 
         return loginMember;

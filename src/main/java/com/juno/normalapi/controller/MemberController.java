@@ -29,7 +29,7 @@ public class MemberController {
     public ResponseEntity<Response<LoginMember>> refresh(@PathVariable(value = "token") String token){
         return ResponseEntity.ok(Response.<LoginMember>builder()
                 .code(ResponseCode.SUCCESS)
-                .message("회원 가입 성공")
+                .message("토큰 재발급 성공")
                 .data(memberService.refresh(token))
                 .build());
     }
