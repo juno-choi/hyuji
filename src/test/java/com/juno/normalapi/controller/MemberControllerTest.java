@@ -125,4 +125,17 @@ class MemberControllerTest extends TestSupport {
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertTrue(contentAsString.contains("토큰 재발급 성공"));
     }
+
+    @Test
+    @DisplayName("토큰 재발급 실패")
+    void refreshFail1() throws Exception {
+        //given
+        //when
+        ResultActions perform = mock.perform(
+                get(URL + "/refresh/{token}", "invalid_token").contentType(MediaType.APPLICATION_JSON)
+        ).andDo(print());
+        //then
+        String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertTrue(contentAsString.contains("토큰 값이 유효하지 않습니다."));
+    }
 }
