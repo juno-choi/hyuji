@@ -33,12 +33,6 @@ class MemberControllerTest extends TestSupport {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RedisTemplate<String, ?> redisTemplate;
-
-    @Autowired
-    private MemberRepository memberRepository;
-
     private final String URL = "/auth/member";
 
     @Test
