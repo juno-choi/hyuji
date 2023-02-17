@@ -23,9 +23,9 @@ logging:
 token:
   secret: juno-secret-key-value
   access:
-    expiration: 3700 # 1시간
+    expiration: 3600 # 1시간
   refresh:
-    expiration: 2593000 # 1달
+    expiration: 2592000 # 1달
 
 spring:
   config:

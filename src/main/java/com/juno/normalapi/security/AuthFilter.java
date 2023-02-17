@@ -70,22 +70,28 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         Collection<GrantedAuthority> authorities = user.getAuthorities();
         log.debug("memberId = {}", memberId);
 
+        long accessExpirationEnv = Long.parseLong(env.getProperty("token.access.expiration"));
+        long refreshExpirationEnv = Long.parseLong(env.getProperty("token.refresh.expiration"));
+
+        Date accessTokenExpiration = new Date(System.currentTimeMillis() + (accessExpirationEnv * 1000L));
+        Date refreshTokenExpiration = new Date(System.currentTimeMillis() + (refreshExpirationEnv * 1000L));
+
+        Long accessTokenExpirationToLong = accessTokenExpiration.getTime();
+        Long refreshTokenExpirationToLong = refreshTokenExpiration.getTime();
+
         // jwt 토큰 생성
-        String accessToken = Jwts.builder().setSubject(memberId).setExpiration(new Date(System.currentTimeMillis() + (Long.parseLong(env.getProperty("token.access.expiration")) * 1000L))) //파기일
+        String accessToken = Jwts.builder()
+                .setSubject(memberId)
+                .setExpiration(accessTokenExpiration) //파기일
                 .claim("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
                 .compact();
 
         String refreshToken = Jwts.builder()
                 .setSubject(memberId)
-                .setExpiration(new Date(System.currentTimeMillis() + (Long.parseLong(env.getProperty("token.refresh.expiration")) * 1000L))) //파기일
+                .setExpiration(refreshTokenExpiration) //파기일
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
                 .compact();
-
-        LoginMember loginMember = LoginMember.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
 
         // redis 토큰 등록
         log.info("redis token 등록");
@@ -93,8 +99,15 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         HashOperations<String, Object, Object> opsHash = redisTemplate.opsForHash();
         opsHash.put(accessToken, "access_token", memberId);
         opsHash.put(refreshToken, "refresh_token", memberId);
-        redisTemplate.expire(accessToken, 1L, TimeUnit.HOURS);
-        redisTemplate.expire(refreshToken, 30L, TimeUnit.DAYS);
+        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
+        redisTemplate.expire(refreshToken, refreshTokenExpirationToLong, TimeUnit.SECONDS);
+
+        LoginMember loginMember = LoginMember.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .accessTokenExpiration(accessTokenExpirationToLong)
+                .refreshTokenExpiration(refreshTokenExpirationToLong)
+                .build();
 
         // 반환 정보 생성
         response.setStatus(HttpStatus.OK.value());

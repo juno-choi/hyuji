@@ -130,7 +130,9 @@ class MemberControllerDocs extends DocsSupport {
                         fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
                         fieldWithPath("data.access_token").type(JsonFieldType.STRING).description("access token 1시간"),
-                        fieldWithPath("data.refresh_token").type(JsonFieldType.STRING).description("refresh token 30일")
+                        fieldWithPath("data.refresh_token").type(JsonFieldType.STRING).description("refresh token 30일"),
+                        fieldWithPath("data.access_token_expiration").type(JsonFieldType.NUMBER).description("access token 파기일 1시간"),
+                        fieldWithPath("data.refresh_token_expiration").type(JsonFieldType.NUMBER).description("refresh token 파기일 30일")
                 )
         ));
     }
@@ -168,7 +170,7 @@ class MemberControllerDocs extends DocsSupport {
                     fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
                     fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
                     fieldWithPath("data.access_token").type(JsonFieldType.STRING).description("access token 1시간 (재발급)"),
-                    fieldWithPath("data.refresh_token").type(JsonFieldType.STRING).description("refresh token 30일 (기존 토큰)")
+                    fieldWithPath("data.access_token_expiration").type(JsonFieldType.NUMBER).description("access token 파기일 1시간")
             )
         ));
     }

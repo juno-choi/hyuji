@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,17 +53,25 @@ public class MemberServiceImpl implements MemberService{
         Long memberId = findMember.getMemberId();
         String roles = findMember.getRole();
         String[] authorities = roles.split(",");
+
+        String accessExpirationEnv = env.getProperty("token.access.expiration");
+        Date accessExpiration = new Date(System.currentTimeMillis() + (Long.parseLong(accessExpirationEnv) * 1000L));
+        Long accessTokenExpirationToLong = accessExpiration.getTime();
+
         // jwt 토큰 생성
-        String accessToken = Jwts.builder().setSubject(String.valueOf(memberId)).setExpiration(new Date(System.currentTimeMillis() + (Long.parseLong(env.getProperty("token.access.expiration")) * 1000L))) //파기일
+        String accessToken = Jwts.builder()
+                .setSubject(String.valueOf(memberId))
+                .setExpiration(accessExpiration) //파기일
                 .claim("roles", Arrays.stream(authorities).collect(Collectors.toList()))
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))    //암호화 알고리즘과 암호화 키값
                 .compact();
 
         redisTemplate.opsForHash().put(accessToken, "access_token", String.valueOf(memberId));
+        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
 
         LoginMember loginMember = LoginMember.builder()
                 .accessToken(accessToken)
-                .refreshToken(token)
+                .accessTokenExpiration(accessTokenExpirationToLong)
                 .build();
 
         return loginMember;

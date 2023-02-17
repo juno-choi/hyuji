@@ -100,6 +100,5 @@ class MemberServiceImplTest {
 
         // then
         assertNotNull(loginMember.getAccessToken());
-        assertNotNull(loginMember.getRefreshToken());
     }
 }
