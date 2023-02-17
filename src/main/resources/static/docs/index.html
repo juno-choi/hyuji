@@ -464,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="_request"><a class="link" href="#_request">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/member/join HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/join HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 255
 Host: 127.0.0.1
@@ -648,7 +648,7 @@ Content-Length: 366
 <h4 id="_request_2"><a class="link" href="#_request_2">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/member/login HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 62
 Host: 127.0.0.1
@@ -701,8 +701,8 @@ Content-Length: 447
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjc0NDQxNzMyLCJyb2xlcyI6WyJVU0VSIl19.tWbm_etcIFVvgCJiGBkt02Exc6bDN8JS_LGK_LZBCq1bQpbUXeMeIsTVGupNSlKXZQe6UtR9y5yHZP7O_nxRpw",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjc3MDMxMDMyfQ.LPLQI3RBu6uTBRw9sAb0dt0f5adl-PTSKXGBXAIBYHK0lU_E1pu4C_KJLEOayFpol1aIe9hjtUzmPm5__lUpQw"
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjc2NjA4MTQxLCJyb2xlcyI6WyJVU0VSIl19.FpNmekEMvX6p3iAiZssrEsdRodpX7Z8THiJp_mt3nWRP1Zq1EwsFLZReVRzM9N8mtrN4NKVHr8Gj9MPpE16FQg",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjc5MTk3NDQxfQ.GkxlTLb7YrVD6azq85KU0QtsjDad6evwyEM1hqs_CoZmV-ynf1ClgYTLjb0Zm5jEZ0iP00PL2Yim7aFD3KHQNw"
   }
 }</code></pre>
 </div>
@@ -754,7 +754,7 @@ Content-Length: 447
 <h4 id="_request_3"><a class="link" href="#_request_3">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/member/refresh/refresh_token HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /auth/member/refresh/refresh_token HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: 127.0.0.1</code></pre>
 </div>
@@ -763,7 +763,7 @@ Host: 127.0.0.1</code></pre>
 <div class="sect3">
 <h4 id="_request_field_3"><a class="link" href="#_request_field_3">✅ REQUEST FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /v1/member/refresh/{token}</caption>
+<caption class="title">Table 1. /auth/member/refresh/{token}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -794,7 +794,7 @@ Content-Length: 321
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNjc0NDQxNzMyLCJyb2xlcyI6WyJVU0VSIl19.MpCwFPt2myLpdskL2-zwQed9ZuaUvd1vbNFh4UM91pUjmoEIkAO8XIiYONNEOYSotlpsGiyMUuZUfLHj3XuWCg",
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNjc2NjA4MTQyLCJyb2xlcyI6WyJVU0VSIl19.vG2ZBMTVfhYgLHIxa6J7US7oIgBVKmdWnXpngEeX4axBpRMX0Adss4t_-bumDrvyEefOxVghYuDeVV4zBbrlvQ",
     "refresh_token" : "refresh_token"
   }
 }</code></pre>
@@ -846,7 +846,7 @@ Content-Length: 321
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-01-23 10:41:45 +0900
+Last updated 2023-02-17 10:22:32 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
