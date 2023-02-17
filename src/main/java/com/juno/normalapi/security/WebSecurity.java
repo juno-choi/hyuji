@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -30,16 +32,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable();
 
         http.authorizeRequests().antMatchers("/**").permitAll()
-        .and().addFilter(getAuthFilter())
-        ;
+        .and().addFilter(getAuthFilter());
     }
 
     // 로그인 요청시 filter
     private AuthFilter getAuthFilter() throws Exception {
-        AuthFilter auth = new AuthFilter(env, objectMapper, redisTemplate);
-        auth.setAuthenticationManager(authenticationManager());
-        auth.setFilterProcessesUrl("/auth/member/login");
-        return auth;
+        AuthFilter filter = new AuthFilter(env, objectMapper, redisTemplate);
+        filter.setAuthenticationManager(authenticationManager());
+        filter.setFilterProcessesUrl("/auth/member/login");
+        return filter;
     }
 
     @Override
