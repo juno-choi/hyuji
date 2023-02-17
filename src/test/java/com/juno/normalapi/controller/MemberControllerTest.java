@@ -39,7 +39,7 @@ class MemberControllerTest extends TestSupport {
     @Autowired
     private MemberRepository memberRepository;
 
-    private final String URL = "/v1/member";
+    private final String URL = "/auth/member";
 
     @Test
     @DisplayName("회원 가입 성공")

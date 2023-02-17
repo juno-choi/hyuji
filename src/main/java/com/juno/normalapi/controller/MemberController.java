@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/member")
+@RequestMapping("/auth/member")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;

@@ -38,7 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private AuthFilter getAuthFilter() throws Exception {
         AuthFilter auth = new AuthFilter(env, objectMapper, redisTemplate);
         auth.setAuthenticationManager(authenticationManager());
-        auth.setFilterProcessesUrl("/v1/member/login");
+        auth.setFilterProcessesUrl("/auth/member/login");
         return auth;
     }
 

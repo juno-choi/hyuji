@@ -58,7 +58,7 @@ public class DocsSupport extends TestSupport{
     private AuthFilter getAuthFilter() throws Exception {
         AuthFilter authFilter = new AuthFilter(env, objectMapper, redisTemplate);
         authFilter.setAuthenticationManager(authenticationManager());
-        authFilter.setFilterProcessesUrl("/v1/member/login");
+        authFilter.setFilterProcessesUrl("/auth/member/login");
         return authFilter;
     }
 }

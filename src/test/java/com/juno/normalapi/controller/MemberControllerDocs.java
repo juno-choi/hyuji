@@ -40,7 +40,7 @@ class MemberControllerDocs extends DocsSupport {
     @Autowired
     private RedisTemplate<String, ?> redisTemplate;
 
-    private final String URL = "/v1/member";
+    private final String URL = "/auth/member";
     private final String EMAIL = "docs@email.com";
     private final String PASSWORD = "test123!";
 
