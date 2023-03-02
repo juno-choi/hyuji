@@ -12,6 +12,10 @@ logging:
 
 server:
   port: 8000
+
+normal:
+  test:
+    email: juno@test.com
 --- #local
 logging:
   pattern:

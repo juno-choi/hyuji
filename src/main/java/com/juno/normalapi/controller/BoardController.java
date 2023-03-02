@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @V1
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/board")
-    public ResponseEntity<Response<BoardListVo>> board(){
+    public ResponseEntity<Response<BoardListVo>> board(HttpServletRequest request){
         return ResponseEntity.ok(Response.<BoardListVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
