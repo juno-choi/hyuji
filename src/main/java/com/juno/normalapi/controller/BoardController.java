@@ -1,5 +1,6 @@
 package com.juno.normalapi.controller;
 
+import com.juno.normalapi.annotation.V1;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.domain.vo.BoardListVo;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1")
+@V1
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
