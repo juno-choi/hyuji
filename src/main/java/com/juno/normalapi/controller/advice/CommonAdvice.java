@@ -8,20 +8,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.naming.AuthenticationException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice(basePackages = "com.juno.normalapi")
 public class CommonAdvice {
     @ExceptionHandler
-    public ResponseEntity<ResponseError<ErrorDto>> illegalArgumentException(IllegalArgumentException e){
-        List<ErrorDto> errors = new ArrayList<>();
-        errors.add(ErrorDto.builder().error(e.getMessage()).build());
+    public ResponseEntity<ResponseError<String>> illegalArgumentException(IllegalArgumentException e){
+        List<String> errors = new ArrayList<>();
+        errors.add(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(
-                        ResponseError.<ErrorDto>builder()
+                        ResponseError.<String>builder()
                                 .code(ResponseCode.FAIL)
                                 .message("잘못된 입력입니다.")
+                                .errors(errors)
+                                .build()
+                );
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ResponseError<String>> authenticationException(AuthenticationException e){
+        List<String> errors = new ArrayList<>();
+        errors.add(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(
+                        ResponseError.<String>builder()
+                                .code(ResponseCode.FAIL)
+                                .message("인증되지 않은 접근입니다.")
                                 .errors(errors)
                                 .build()
                 );
