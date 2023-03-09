@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class BoardVo {
     private Long boardId;
+    private Long memberId;
     private String title;
+    private String content;
     private String writer;
     private LocalDateTime regDate;
 }

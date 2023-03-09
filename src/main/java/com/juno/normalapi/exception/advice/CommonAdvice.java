@@ -1,14 +1,13 @@
-package com.juno.normalapi.controller.advice;
+package com.juno.normalapi.exception.advice;
 
-import com.juno.normalapi.api.ErrorDto;
 import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.api.ResponseError;
+import com.juno.normalapi.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.naming.AuthenticationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class CommonAdvice {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ResponseError<String>> authenticationException(AuthenticationException e){
+    public ResponseEntity<ResponseError<String>> authenticationException(UnauthorizedException e){
         List<String> errors = new ArrayList<>();
         errors.add(e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

@@ -15,7 +15,7 @@ server:
 
 normal:
   login:
-    attribute: loginUserId
+    attribute: loginMemberId
   test:
     email: juno@test.com
 --- #local
