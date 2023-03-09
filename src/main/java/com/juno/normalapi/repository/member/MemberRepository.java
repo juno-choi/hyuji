@@ -1,4 +1,4 @@
-package com.juno.normalapi.repository;
+package com.juno.normalapi.repository.member;
 
 import com.juno.normalapi.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

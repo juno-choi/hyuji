@@ -1,17 +1,16 @@
-package com.juno.normalapi.service;
+package com.juno.normalapi.service.member;
 
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.domain.vo.JoinMember;
 import com.juno.normalapi.domain.vo.LoginMember;
-import com.juno.normalapi.repository.MemberRepository;
+import com.juno.normalapi.repository.member.MemberRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

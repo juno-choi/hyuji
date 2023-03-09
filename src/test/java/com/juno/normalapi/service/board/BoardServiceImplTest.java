@@ -1,14 +1,13 @@
-package com.juno.normalapi.service;
+package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
+import com.juno.normalapi.exception.UnauthorizedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.mock.web.MockHttpServletRequest;
-
-import javax.naming.AuthenticationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,8 +22,8 @@ class BoardServiceImplTest {
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
     @Test
-    @DisplayName("게시글 등록에 실패한다.")
-    void postBoardFail1() throws AuthenticationException {
+    @DisplayName("게시글 등록에 성공한다.")
+    void postBoardFail2() {
         // given
         RequestBoard requestBoard = RequestBoard.builder()
                 .title("제목")
@@ -32,9 +31,12 @@ class BoardServiceImplTest {
                 .build();
 
         request.setAttribute("loginMemberId", 1L);
-        System.out.println(request.getAttribute("loginMemberId").toString());
         // when
-        boardService.postBoard(requestBoard, request);
+        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postBoard(requestBoard, request));
+
         // then
+        assertEquals("잘못된 접근입니다.", ex.getMessage());
     }
+
+
 }

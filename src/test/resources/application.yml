@@ -10,6 +10,11 @@ logging:
     root: info
     com.juno.normalapi: info
 
+normal:
+  login:
+    attribute: loginMemberId
+  test:
+    email: juno@test.com
 --- #local
 logging:
   pattern:

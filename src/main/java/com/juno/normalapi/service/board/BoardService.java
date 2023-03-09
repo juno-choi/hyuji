@@ -1,4 +1,4 @@
-package com.juno.normalapi.service;
+package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.vo.BoardListVo;

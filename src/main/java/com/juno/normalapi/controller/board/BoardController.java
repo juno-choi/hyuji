@@ -1,4 +1,4 @@
-package com.juno.normalapi.controller;
+package com.juno.normalapi.controller.board;
 
 import com.juno.normalapi.annotation.V1;
 import com.juno.normalapi.api.Response;
@@ -6,7 +6,7 @@ import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
-import com.juno.normalapi.service.BoardService;
+import com.juno.normalapi.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

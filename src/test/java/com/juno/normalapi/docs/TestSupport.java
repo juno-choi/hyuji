@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.enums.JoinType;
-import com.juno.normalapi.repository.MemberRepository;
+import com.juno.normalapi.repository.member.MemberRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.BeforeAll;

@@ -2,7 +2,7 @@ package com.juno.normalapi.config;
 
 import com.juno.normalapi.annotation.V1;
 import com.juno.normalapi.interceptor.TokenInterceptor;
-import com.juno.normalapi.repository.MemberRepository;
+import com.juno.normalapi.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;

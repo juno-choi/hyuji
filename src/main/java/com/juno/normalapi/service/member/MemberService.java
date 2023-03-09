@@ -1,4 +1,4 @@
-package com.juno.normalapi.service;
+package com.juno.normalapi.service.member;
 
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.vo.JoinMember;

@@ -3,7 +3,7 @@ package com.juno.normalapi.interceptor;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.enums.JoinType;
-import com.juno.normalapi.repository.MemberRepository;
+import com.juno.normalapi.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
