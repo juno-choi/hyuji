@@ -46,7 +46,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 return true;
             }
             Long memberId = findMember.get().getMemberId();
-            request.setAttribute("loginUserId", memberId);
+            request.setAttribute(env.getProperty("normal.login.attribute"), memberId);
             return true;
         }
 
@@ -54,7 +54,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         Optional.ofNullable(loginUserTokenValue).orElseThrow(()-> new AuthenticationException("유효하지 않은 access token 입니다."));
         Long loginUserId = Long.parseLong(loginUserTokenValue);
 
-        request.setAttribute("loginUserId", loginUserId);
+        request.setAttribute(env.getProperty("normal.login.attribute"), loginUserId);
         return true;
     }
 
@@ -72,7 +72,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                         .build(), JoinType.EMAIL));
 
         Long memberId = saveMember.getMemberId();
-        request.setAttribute("loginUserId", memberId);
+        request.setAttribute(env.getProperty("normal.login.attribute"), memberId);
 
         redisTemplate.opsForHash().put(TEST_ACCESS_TOKEN, "access_token", String.valueOf(memberId));
     }
