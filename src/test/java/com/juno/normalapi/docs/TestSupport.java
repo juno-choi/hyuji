@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestSupport extends WebSecurityConfigurerAdapter {
     protected String accessToken = "Bearer ";
-    private Boolean flag = true;
 
     @Autowired
     protected ObjectMapper objectMapper;
@@ -57,8 +56,7 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
     @Transactional
     void beforeAll(){
         String email = "test@email.com";
-        if(flag || memberRepository.findByEmail(email).isPresent()){
-            flag = false;
+        if(memberRepository.findByEmail(email).isPresent()){
             return ;
         }
 

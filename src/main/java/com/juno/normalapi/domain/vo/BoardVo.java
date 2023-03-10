@@ -16,5 +16,5 @@ public class BoardVo {
     private String title;
     private String content;
     private String writer;
-    private LocalDateTime regDate;
+    private LocalDateTime createdAt;
 }

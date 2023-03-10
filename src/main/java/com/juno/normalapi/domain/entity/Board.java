@@ -26,4 +26,16 @@ public class Board {
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
 
+    private Board(Long memberId, String title, String content, LocalDateTime modifiedAt, LocalDateTime createdAt) {
+        this.memberId = memberId;
+        this.title = title;
+        this.content = content;
+        this.modifiedAt = modifiedAt;
+        this.createdAt = createdAt;
+    }
+
+    public static Board of(String title, String content, Long memberId){
+        LocalDateTime now = LocalDateTime.now();
+        return new Board(memberId, title, content, now, now);
+    }
 }

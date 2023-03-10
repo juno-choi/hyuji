@@ -64,3 +64,23 @@ include::{snippets}/member-controller-docs/refresh/http-response.adoc[]
 ==== ✅ RESPONSE FIELD
 
 include::{snippets}/member-controller-docs/refresh/response-fields.adoc[]
+
+== 📗 게시판
+
+
+### 📄 게시글 등록
+
+==== ✅ REQUEST
+include::{snippets}/board-controller-docs/post-board/http-request.adoc[]
+
+==== ✅ REQUEST FIELD
+
+include::{snippets}/board-controller-docs/post-board/http-request.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/board-controller-docs/post-board/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/board-controller-docs/post-board/response-fields.adoc[]
