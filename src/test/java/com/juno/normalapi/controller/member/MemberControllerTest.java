@@ -1,4 +1,4 @@
-package com.juno.normalapi.controller;
+package com.juno.normalapi.controller.member;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.juno.normalapi.api.Response;

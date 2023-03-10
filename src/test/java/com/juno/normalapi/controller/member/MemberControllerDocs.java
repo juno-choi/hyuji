@@ -1,4 +1,4 @@
-package com.juno.normalapi.controller;
+package com.juno.normalapi.controller.member;
 
 import com.juno.normalapi.docs.DocsSupport;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
