@@ -3,6 +3,7 @@ package com.juno.normalapi.interceptor;
 import com.juno.normalapi.domain.dto.RequestJoinMember;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.enums.JoinType;
+import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,13 +28,13 @@ public class TokenInterceptor implements HandlerInterceptor {
     private final String TEST_ACCESS_TOKEN = "test";
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         log.info("TokenInterceptor start...");
 
         // local에서 테스트 진행할 경우 예외
         String profile = env.getProperty("spring.profiles.active");
         String accessToken = request.getHeader(AUTHORIZATION);
-        Optional.ofNullable(accessToken).orElseThrow(() -> new AuthenticationException("please check header token value"));
+        Optional.ofNullable(accessToken).orElseThrow(() -> new UnauthorizedException("please check header token value"));
         accessToken = accessToken.replace("Bearer ", "");
 
         if(profile.equals("local") && accessToken.equals(TEST_ACCESS_TOKEN)){
@@ -51,7 +52,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
 
         String loginUserTokenValue = (String) redisTemplate.opsForHash().get(accessToken, "access_token");
-        Optional.ofNullable(loginUserTokenValue).orElseThrow(()-> new AuthenticationException("유효하지 않은 access token 입니다."));
+        Optional.ofNullable(loginUserTokenValue).orElseThrow(()-> new UnauthorizedException("유효하지 않은 access token 입니다."));
         Long loginUserId = Long.parseLong(loginUserTokenValue);
 
         request.setAttribute(env.getProperty("normal.login.attribute"), loginUserId);
