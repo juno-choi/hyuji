@@ -55,13 +55,13 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
     @BeforeAll
     @Transactional
     void beforeAll(){
-        String email = "test@email.com";
+        String email = env.getProperty("normal.test.email");
         if(memberRepository.findByEmail(email).isPresent()){
             return ;
         }
 
         RequestJoinMember requestJoinMember = RequestJoinMember.builder()
-                .email("test@email.com")
+                .email(email)
                 .password("test123!")
                 .name("테스터")
                 .nickname("닉네임")

@@ -11,5 +11,10 @@ import java.util.List;
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class BoardListVo {
-    private List<BoardVo> boardList;
+    private int totalPage;
+    private Long totalElements;
+    private int numberOfElements;
+    private Boolean last;
+    private Boolean empty;
+    private List<BoardVo> list;
 }

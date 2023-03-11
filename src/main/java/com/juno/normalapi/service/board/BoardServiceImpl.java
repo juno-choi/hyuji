@@ -6,6 +6,7 @@ import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
 import com.juno.normalapi.exception.UnauthorizedException;
+import com.juno.normalapi.repository.board.BoardRepositoryCustom;
 import com.juno.normalapi.repository.member.MemberRepository;
 import com.juno.normalapi.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class BoardServiceImpl implements BoardService{
     private final Environment env;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
+    private final BoardRepositoryCustom boardRepositoryCustom;
 
     @Transactional
     @Override
@@ -51,9 +53,19 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public Page<Board> getBoardList(Pageable pageable, HttpServletRequest request) {
+    public BoardListVo getBoardList(Pageable pageable, HttpServletRequest request) {
         Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
         log.info("[user = {}] getBoardList", loginUserId);
-        return boardRepository.findAll(pageable);
+
+        Page<BoardVo> page = boardRepositoryCustom.findAll(pageable);
+
+        return BoardListVo.builder()
+                .totalPage(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .numberOfElements(page.getNumberOfElements())
+                .last(page.isLast())
+                .empty(page.isEmpty())
+                .list(page.getContent())
+                .build();
     }
 }

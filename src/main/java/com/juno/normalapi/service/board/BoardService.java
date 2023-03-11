@@ -13,5 +13,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface BoardService {
     BoardVo postBoard(RequestBoard requestBoard, HttpServletRequest request);
 
-    Page<Board> getBoardList(Pageable pageable, HttpServletRequest request);
+    BoardListVo getBoardList(Pageable pageable, HttpServletRequest request);
 }

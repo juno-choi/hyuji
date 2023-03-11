@@ -2,6 +2,7 @@ package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.entity.Board;
+import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
 import com.juno.normalapi.repository.board.BoardRepository;
 import com.juno.normalapi.service.ServiceTestSupport;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -68,7 +68,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         request.setAttribute("loginMemberId", member.getMemberId());
 
         //when
-        Page<Board> boardList = boardService.getBoardList(pageable, request);
+        BoardListVo boardList = boardService.getBoardList(pageable, request);
 
         //then
         assertNotNull(boardList);
