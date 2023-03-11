@@ -65,11 +65,11 @@ public class BoardServiceImpl implements BoardService{
         log.info("{} user post board", loginUserId);
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
-        Board saveBoard = boardRepository.save(Board.of(requestBoard.getTitle(), requestBoard.getContent(), findMember.getMemberId()));
+        Board saveBoard = boardRepository.save(Board.of(findMember, requestBoard.getTitle(), requestBoard.getContent()));
 
         return BoardVo.builder()
                 .boardId(saveBoard.getId())
-                .memberId(saveBoard.getMemberId())
+                .memberId(saveBoard.getMember().getMemberId())
                 .title(saveBoard.getTitle())
                 .content(saveBoard.getContent())
                 .writer(findMember.getNickname())

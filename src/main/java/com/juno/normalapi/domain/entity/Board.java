@@ -17,8 +17,10 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     @Comment("작성자 id")
-    private Long memberId;
+    private Member member;
 
     private String title;
     private String content;
@@ -26,16 +28,16 @@ public class Board {
     private LocalDateTime modifiedAt;
     private LocalDateTime createdAt;
 
-    private Board(Long memberId, String title, String content, LocalDateTime modifiedAt, LocalDateTime createdAt) {
-        this.memberId = memberId;
+    private Board(Member member, String title, String content, LocalDateTime modifiedAt, LocalDateTime createdAt) {
+        this.member = member;
         this.title = title;
         this.content = content;
         this.modifiedAt = modifiedAt;
         this.createdAt = createdAt;
     }
 
-    public static Board of(String title, String content, Long memberId){
+    public static Board of(Member member, String title, String content){
         LocalDateTime now = LocalDateTime.now();
-        return new Board(memberId, title, content, now, now);
+        return new Board(member, title, content, now, now);
     }
 }
