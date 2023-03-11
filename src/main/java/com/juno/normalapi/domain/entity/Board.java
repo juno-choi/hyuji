@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
+@Builder
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

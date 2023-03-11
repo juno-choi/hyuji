@@ -11,6 +11,8 @@ import com.juno.normalapi.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,40 +31,11 @@ public class BoardServiceImpl implements BoardService{
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
-    @Override
-    public BoardListVo getBoardList() {
-        List<BoardVo> list = new ArrayList<>();
-        BoardVo boardVo = BoardVo.builder()
-                .boardId(1L)
-                .title("테스트 제목")
-                .createdAt(LocalDateTime.now().minusMinutes(30L))
-                .writer("테스터")
-                .build();
-
-        BoardVo boardVo2 = BoardVo.builder()
-                .boardId(2L)
-                .title("테스트 제목2")
-                .createdAt(LocalDateTime.now())
-                .writer("테스터2")
-                .build();
-
-        list.add(boardVo);
-        list.add(boardVo2);
-
-        list = list.stream()
-                .sorted((s1, s2) -> Long.compare(s2.getBoardId(), s1.getBoardId()))
-                .collect(Collectors.toList());
-
-        return BoardListVo.builder()
-                .boardList(list)
-                .build();
-    }
-
     @Transactional
     @Override
     public BoardVo postBoard(RequestBoard requestBoard, HttpServletRequest request) {
         Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
-        log.info("{} user post board", loginUserId);
+        log.info("[user = {}] postBoard", loginUserId);
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
         Board saveBoard = boardRepository.save(Board.of(findMember, requestBoard.getTitle(), requestBoard.getContent()));
@@ -75,5 +48,12 @@ public class BoardServiceImpl implements BoardService{
                 .writer(findMember.getNickname())
                 .createdAt(saveBoard.getCreatedAt())
                 .build();
+    }
+
+    @Override
+    public Page<Board> getBoardList(Pageable pageable, HttpServletRequest request) {
+        Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
+        log.info("[user = {}] getBoardList", loginUserId);
+        return boardRepository.findAll(pageable);
     }
 }
