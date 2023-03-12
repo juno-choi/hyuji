@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +26,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     private final RedisTemplate<String, String> redisTemplate;
     private final MemberRepository memberRepository;
     private final String TEST_ACCESS_TOKEN = "test";
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -69,7 +70,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                         .nickname("테스터닉네임")
                         .tel("01012341234")
                         .zipCode("우편번호")
-                        .password("qwer1234!")
+                        .password(passwordEncoder.encode("qwer1234!"))
                         .build(), JoinType.EMAIL));
 
         Long memberId = saveMember.getMemberId();
