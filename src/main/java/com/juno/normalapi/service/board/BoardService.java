@@ -14,4 +14,6 @@ public interface BoardService {
     BoardVo postBoard(RequestBoard requestBoard, HttpServletRequest request);
 
     BoardListVo getBoardList(Pageable pageable, HttpServletRequest request);
+
+    BoardVo getBoard(Long boardId, HttpServletRequest request);
 }

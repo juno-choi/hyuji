@@ -73,4 +73,15 @@ class BoardServiceImplTest extends ServiceTestSupport {
         //then
         assertNotNull(boardList);
     }
+
+    @Test
+    @DisplayName("유효하지 않은 게시물은 불러오는데 실패한다.")
+    void getBoardFail1() throws Exception {
+        //given
+        //when
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> boardService.getBoard(0L, request));
+
+        //then
+        assertEquals("유효하지 않은 게시판 번호입니다.", ex.getMessage());
+    }
 }

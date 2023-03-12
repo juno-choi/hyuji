@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +38,6 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public BoardVo postBoard(RequestBoard requestBoard, HttpServletRequest request) {
         Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
-        log.info("[user = {}] postBoard", loginUserId);
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
         Board saveBoard = boardRepository.save(Board.of(findMember, requestBoard.getTitle(), requestBoard.getContent()));
@@ -54,9 +54,6 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardListVo getBoardList(Pageable pageable, HttpServletRequest request) {
-        Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
-        log.info("[user = {}] getBoardList", loginUserId);
-
         Page<BoardVo> page = boardRepositoryCustom.findAll(pageable);
 
         return BoardListVo.builder()
@@ -66,6 +63,21 @@ public class BoardServiceImpl implements BoardService{
                 .last(page.isLast())
                 .empty(page.isEmpty())
                 .list(page.getContent())
+                .build();
+    }
+
+    @Override
+    public BoardVo getBoard(Long boardId, HttpServletRequest request) {
+        Board findBoard = boardRepository.findById(boardId).orElseThrow(
+                () -> new IllegalArgumentException("유효하지 않은 게시판 번호입니다.")
+        );
+
+        return BoardVo.builder()
+                .boardId(findBoard.getId())
+                .title(findBoard.getTitle())
+                .content(findBoard.getContent())
+                .writer(findBoard.getMember().getNickname())
+                .createdAt(findBoard.getCreatedAt())
                 .build();
     }
 }
