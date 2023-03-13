@@ -7,6 +7,7 @@ import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepositoryCustom;
+import com.juno.normalapi.repository.board.ReplyRepository;
 import com.juno.normalapi.repository.member.MemberRepository;
 import com.juno.normalapi.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +29,7 @@ public class BoardServiceImpl implements BoardService{
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
     private final BoardRepositoryCustom boardRepositoryCustom;
+    private final ReplyRepository replyRepository;
 
     @Transactional
     @Override
@@ -72,11 +69,14 @@ public class BoardServiceImpl implements BoardService{
                 () -> new IllegalArgumentException("유효하지 않은 게시판 번호입니다.")
         );
 
+        int replyCount = replyRepository.countByBoardId(findBoard.getId());
+
         return BoardVo.builder()
                 .boardId(findBoard.getId())
                 .title(findBoard.getTitle())
                 .content(findBoard.getContent())
                 .writer(findBoard.getMember().getNickname())
+                .replyCount(replyCount)
                 .createdAt(findBoard.getCreatedAt())
                 .build();
     }

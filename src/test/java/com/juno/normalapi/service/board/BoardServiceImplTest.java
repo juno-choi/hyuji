@@ -2,9 +2,11 @@ package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.entity.Board;
+import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
 import com.juno.normalapi.repository.board.BoardRepository;
+import com.juno.normalapi.repository.board.ReplyRepository;
 import com.juno.normalapi.service.ServiceTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,9 @@ class BoardServiceImplTest extends ServiceTestSupport {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
@@ -47,8 +52,8 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("게시글 불러오기에 성공한다.")
-    void getBoardSuccess() {
+    @DisplayName("게시글 리스트 불러오기에 성공한다.")
+    void getBoardListSuccess() {
         //given
         for(int i=0; i<20; i++){
             LocalDateTime now = LocalDateTime.now();
@@ -83,5 +88,28 @@ class BoardServiceImplTest extends ServiceTestSupport {
 
         //then
         assertEquals("유효하지 않은 게시판 번호입니다.", ex.getMessage());
+    }
+
+    @Test
+    @DisplayName("게시물 불러오는데 성공한다.")
+    void getBoardSuccess1() throws Exception {
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        Board saveBoard = boardRepository.save(
+                Board.builder()
+                        .title("테스트")
+                        .content("내용")
+                        .member(member)
+                        .createdAt(now)
+                        .modifiedAt(now)
+                        .build()
+        );
+        replyRepository.save(Reply.of(member, saveBoard, "댓글 달아보자"));
+
+        //when
+        BoardVo board = boardService.getBoard(saveBoard.getId(), request);
+
+        //then
+        assertNotNull(board);
     }
 }
