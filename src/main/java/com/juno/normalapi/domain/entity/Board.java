@@ -25,9 +25,6 @@ public class Board {
     @Comment("작성자 id")
     private Member member;
 
-    @OneToMany(mappedBy = "board",fetch = FetchType.LAZY)
-    private List<Reply> reply = new ArrayList<>();
-
     private String title;
     private String content;
 
