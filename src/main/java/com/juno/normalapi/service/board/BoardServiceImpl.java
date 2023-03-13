@@ -45,6 +45,7 @@ public class BoardServiceImpl implements BoardService{
                 .title(saveBoard.getTitle())
                 .content(saveBoard.getContent())
                 .writer(findMember.getNickname())
+                .replyCount(0L)
                 .createdAt(saveBoard.getCreatedAt())
                 .build();
     }
@@ -69,7 +70,7 @@ public class BoardServiceImpl implements BoardService{
                 () -> new IllegalArgumentException("유효하지 않은 게시판 번호입니다.")
         );
 
-        int replyCount = replyRepository.countByBoardId(findBoard.getId());
+        Long replyCount = Long.valueOf(replyRepository.countByBoardId(findBoard.getId()));
 
         return BoardVo.builder()
                 .boardId(findBoard.getId())

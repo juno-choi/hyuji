@@ -20,6 +20,6 @@ public class BoardVo {
     private String title;
     private String content;
     private String writer;
-    private int replyCount;
+    private Long replyCount;
     private LocalDateTime createdAt;
 }
