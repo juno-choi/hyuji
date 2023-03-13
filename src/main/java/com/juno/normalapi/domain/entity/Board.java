@@ -5,6 +5,8 @@ import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +24,9 @@ public class Board {
     @JoinColumn(name = "member_id")
     @Comment("작성자 id")
     private Member member;
+
+    @OneToMany(mappedBy = "board",fetch = FetchType.LAZY)
+    private List<Reply> reply = new ArrayList<>();
 
     private String title;
     private String content;
