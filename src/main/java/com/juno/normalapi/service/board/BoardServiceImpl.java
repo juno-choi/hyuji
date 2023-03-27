@@ -1,10 +1,13 @@
 package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
+import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.ReplyVo;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepositoryCustom;
 import com.juno.normalapi.repository.board.ReplyRepository;
@@ -80,5 +83,19 @@ public class BoardServiceImpl implements BoardService{
                 .replyCount(replyCount)
                 .createdAt(findBoard.getCreatedAt())
                 .build();
+    }
+
+    @Transactional
+    @Override
+    public ReplyVo postReply(RequestReply requestReply, HttpServletRequest request) {
+        Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
+        Long boardId = requestReply.getBoardId();
+        String content = requestReply.getContent();
+
+        Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
+        Board findBoard = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 게시판입니다."));
+        Reply saveReply = replyRepository.save(Reply.of(findMember, findBoard, content));
+
+        return ReplyVo.of(saveReply.getId(), findBoard.getId(), content, findMember.getNickname());
     }
 }

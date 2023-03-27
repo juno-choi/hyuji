@@ -1,10 +1,12 @@
 package com.juno.normalapi.service.board;
 
 import com.juno.normalapi.domain.dto.RequestBoard;
+import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.ReplyVo;
 import com.juno.normalapi.repository.board.BoardRepository;
 import com.juno.normalapi.repository.board.ReplyRepository;
 import com.juno.normalapi.service.ServiceTestSupport;
@@ -105,11 +107,33 @@ class BoardServiceImplTest extends ServiceTestSupport {
                         .build()
         );
         replyRepository.save(Reply.of(member, saveBoard, "댓글 달아보자"));
+        replyRepository.save(Reply.of(member, saveBoard, "댓글 달아보자2"));
 
         //when
         BoardVo board = boardService.getBoard(saveBoard.getId(), request);
 
         //then
         assertNotNull(board);
+    }
+
+    @Test
+    @DisplayName("게시판 댓글 등록에 성공한다.")
+    void postReplyFail1(){
+        // given
+        Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
+        String content = "댓글이 달림";
+
+        RequestReply requestReply = RequestReply.builder()
+                .boardId(saveBoard.getId())
+                .content(content)
+                .build();
+
+        request.setAttribute("loginMemberId", member.getMemberId());
+
+        // when
+        ReplyVo replyVo = boardService.postReply(requestReply, request);
+
+        // then
+        assertEquals(content, replyVo.getContent());
     }
 }
