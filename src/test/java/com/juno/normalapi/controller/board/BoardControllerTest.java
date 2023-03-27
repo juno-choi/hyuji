@@ -2,6 +2,7 @@ package com.juno.normalapi.controller.board;
 
 import com.juno.normalapi.docs.TestSupport;
 import com.juno.normalapi.domain.dto.RequestBoard;
+import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.repository.board.BoardRepository;
@@ -76,5 +77,20 @@ class BoardControllerTest extends TestSupport {
         ).andDo(print());
         //then
         perform.andReturn().getResponse().getContentAsString().contains("SUCCESS");
+    }
+
+    @Test
+    @DisplayName("board Id가 비어있어 댓글 등록에 실패한다.")
+    void postReplyFail1() throws Exception {
+        // given
+        // when
+        mock.perform(
+                post("/reply")
+                        .header(AUTHORIZATION, accessToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(convertToString(RequestReply.builder().build()))
+        ).andDo(print());
+
+        // then
     }
 }
