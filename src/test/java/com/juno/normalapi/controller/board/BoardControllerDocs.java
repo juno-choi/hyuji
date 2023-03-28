@@ -2,6 +2,7 @@ package com.juno.normalapi.controller.board;
 
 import com.juno.normalapi.docs.DocsSupport;
 import com.juno.normalapi.domain.dto.RequestBoard;
+import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.repository.board.BoardRepository;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -20,8 +22,7 @@ import java.time.LocalDateTime;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -69,7 +70,7 @@ class BoardControllerDocs extends DocsSupport {
 
     @Test
     @DisplayName(URL + " (GET)")
-    void getBoard() throws Exception {
+    void getBoardList() throws Exception {
         //given
         Member member = memberRepository.findByEmail(env.getProperty("normal.test.email")).get();
         for(int i=0; i<20; i++){
@@ -111,6 +112,89 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.list[].created_at").type(JsonFieldType.STRING).description("등록일")
                 )
         ));
+    }
 
+    @Test
+    @DisplayName(URL + "/{board_id} (GET)")
+    void getBoard() throws Exception {
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        Board saveBoard = boardRepository.save(
+                Board.builder()
+                        .title("테스트")
+                        .content("내용")
+                        .member(member)
+                        .createdAt(now)
+                        .modifiedAt(now)
+                        .build()
+        );
+
+        //when
+        ResultActions perform = mock.perform(
+                RestDocumentationRequestBuilders.get(URL+"/{board_id}",saveBoard.getId()).header(AUTHORIZATION, accessToken)
+        );
+        
+        //then
+        perform.andDo(docs.document(
+                pathParameters(
+                        parameterWithName("board_id").description("게시판 번호").optional()
+                ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.board_id").type(JsonFieldType.NUMBER).description("게시글 번호"),
+                        fieldWithPath("data.member_id").type(JsonFieldType.NUMBER).description("회원 번호"),
+                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
+                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
+                        fieldWithPath("data.writer").type(JsonFieldType.STRING).description("닉네임"),
+                        fieldWithPath("data.reply_count").type(JsonFieldType.NUMBER).description("댓글수"),
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일")
+                )
+        ));
+    }
+    @Test
+    @DisplayName(URL+"/reply (POST)")
+    void postReply() throws Exception {
+        // given
+        LocalDateTime now = LocalDateTime.now();
+        Board saveBoard = boardRepository.save(
+                Board.builder()
+                        .title("테스트")
+                        .content("내용")
+                        .member(member)
+                        .createdAt(now)
+                        .modifiedAt(now)
+                        .build()
+        );
+
+        RequestReply requestReply = RequestReply.builder()
+                .boardId(saveBoard.getId())
+                .content("댓글 달었지롱")
+                .build();
+
+        // when
+        ResultActions perform = mock.perform(
+                post(URL+"/reply").header(AUTHORIZATION, accessToken)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(convertToString(requestReply))
+        );
+
+        // then
+        perform.andDo(docs.document(
+                requestFields(
+                        fieldWithPath("board_id").type(JsonFieldType.NUMBER).description("게시글 id"),
+                        fieldWithPath("content").type(JsonFieldType.STRING).description("댓글 내용")
+                ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("댓글 id"),
+                        fieldWithPath("data.board_id").type(JsonFieldType.NUMBER).description("게시판 id"),
+                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("댓글 내용"),
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("작성일"),
+                        fieldWithPath("data.modified_at").type(JsonFieldType.STRING).description("수정일"),
+                        fieldWithPath("data.writer").type(JsonFieldType.STRING).description("작성자")
+                )
+        ));
     }
 }

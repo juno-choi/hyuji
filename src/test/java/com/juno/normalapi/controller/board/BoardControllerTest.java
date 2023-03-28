@@ -15,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -54,8 +56,8 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("게시글 불러오기에 성공한다.")
-    void getBoardSuccess() throws Exception {
+    @DisplayName("게시글 리스트 불러오기에 성공한다.")
+    void getBoardListSuccess() throws Exception {
         //given
         Member member = memberRepository.findByEmail(env.getProperty("normal.test.email")).get();
         for(int i=0; i<20; i++){
@@ -80,17 +82,41 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("board Id가 비어있어 댓글 등록에 실패한다.")
+    @DisplayName("board id 값이 비어있어 댓글 등록에 실패한다.")
     void postReplyFail1() throws Exception {
         // given
         // when
-        mock.perform(
-                post("/reply")
+        ResultActions perform = mock.perform(
+                post(URL + "/reply")
                         .header(AUTHORIZATION, accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(convertToString(RequestReply.builder().build()))
         ).andDo(print());
 
         // then
+        assertTrue(
+                perform.andReturn().getResponse()
+                        .getContentAsString(StandardCharsets.UTF_8)
+                        .contains("board_id는 필수 값입니다.")
+        );
+    }
+
+    @Test
+    @DisplayName("board id 유효하지 않아 게시글 상세 불러오기에 실패한다.")
+    void getBoardFail1() throws Exception {
+        // given
+        // when
+        ResultActions perform = mock.perform(
+                get(URL + "/{boardId}", 0L)
+                        .header(AUTHORIZATION, accessToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andDo(print());
+        // then
+        assertTrue(
+                perform.andReturn()
+                        .getResponse()
+                        .getContentAsString(StandardCharsets.UTF_8)
+                        .contains("유효하지 않은 게시판 번호입니다.")
+        );
     }
 }

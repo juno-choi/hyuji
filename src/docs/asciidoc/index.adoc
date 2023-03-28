@@ -85,14 +85,31 @@ include::{snippets}/board-controller-docs/post-board/http-response.adoc[]
 include::{snippets}/board-controller-docs/post-board/response-fields.adoc[]
 
 
-### 📄 게시글 불러오기
+### 📄 게시글 불러오기 (리스트)
+
+==== ✅ REQUEST
+include::{snippets}/board-controller-docs/get-board-list/http-request.adoc[]
+
+==== ✅ REQUEST PARAMETER
+
+include::{snippets}/board-controller-docs/get-board-list/request-parameters.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/board-controller-docs/get-board-list/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/board-controller-docs/get-board-list/response-fields.adoc[]
+
+### 📄 게시글 불러오기 (상세)
 
 ==== ✅ REQUEST
 include::{snippets}/board-controller-docs/get-board/http-request.adoc[]
 
 ==== ✅ REQUEST PARAMETER
 
-include::{snippets}/board-controller-docs/get-board/request-parameters.adoc[]
+include::{snippets}/board-controller-docs/get-board/path-parameters.adoc[]
 
 ==== ✅ RESPONSE
 
@@ -101,4 +118,22 @@ include::{snippets}/board-controller-docs/get-board/http-response.adoc[]
 ==== ✅ RESPONSE FIELD
 
 include::{snippets}/board-controller-docs/get-board/response-fields.adoc[]
+
+
+### 📄 댓글 등록
+
+==== ✅ REQUEST
+include::{snippets}/board-controller-docs/post-reply/http-request.adoc[]
+
+==== ✅ REQUEST PARAMETER
+
+include::{snippets}/board-controller-docs/post-reply/request-fields.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/board-controller-docs/post-reply/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/board-controller-docs/post-reply/response-fields.adoc[]
 

@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @V1
@@ -51,6 +52,15 @@ public class BoardController {
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
                 .data(boardService.postReply(requestReply, request))
+                .build());
+    }
+
+    @GetMapping("{board_id}")
+    public ResponseEntity<Response<BoardVo>> getBoard(@PathVariable(name = "board_id") @NotNull(message = "게시판 id는 필수값 입니다.") Long boardId, HttpServletRequest request){
+        return ResponseEntity.ok(Response.<BoardVo>builder()
+                .code(ResponseCode.SUCCESS)
+                .message("성공")
+                .data(boardService.getBoard(boardId, request))
                 .build());
     }
 }
