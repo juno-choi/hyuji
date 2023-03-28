@@ -28,7 +28,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("")
-    public ResponseEntity<Response<BoardVo>> postBoard(@RequestBody RequestBoard requestBoard, HttpServletRequest request){
+    public ResponseEntity<Response<BoardVo>> postBoard(@RequestBody @Validated RequestBoard requestBoard, BindingResult bindingResult, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(Response.<BoardVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
