@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestSupport extends WebSecurityConfigurerAdapter {
     protected String accessToken = "Bearer ";
+    protected Member member;
 
     @Autowired
     protected ObjectMapper objectMapper;
@@ -89,7 +90,7 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
                 .compact();
 
         this.accessToken += accessToken;
-
+        this.member = saveMember;
         HashOperations<String, Object, Object> opsHash = redisTemplate.opsForHash();
         opsHash.put(accessToken, "access_token", memberId);
     }
