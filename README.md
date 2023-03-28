@@ -24,3 +24,10 @@
 
 1. redis jwt access, refresh token 등록하여 expire 시간에 따라 토큰 유효 체크
 2. refresh token 재발급 기능
+
+### ✅ 게시판, 댓글 기능
+
+1. 게시판 글 등록
+2. 게시판 불러오기 (리스트)
+3. 게시판 불러오기 (상세)
+4. 댓글 등록
