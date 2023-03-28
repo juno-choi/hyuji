@@ -102,14 +102,21 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("board id 값이 비어 있어 게시글 상세 불러오기에 실패한다.")
+    @DisplayName("board id 유효하지 않아 게시글 상세 불러오기에 실패한다.")
     void getBoardFail1() throws Exception {
         // given
-
         // when
-        mock.perform(
-                MockMvcRequestBuilders.get(URL+"")
-        );
+        ResultActions perform = mock.perform(
+                get(URL + "/{boardId}", 0L)
+                        .header(AUTHORIZATION, accessToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andDo(print());
         // then
+        assertTrue(
+                perform.andReturn()
+                        .getResponse()
+                        .getContentAsString(StandardCharsets.UTF_8)
+                        .contains("유효하지 않은 게시판 번호입니다.")
+        );
     }
 }

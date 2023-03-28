@@ -77,6 +77,7 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardVo.builder()
                 .boardId(findBoard.getId())
+                .memberId(findBoard.getMember().getMemberId())
                 .title(findBoard.getTitle())
                 .content(findBoard.getContent())
                 .writer(findBoard.getMember().getNickname())

@@ -69,7 +69,7 @@ class BoardControllerDocs extends DocsSupport {
 
     @Test
     @DisplayName(URL + " (GET)")
-    void getBoard() throws Exception {
+    void getBoardList() throws Exception {
         //given
         Member member = memberRepository.findByEmail(env.getProperty("normal.test.email")).get();
         for(int i=0; i<20; i++){
@@ -111,6 +111,45 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.list[].created_at").type(JsonFieldType.STRING).description("등록일")
                 )
         ));
+    }
 
+    @Test
+    @DisplayName(URL + "/{board_id} (GET)")
+    void getBoard() throws Exception {
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        Board saveBoard = boardRepository.save(
+                Board.builder()
+                        .title("테스트")
+                        .content("내용")
+                        .member(member)
+                        .createdAt(now)
+                        .modifiedAt(now)
+                        .build()
+        );
+
+        //when
+        ResultActions perform = mock.perform(
+                get(URL+"/"+saveBoard.getId()).header(AUTHORIZATION, accessToken)
+        );
+
+        //then
+        perform.andDo(docs.document(
+                requestParameters(
+                        parameterWithName("page").description("페이지 번호 (default = 0)").optional(),
+                        parameterWithName("size").description("페이지 당 호출할 개수 (default = 5)").optional()
+                ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.board_id").type(JsonFieldType.NUMBER).description("게시글 번호"),
+                        fieldWithPath("data.member_id").type(JsonFieldType.NUMBER).description("회원 번호"),
+                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
+                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
+                        fieldWithPath("data.writer").type(JsonFieldType.STRING).description("닉네임"),
+                        fieldWithPath("data.reply_count").type(JsonFieldType.NUMBER).description("댓글수"),
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일")
+                )
+        ));
     }
 }
