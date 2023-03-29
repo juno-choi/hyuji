@@ -42,7 +42,7 @@ class BoardControllerTest extends TestSupport {
     private Environment env;
 
     @Test
-    @DisplayName("게시글 등록에 성공한다.")
+    @DisplayName("게시글 등록에 성공")
     void postBoardSuccess() throws Exception {
         //given
         BoardDto boardDto = BoardDto.builder().title("테스트 글").content("테스트 내용").build();
@@ -56,7 +56,7 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("게시글 리스트 불러오기에 성공한다.")
+    @DisplayName("게시글 리스트 불러오기에 성공")
     void getBoardListSuccess() throws Exception {
         //given
         Member member = memberRepository.findByEmail(env.getProperty("normal.test.email")).get();
@@ -82,7 +82,7 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("board id 값이 비어있어 댓글 등록에 실패한다.")
+    @DisplayName("board id 값이 비어있어 댓글 등록에 실패")
     void postReplyFail1() throws Exception {
         // given
         // when
@@ -102,7 +102,7 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("board id 유효하지 않아 게시글 상세 불러오기에 실패한다.")
+    @DisplayName("board id 유효하지 않아 게시글 상세 불러오기에 실패")
     void getBoardFail1() throws Exception {
         // given
         // when
@@ -121,7 +121,7 @@ class BoardControllerTest extends TestSupport {
     }
 
     @Test
-    @DisplayName("댓글 페이징 board_id 값이 빠져 불러오는데 실패한다.")
+    @DisplayName("댓글 페이징 board_id 값이 빠져 불러오는데 실패")
     void getReplyListFail1() throws Exception {
         // given
         // when

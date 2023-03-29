@@ -44,7 +44,7 @@ class BoardServiceImplUnitTest {
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
     @Test
-    @DisplayName("게시글 등록에 실패한다.")
+    @DisplayName("게시글 등록에 실패")
     void postBoardFail1() {
         // given
         BoardDto boardDto = BoardDto.builder()
@@ -62,7 +62,7 @@ class BoardServiceImplUnitTest {
     }
     
     @Test
-    @DisplayName("유효하지 않은 회원은 댓글 등록에 실패한다")
+    @DisplayName("유효하지 않은 회원은 댓글 등록에 실패")
     void postReplyFail1(){
         // given
         given(env.getProperty(anyString())).willReturn("loginMemberId");
@@ -79,7 +79,7 @@ class BoardServiceImplUnitTest {
     }
 
     @Test
-    @DisplayName("유효하지 게시판은 댓글 등록에 실패한다")
+    @DisplayName("유효하지 게시판은 댓글 등록에 실패")
     void postReplyFail2(){
         // given
         given(env.getProperty(anyString())).willReturn("loginMemberId");

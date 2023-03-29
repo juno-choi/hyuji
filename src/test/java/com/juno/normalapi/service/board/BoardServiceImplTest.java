@@ -36,7 +36,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     private MockHttpServletRequest request = new MockHttpServletRequest();
 
     @Test
-    @DisplayName("게시글 등록에 성공한다.")
+    @DisplayName("게시글 등록에 성공")
     void postBoardSuccess() {
         // given
         BoardDto boardDto = BoardDto.builder()
@@ -55,7 +55,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("게시글 리스트 불러오기에 성공한다.")
+    @DisplayName("게시글 리스트 불러오기에 성공")
     void getBoardListSuccess() {
         //given
         for(int i=0; i<20; i++){
@@ -83,7 +83,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("유효하지 않은 게시물은 불러오는데 실패한다.")
+    @DisplayName("유효하지 않은 게시물은 불러오는데 실패")
     void getBoardFail1() throws Exception {
         //given
         //when
@@ -94,7 +94,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("게시물 불러오는데 성공한다.")
+    @DisplayName("게시물 불러오는데 성공")
     void getBoardSuccess1() throws Exception {
         //given
         LocalDateTime now = LocalDateTime.now();
@@ -118,7 +118,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("게시판 댓글 등록에 성공한다.")
+    @DisplayName("게시판 댓글 등록에 성공")
     void postReplyFail1(){
         // given
         Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
@@ -139,7 +139,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("댓글을 페이징하여 불러오는데 성공한다.")
+    @DisplayName("댓글을 페이징하여 불러오는데 성공")
     void getReplyListSuccess1(){
         // given
         Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
