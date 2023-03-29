@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -117,6 +118,26 @@ class BoardControllerTest extends TestSupport {
                         .getResponse()
                         .getContentAsString(StandardCharsets.UTF_8)
                         .contains("유효하지 않은 게시판 번호입니다.")
+        );
+    }
+
+    @Test
+    @DisplayName("댓글 페이징 board_id 값이 빠져 불러오는데 실패한다.")
+    void getReplyListFail1() throws Exception {
+        // given
+        // when
+        ResultActions perform = mock.perform(
+                get(URL + "/reply").header(AUTHORIZATION, accessToken)
+                        .param("page", "1")
+                        .param("size", "10")
+        ).andDo(print());
+        // then
+        perform.andExpect(status().is4xxClientError());
+        assertTrue(
+                perform.andReturn()
+                        .getResponse()
+                        .getContentAsString(StandardCharsets.UTF_8)
+                        .contains("board_id (Long) 값이 비어있습니다.")
         );
     }
 }
