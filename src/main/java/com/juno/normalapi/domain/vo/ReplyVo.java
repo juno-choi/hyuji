@@ -2,9 +2,6 @@ package com.juno.normalapi.domain.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.juno.normalapi.domain.entity.Board;
-import com.juno.normalapi.domain.entity.Member;
-import com.juno.normalapi.domain.entity.Reply;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,7 +18,7 @@ public class ReplyVo {
     private LocalDateTime modifiedAt;
     private String writer;
 
-    private ReplyVo(Long id, Long boardId, String content, LocalDateTime createdAt, LocalDateTime modifiedAt, String writer) {
+    public ReplyVo(Long id, Long boardId, String content, LocalDateTime createdAt, LocalDateTime modifiedAt, String writer) {
         this.id = id;
         this.boardId = boardId;
         this.content = content;
