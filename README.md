@@ -6,7 +6,7 @@
 
 ## 📄 skill
 
-`language` java 17
+`language` java 11
 
 `framework` Spring Boot 2.7.7
 
