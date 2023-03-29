@@ -1,8 +1,8 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.RequestBoard;
-import com.juno.normalapi.domain.dto.RequestReply;
-import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.dto.board.RequestBoard;
+import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepository;
 import com.juno.normalapi.repository.board.ReplyRepository;

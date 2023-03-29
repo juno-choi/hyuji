@@ -2,9 +2,9 @@ package com.juno.normalapi.controller.member;
 
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
-import com.juno.normalapi.domain.dto.RequestJoinMember;
-import com.juno.normalapi.domain.vo.JoinMember;
-import com.juno.normalapi.domain.vo.LoginMember;
+import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.vo.member.JoinMember;
+import com.juno.normalapi.domain.vo.member.LoginMember;
 import com.juno.normalapi.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

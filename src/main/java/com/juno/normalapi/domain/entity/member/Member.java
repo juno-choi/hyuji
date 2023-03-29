@@ -1,6 +1,6 @@
-package com.juno.normalapi.domain.entity;
+package com.juno.normalapi.domain.entity.member;
 
-import com.juno.normalapi.domain.dto.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.RequestJoinMember;
 import com.juno.normalapi.domain.enums.JoinType;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

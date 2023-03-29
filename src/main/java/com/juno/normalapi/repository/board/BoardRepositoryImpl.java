@@ -1,7 +1,7 @@
 package com.juno.normalapi.repository.board;
 
 import com.juno.normalapi.config.QueryDslConfig;
-import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.board.BoardVo;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
@@ -13,8 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.juno.normalapi.domain.entity.QBoard.board;
-import static com.juno.normalapi.domain.entity.QReply.reply;
+import static com.juno.normalapi.domain.entity.board.QBoard.board;
+import static com.juno.normalapi.domain.entity.board.QReply.reply;
+
 
 @Repository
 @RequiredArgsConstructor

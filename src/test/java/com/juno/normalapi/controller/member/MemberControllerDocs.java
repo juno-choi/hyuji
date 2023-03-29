@@ -1,9 +1,9 @@
 package com.juno.normalapi.controller.member;
 
 import com.juno.normalapi.docs.DocsSupport;
-import com.juno.normalapi.domain.dto.RequestJoinMember;
-import com.juno.normalapi.domain.dto.RequestLoginMember;
-import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.RequestLoginMember;
+import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.repository.member.MemberRepository;
 import org.junit.jupiter.api.BeforeAll;
