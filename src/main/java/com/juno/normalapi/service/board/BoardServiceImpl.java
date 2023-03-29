@@ -53,6 +53,7 @@ public class BoardServiceImpl implements BoardService{
                 .writer(findMember.getNickname())
                 .replyCount(0L)
                 .createdAt(saveBoard.getCreatedAt())
+                .modifiedAt(saveBoard.getModifiedAt())
                 .build();
     }
 
@@ -86,6 +87,7 @@ public class BoardServiceImpl implements BoardService{
                 .writer(findBoard.getMember().getNickname())
                 .replyCount(replyCount)
                 .createdAt(findBoard.getCreatedAt())
+                .modifiedAt(findBoard.getModifiedAt())
                 .build();
     }
 

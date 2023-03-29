@@ -67,7 +67,8 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
                         fieldWithPath("data.writer").type(JsonFieldType.STRING).description("닉네임"),
                         fieldWithPath("data.reply_count").type(JsonFieldType.NUMBER).description("댓글수"),
-                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일")
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일"),
+                        fieldWithPath("data.modified_at").type(JsonFieldType.STRING).description("수정일")
                 )
         ));
     }
@@ -113,7 +114,8 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.list[].content").type(JsonFieldType.STRING).description("내용"),
                         fieldWithPath("data.list[].writer").type(JsonFieldType.STRING).description("닉네임"),
                         fieldWithPath("data.list[].reply_count").type(JsonFieldType.NUMBER).description("댓글수"),
-                        fieldWithPath("data.list[].created_at").type(JsonFieldType.STRING).description("등록일")
+                        fieldWithPath("data.list[].created_at").type(JsonFieldType.STRING).description("등록일"),
+                        fieldWithPath("data.list[].modified_at").type(JsonFieldType.STRING).description("수정일")
                 )
         ));
     }
@@ -152,7 +154,8 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
                         fieldWithPath("data.writer").type(JsonFieldType.STRING).description("닉네임"),
                         fieldWithPath("data.reply_count").type(JsonFieldType.NUMBER).description("댓글수"),
-                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일")
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("등록일"),
+                        fieldWithPath("data.modified_at").type(JsonFieldType.STRING).description("수정일")
                 )
         ));
     }

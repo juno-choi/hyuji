@@ -22,4 +22,5 @@ public class BoardVo {
     private String writer;
     private Long replyCount;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 }

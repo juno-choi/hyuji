@@ -724,10 +724,10 @@ Content-Length: 544
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMDUzMzUyLCJyb2xlcyI6WyJVU0VSIl19.VpBWZdty5a3MiRQSxKPy6dbB165XqP79btVuym-HBkWy23uRrix6KXzjWKT8AtT7WMqVEqtHCi8AbMItNKGEpQ",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNjQxNzUyfQ.I33x3U0QDSEdScpCnMQCMZnK8DR_kG9riQaPsnxMdnmzjocvG78crXQgIkB-8Yb1B7WqGZfvJ5acftsvQ9MIiQ",
-    "access_token_expiration" : 1680053352925,
-    "refresh_token_expiration" : 1682641752925
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMDU0NDA3LCJyb2xlcyI6WyJVU0VSIl19.T33kXSXAziAt1I9bRbgOga4j4IBCzBaKsrvC2IXuBeWg5exZVq3oUwOSJbFQbDbT7443th27EhAJizJPQuMe4Q",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNjQyODA3fQ.OwCPNuLB-lQEUKCzwTcAxBv14gYzANOqakcvz-hn2hUacj172XfheEIwIqPhzoqgqWXPAo7QonZAoDwDSE-TBA",
+    "access_token_expiration" : 1680054407438,
+    "refresh_token_expiration" : 1682642807438
   }
 }</code></pre>
 </div>
@@ -831,8 +831,8 @@ Content-Length: 329
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwMDUzMzUyLCJyb2xlcyI6WyJVU0VSIl19.5iIuw2cTl9cpjzoJ8gGcdn9lSfSDODBtJumMyGVSV9CSj6LWNZdtnP9wQHY7C42OioE74OEzPMmKX3bybTnBqQ",
-    "access_token_expiration" : 1680053352965
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwMDU0NDA3LCJyb2xlcyI6WyJVU0VSIl19.X5ZUGcQoPk-Fy6klBiXkm07r2foGdM4ZP2AwHmsPLDkJdmZH99fxwCmBCjpD2m7yvw48JV1jArv7idrlR4nQCg",
+    "access_token_expiration" : 1680054407474
   }
 }</code></pre>
 </div>
@@ -941,7 +941,7 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 287
+Content-Length: 337
 
 {
   "code" : "SUCCESS",
@@ -953,7 +953,8 @@ Content-Length: 287
     "content" : "테스트 내용",
     "writer" : "닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-29T09:29:09.9078506"
+    "created_at" : "2023-03-29T09:46:44.925636",
+    "modified_at" : "2023-03-29T09:46:44.925636"
   }
 }</code></pre>
 </div>
@@ -1020,6 +1021,11 @@ Content-Length: 287
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1071,7 +1077,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1368
+Content-Length: 1633
 
 {
   "code" : "SUCCESS",
@@ -1089,7 +1095,8 @@ Content-Length: 1368
       "content" : "내용 19",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:29:09.058168"
+      "created_at" : "2023-03-29T09:46:44.185162",
+      "modified_at" : "2023-03-29T09:46:44.185162"
     }, {
       "board_id" : 19,
       "member_id" : 1,
@@ -1097,7 +1104,8 @@ Content-Length: 1368
       "content" : "내용 18",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:29:09.057168"
+      "created_at" : "2023-03-29T09:46:44.184161",
+      "modified_at" : "2023-03-29T09:46:44.184161"
     }, {
       "board_id" : 18,
       "member_id" : 1,
@@ -1105,7 +1113,8 @@ Content-Length: 1368
       "content" : "내용 17",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:29:09.057168"
+      "created_at" : "2023-03-29T09:46:44.183162",
+      "modified_at" : "2023-03-29T09:46:44.183162"
     }, {
       "board_id" : 17,
       "member_id" : 1,
@@ -1113,7 +1122,8 @@ Content-Length: 1368
       "content" : "내용 16",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:29:09.056168"
+      "created_at" : "2023-03-29T09:46:44.182162",
+      "modified_at" : "2023-03-29T09:46:44.182162"
     }, {
       "board_id" : 16,
       "member_id" : 1,
@@ -1121,7 +1131,8 @@ Content-Length: 1368
       "content" : "내용 15",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:29:09.055169"
+      "created_at" : "2023-03-29T09:46:44.182162",
+      "modified_at" : "2023-03-29T09:46:44.182162"
     } ]
   }
 }</code></pre>
@@ -1214,6 +1225,11 @@ Content-Length: 1368
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1260,7 +1276,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 272
+Content-Length: 323
 
 {
   "code" : "SUCCESS",
@@ -1272,7 +1288,8 @@ Content-Length: 272
     "content" : "내용",
     "writer" : "닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-29T09:29:09.673849"
+    "created_at" : "2023-03-29T09:46:44.717638",
+    "modified_at" : "2023-03-29T09:46:44.717638"
   }
 }</code></pre>
 </div>
@@ -1338,6 +1355,11 @@ Content-Length: 272
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.created_at</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
 </tr>
 </tbody>
 </table>
@@ -1410,8 +1432,8 @@ Content-Length: 281
     "id" : 101,
     "board_id" : 24,
     "content" : "댓글 달었지롱",
-    "created_at" : "2023-03-29T09:29:09.9678528",
-    "modified_at" : "2023-03-29T09:29:09.9678528",
+    "created_at" : "2023-03-29T09:46:44.9946412",
+    "modified_at" : "2023-03-29T09:46:44.9946412",
     "writer" : "닉네임"
   }
 }</code></pre>
@@ -1530,7 +1552,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 2396
+Content-Length: 2388
 
 {
   "code" : "SUCCESS",
@@ -1545,71 +1567,71 @@ Content-Length: 2396
       "id" : 90,
       "board_id" : 21,
       "content" : "댓글89",
-      "created_at" : "2023-03-29T09:29:09.527248",
-      "modified_at" : "2023-03-29T09:29:09.527248",
+      "created_at" : "2023-03-29T09:46:44.58764",
+      "modified_at" : "2023-03-29T09:46:44.58764",
       "writer" : "닉네임"
     }, {
       "id" : 89,
       "board_id" : 21,
       "content" : "댓글88",
-      "created_at" : "2023-03-29T09:29:09.526246",
-      "modified_at" : "2023-03-29T09:29:09.526246",
+      "created_at" : "2023-03-29T09:46:44.58664",
+      "modified_at" : "2023-03-29T09:46:44.58664",
       "writer" : "닉네임"
     }, {
       "id" : 88,
       "board_id" : 21,
       "content" : "댓글87",
-      "created_at" : "2023-03-29T09:29:09.526246",
-      "modified_at" : "2023-03-29T09:29:09.526246",
+      "created_at" : "2023-03-29T09:46:44.58664",
+      "modified_at" : "2023-03-29T09:46:44.58664",
       "writer" : "닉네임"
     }, {
       "id" : 87,
       "board_id" : 21,
       "content" : "댓글86",
-      "created_at" : "2023-03-29T09:29:09.525248",
-      "modified_at" : "2023-03-29T09:29:09.525248",
+      "created_at" : "2023-03-29T09:46:44.585636",
+      "modified_at" : "2023-03-29T09:46:44.585636",
       "writer" : "닉네임"
     }, {
       "id" : 86,
       "board_id" : 21,
       "content" : "댓글85",
-      "created_at" : "2023-03-29T09:29:09.525248",
-      "modified_at" : "2023-03-29T09:29:09.525248",
+      "created_at" : "2023-03-29T09:46:44.585636",
+      "modified_at" : "2023-03-29T09:46:44.585636",
       "writer" : "닉네임"
     }, {
       "id" : 85,
       "board_id" : 21,
       "content" : "댓글84",
-      "created_at" : "2023-03-29T09:29:09.524247",
-      "modified_at" : "2023-03-29T09:29:09.524247",
+      "created_at" : "2023-03-29T09:46:44.584639",
+      "modified_at" : "2023-03-29T09:46:44.584639",
       "writer" : "닉네임"
     }, {
       "id" : 84,
       "board_id" : 21,
       "content" : "댓글83",
-      "created_at" : "2023-03-29T09:29:09.524247",
-      "modified_at" : "2023-03-29T09:29:09.524247",
+      "created_at" : "2023-03-29T09:46:44.584639",
+      "modified_at" : "2023-03-29T09:46:44.584639",
       "writer" : "닉네임"
     }, {
       "id" : 83,
       "board_id" : 21,
       "content" : "댓글82",
-      "created_at" : "2023-03-29T09:29:09.523249",
-      "modified_at" : "2023-03-29T09:29:09.523249",
+      "created_at" : "2023-03-29T09:46:44.58364",
+      "modified_at" : "2023-03-29T09:46:44.58364",
       "writer" : "닉네임"
     }, {
       "id" : 82,
       "board_id" : 21,
       "content" : "댓글81",
-      "created_at" : "2023-03-29T09:29:09.522249",
-      "modified_at" : "2023-03-29T09:29:09.522249",
+      "created_at" : "2023-03-29T09:46:44.582636",
+      "modified_at" : "2023-03-29T09:46:44.582636",
       "writer" : "닉네임"
     }, {
       "id" : 81,
       "board_id" : 21,
       "content" : "댓글80",
-      "created_at" : "2023-03-29T09:29:09.522249",
-      "modified_at" : "2023-03-29T09:29:09.522249",
+      "created_at" : "2023-03-29T09:46:44.582636",
+      "modified_at" : "2023-03-29T09:46:44.582636",
       "writer" : "닉네임"
     } ]
   }

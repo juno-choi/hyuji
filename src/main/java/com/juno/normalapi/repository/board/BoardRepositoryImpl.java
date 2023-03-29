@@ -37,7 +37,8 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                                     .where(reply.board.id.eq(board.id)),
                             "replyCount"
                         ),
-                        board.createdAt
+                        board.createdAt,
+                        board.modifiedAt
                         ))
                 .from(board)
                 .orderBy(board.id.desc())
