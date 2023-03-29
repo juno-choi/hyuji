@@ -25,6 +25,6 @@ public class AuthServiceImpl implements AuthService{
         Member findMember = memberRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("아이디 혹은 비밀번호를 확인해주세요!"));
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(findMember.getRole()));
-        return new User(String.valueOf(findMember.getMemberId()), findMember.getPassword(), true, true, true, true, authorities);
+        return new User(String.valueOf(findMember.getId()), findMember.getPassword(), true, true, true, true, authorities);
     }
 }

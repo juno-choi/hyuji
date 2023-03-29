@@ -86,8 +86,8 @@ class MemberControllerTest extends TestSupport {
         String accessToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getAccessToken(), "access_token");
         String refreshToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getRefreshToken(), "refresh_token");
 
-        assertEquals(Long.valueOf(accessToken) ,saveMember.getMemberId());
-        assertEquals(Long.valueOf(refreshToken) ,saveMember.getMemberId());
+        assertEquals(Long.valueOf(accessToken) ,saveMember.getId());
+        assertEquals(Long.valueOf(refreshToken) ,saveMember.getId());
     }
 
     @Test
@@ -107,7 +107,7 @@ class MemberControllerTest extends TestSupport {
         Member member = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         String token = "refresh_temp_token";
-        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getId()));
 
         //when
         ResultActions perform = mock.perform(

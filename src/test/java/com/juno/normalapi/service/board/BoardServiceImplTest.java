@@ -44,7 +44,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
                 .content("내용")
                 .build();
 
-        request.setAttribute("loginMemberId", member.getMemberId());
+        request.setAttribute("loginMemberId", member.getId());
 
         // when
         BoardVo saveBoard = boardService.postBoard(boardDto, request);
@@ -73,7 +73,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
 
         Pageable pageable = Pageable.ofSize(5);
         pageable = pageable.next();
-        request.setAttribute("loginMemberId", member.getMemberId());
+        request.setAttribute("loginMemberId", member.getId());
 
         //when
         BoardListVo boardList = boardService.getBoardList(pageable, request);
@@ -129,7 +129,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
                 .content(content)
                 .build();
 
-        request.setAttribute("loginMemberId", member.getMemberId());
+        request.setAttribute("loginMemberId", member.getId());
 
         // when
         ReplyVo replyVo = boardService.postReply(replyDto, request);

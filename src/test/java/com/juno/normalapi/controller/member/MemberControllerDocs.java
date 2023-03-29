@@ -155,7 +155,7 @@ class MemberControllerDocs extends DocsSupport {
         Member member = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         String token = "refresh_token";
-        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getId()));
 
         //when
         ResultActions perform = mock.perform(

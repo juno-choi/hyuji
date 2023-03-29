@@ -22,7 +22,7 @@ public class JoinMemberVo {
 
     public static JoinMemberVo of(Member member){
         return JoinMemberVo.builder()
-                .memberId(member.getMemberId())
+                .memberId(member.getId())
                 .email(member.getEmail())
                 .name(member.getName())
                 .nickname(member.getNickname())

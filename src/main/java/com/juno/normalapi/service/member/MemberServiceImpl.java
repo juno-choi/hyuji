@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService{
             () -> new IllegalArgumentException("유효하지 않은 회원입니다. 관리자에게 문의해주세요!")
         );
 
-        Long memberId = findMember.getMemberId();
+        Long memberId = findMember.getId();
         String roles = findMember.getRole();
         String[] authorities = roles.split(",");
 

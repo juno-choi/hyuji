@@ -28,7 +28,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         List<BoardVo> content = qd.query()
                 .select(Projections.constructor(BoardVo.class,
                         board.id,
-                        board.member.memberId,
+                        board.member.id,
                         board.title,
                         board.content,
                         board.member.nickname,

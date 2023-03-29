@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardVo.builder()
                 .boardId(saveBoard.getId())
-                .memberId(saveBoard.getMember().getMemberId())
+                .memberId(saveBoard.getMember().getId())
                 .title(saveBoard.getTitle())
                 .content(saveBoard.getContent())
                 .writer(findMember.getNickname())
@@ -81,7 +81,7 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardVo.builder()
                 .boardId(findBoard.getId())
-                .memberId(findBoard.getMember().getMemberId())
+                .memberId(findBoard.getMember().getId())
                 .title(findBoard.getTitle())
                 .content(findBoard.getContent())
                 .writer(findBoard.getMember().getNickname())

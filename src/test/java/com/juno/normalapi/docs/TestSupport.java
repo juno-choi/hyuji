@@ -75,7 +75,7 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
         Member member = Member.of(joinMemberDto, JoinType.EMAIL);
         Member saveMember = memberRepository.save(member);
 
-        String memberId = String.valueOf(saveMember.getMemberId());
+        String memberId = String.valueOf(saveMember.getId());
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
