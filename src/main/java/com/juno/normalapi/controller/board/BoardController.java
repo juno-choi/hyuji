@@ -3,8 +3,8 @@ package com.juno.normalapi.controller.board;
 import com.juno.normalapi.annotation.V1;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
-import com.juno.normalapi.domain.dto.board.RequestBoard;
-import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.dto.board.BoardDto;
+import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.vo.board.BoardListVo;
 import com.juno.normalapi.domain.vo.board.BoardVo;
 import com.juno.normalapi.domain.vo.board.ReplyListVo;
@@ -31,11 +31,11 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("")
-    public ResponseEntity<Response<BoardVo>> postBoard(@RequestBody @Validated RequestBoard requestBoard, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseEntity<Response<BoardVo>> postBoard(@RequestBody @Validated BoardDto boardDto, BindingResult bindingResult, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(Response.<BoardVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
-                .data(boardService.postBoard(requestBoard, request))
+                .data(boardService.postBoard(boardDto, request))
                 .build());
     }
 
@@ -49,11 +49,11 @@ public class BoardController {
     }
 
     @PostMapping("/reply")
-    public ResponseEntity<Response<ReplyVo>> postReply(@RequestBody @Validated RequestReply requestReply, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseEntity<Response<ReplyVo>> postReply(@RequestBody @Validated ReplyDto replyDto, BindingResult bindingResult, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(Response.<ReplyVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
-                .data(boardService.postReply(requestReply, request))
+                .data(boardService.postReply(replyDto, request))
                 .build());
     }
 

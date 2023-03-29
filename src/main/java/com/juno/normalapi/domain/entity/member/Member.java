@@ -1,6 +1,6 @@
 package com.juno.normalapi.domain.entity.member;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.enums.JoinType;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,16 +36,16 @@ public class Member {
     private String role;
 
     // 일반 유저
-    public static Member of(RequestJoinMember requestJoinMember, JoinType joinType){
+    public static Member of(JoinMemberDto joinMemberDto, JoinType joinType){
         return Member.builder()
-                .email(requestJoinMember.getEmail())
-                .password(requestJoinMember.getPassword())
-                .name(requestJoinMember.getName())
-                .nickname(requestJoinMember.getNickname())
-                .tel(requestJoinMember.getTel())
-                .zipCode(requestJoinMember.getZipCode())
-                .address(requestJoinMember.getAddress())
-                .addressDetail(requestJoinMember.getAddressDetail())
+                .email(joinMemberDto.getEmail())
+                .password(joinMemberDto.getPassword())
+                .name(joinMemberDto.getName())
+                .nickname(joinMemberDto.getNickname())
+                .tel(joinMemberDto.getTel())
+                .zipCode(joinMemberDto.getZipCode())
+                .address(joinMemberDto.getAddress())
+                .addressDetail(joinMemberDto.getAddressDetail())
                 .type(joinType)
                 .role("USER")
                 .build();

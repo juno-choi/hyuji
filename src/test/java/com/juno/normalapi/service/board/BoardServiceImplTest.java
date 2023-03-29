@@ -1,7 +1,7 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.board.RequestBoard;
-import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.dto.board.BoardDto;
+import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.entity.board.Board;
 import com.juno.normalapi.domain.entity.board.Reply;
 import com.juno.normalapi.domain.vo.board.BoardListVo;
@@ -39,7 +39,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
     @DisplayName("게시글 등록에 성공한다.")
     void postBoardSuccess() {
         // given
-        RequestBoard requestBoard = RequestBoard.builder()
+        BoardDto boardDto = BoardDto.builder()
                 .title("제목")
                 .content("내용")
                 .build();
@@ -47,7 +47,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         request.setAttribute("loginMemberId", member.getMemberId());
 
         // when
-        BoardVo saveBoard = boardService.postBoard(requestBoard, request);
+        BoardVo saveBoard = boardService.postBoard(boardDto, request);
 
         // then
         Long boardId = saveBoard.getBoardId();
@@ -124,7 +124,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
         String content = "댓글이 달림";
 
-        RequestReply requestReply = RequestReply.builder()
+        ReplyDto replyDto = ReplyDto.builder()
                 .boardId(saveBoard.getId())
                 .content(content)
                 .build();
@@ -132,7 +132,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         request.setAttribute("loginMemberId", member.getMemberId());
 
         // when
-        ReplyVo replyVo = boardService.postReply(requestReply, request);
+        ReplyVo replyVo = boardService.postReply(replyDto, request);
 
         // then
         assertEquals(content, replyVo.getContent());

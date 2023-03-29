@@ -1,11 +1,11 @@
 package com.juno.normalapi.service.member;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
-import com.juno.normalapi.domain.vo.member.JoinMember;
-import com.juno.normalapi.domain.vo.member.LoginMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
+import com.juno.normalapi.domain.vo.member.JoinMemberVo;
+import com.juno.normalapi.domain.vo.member.LoginMemberVo;
 
 public interface MemberService {
-    JoinMember join(RequestJoinMember requestJoinMember);
+    JoinMemberVo join(JoinMemberDto joinMemberDto);
 
-    LoginMember refresh(String token);
+    LoginMemberVo refresh(String token);
 }

@@ -2,7 +2,7 @@ package com.juno.normalapi.docs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.repository.member.MemberRepository;
@@ -61,7 +61,7 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
             return ;
         }
 
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email(email)
                 .password("test123!")
                 .name("테스터")
@@ -72,7 +72,7 @@ public class TestSupport extends WebSecurityConfigurerAdapter {
                 .addressDetail("상세 주소")
                 .build();
 
-        Member member = Member.of(requestJoinMember, JoinType.EMAIL);
+        Member member = Member.of(joinMemberDto, JoinType.EMAIL);
         Member saveMember = memberRepository.save(member);
 
         String memberId = String.valueOf(saveMember.getMemberId());

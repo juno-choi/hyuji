@@ -1,6 +1,6 @@
 package com.juno.normalapi.service;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.repository.member.MemberRepository;
@@ -30,7 +30,7 @@ public class ServiceTestSupport {
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
         if(findMember.isEmpty()){
-            member = memberRepository.save(Member.of(RequestJoinMember.builder()
+            member = memberRepository.save(Member.of(JoinMemberDto.builder()
                     .email(email)
                     .password("test1234!")
                     .tel("01012341234")

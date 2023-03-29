@@ -1,7 +1,7 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.board.RequestBoard;
-import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.dto.board.BoardDto;
+import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepository;
@@ -47,7 +47,7 @@ class BoardServiceImplUnitTest {
     @DisplayName("게시글 등록에 실패한다.")
     void postBoardFail1() {
         // given
-        RequestBoard requestBoard = RequestBoard.builder()
+        BoardDto boardDto = BoardDto.builder()
                 .title("제목")
                 .content("내용")
                 .build();
@@ -55,7 +55,7 @@ class BoardServiceImplUnitTest {
         given(env.getProperty(anyString())).willReturn("loginMemberId");
 
         // when
-        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postBoard(requestBoard, request));
+        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postBoard(boardDto, request));
 
         // then
         assertEquals("잘못된 접근입니다.", ex.getMessage());
@@ -68,7 +68,7 @@ class BoardServiceImplUnitTest {
         given(env.getProperty(anyString())).willReturn("loginMemberId");
         // when
         UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postReply(
-                RequestReply.builder()
+                ReplyDto.builder()
                         .boardId(1L)
                         .content("테스트")
                         .build(),
@@ -88,7 +88,7 @@ class BoardServiceImplUnitTest {
 
         // when
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> boardService.postReply(
-                RequestReply.builder()
+                ReplyDto.builder()
                         .boardId(1L)
                         .content("테스트")
                         .build(),

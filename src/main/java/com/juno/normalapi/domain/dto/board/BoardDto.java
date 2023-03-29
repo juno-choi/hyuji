@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RequestBoard {
+public class BoardDto {
     @NotNull(message = "title은 필수 값입니다.")
     private String title;
     @NotNull(message = "content는 필수 값입니다.")

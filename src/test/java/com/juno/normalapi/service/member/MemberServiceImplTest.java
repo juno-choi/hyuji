@@ -1,9 +1,9 @@
 package com.juno.normalapi.service.member;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
-import com.juno.normalapi.domain.vo.member.JoinMember;
-import com.juno.normalapi.domain.vo.member.LoginMember;
+import com.juno.normalapi.domain.vo.member.JoinMemberVo;
+import com.juno.normalapi.domain.vo.member.LoginMemberVo;
 import com.juno.normalapi.repository.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class MemberServiceImplTest {
     @DisplayName("회원가입 성공")
     void joinSuccess1(){
         // given
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("test2@naver.com")
                 .password("test123!")
                 .name("테스터")
@@ -41,7 +41,7 @@ class MemberServiceImplTest {
                 .addressDetail("상세 주소")
                .build();
         // when
-        JoinMember joinMember = memberService.join(requestJoinMember);
+        JoinMemberVo joinMemberVo = memberService.join(joinMemberDto);
 
         // then
         List<Member> all = memberRepository.findAll();
@@ -80,7 +80,7 @@ class MemberServiceImplTest {
     @DisplayName("토큰 재발급에 성공한다.")
     void refreshSuccess1(){
         // given
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("refresh@naver.com")
                 .password("test123!")
                 .name("테스터")
@@ -90,15 +90,15 @@ class MemberServiceImplTest {
                 .address("경기도 성남시 중원구 자혜로17번길 16")
                 .addressDetail("상세 주소")
                 .build();
-        JoinMember joinMember = memberService.join(requestJoinMember);
+        JoinMemberVo joinMemberVo = memberService.join(joinMemberDto);
 
         String token = "token";
-        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(joinMember.getMemberId()));
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(joinMemberVo.getMemberId()));
 
         // when
-        LoginMember loginMember = memberService.refresh(token);
+        LoginMemberVo loginMemberVo = memberService.refresh(token);
 
         // then
-        assertNotNull(loginMember.getAccessToken());
+        assertNotNull(loginMemberVo.getAccessToken());
     }
 }

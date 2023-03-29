@@ -9,7 +9,7 @@ import lombok.Getter;
 @Builder
 @Getter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class JoinMember {
+public class JoinMemberVo {
     private Long memberId;
     private String email;
     private String name;
@@ -20,8 +20,8 @@ public class JoinMember {
     private String addressDetail;
     private String role;
 
-    public static JoinMember of(Member member){
-        return JoinMember.builder()
+    public static JoinMemberVo of(Member member){
+        return JoinMemberVo.builder()
                 .memberId(member.getMemberId())
                 .email(member.getEmail())
                 .name(member.getName())
