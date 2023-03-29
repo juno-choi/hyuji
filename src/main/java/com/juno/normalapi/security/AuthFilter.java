@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.api.ResponseCode;
 import com.juno.normalapi.domain.dto.EmptyDto;
-import com.juno.normalapi.domain.dto.member.RequestLoginMember;
-import com.juno.normalapi.domain.vo.member.LoginMember;
+import com.juno.normalapi.domain.dto.member.LoginMemberDto;
+import com.juno.normalapi.domain.vo.member.LoginMemberVo;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -45,9 +45,9 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         log.info("인증 요청");
-        RequestLoginMember requestLoginMember = null;
+        LoginMemberDto loginMemberDto = null;
         try {
-            requestLoginMember = objectMapper.readValue(request.getInputStream(), RequestLoginMember.class);
+            loginMemberDto = objectMapper.readValue(request.getInputStream(), LoginMemberDto.class);
         } catch (IOException e) {
             log.error("로그인 요청 양식 에러", e);
             onError(response, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 에러", "서버 내부 에러");
@@ -55,7 +55,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         }
 
         return getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(requestLoginMember.getEmail(), requestLoginMember.getPassword(), new ArrayList<>())
+                new UsernamePasswordAuthenticationToken(loginMemberDto.getEmail(), loginMemberDto.getPassword(), new ArrayList<>())
         );
     }
 
@@ -102,7 +102,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
         redisTemplate.expire(refreshToken, refreshTokenExpirationToLong, TimeUnit.SECONDS);
 
-        LoginMember loginMember = LoginMember.builder()
+        LoginMemberVo loginMemberVo = LoginMemberVo.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .accessTokenExpiration(accessTokenExpirationToLong)
@@ -114,10 +114,10 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         PrintWriter writer = response.getWriter();
-        Response<LoginMember> responseDto = Response.<LoginMember>builder()
+        Response<LoginMemberVo> responseDto = Response.<LoginMemberVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("로그인 성공")
-                .data(loginMember)
+                .data(loginMemberVo)
                 .build();
         writer.write(objectMapper.writeValueAsString(responseDto));
     }

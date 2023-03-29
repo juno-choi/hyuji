@@ -3,10 +3,10 @@ package com.juno.normalapi.controller.member;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.juno.normalapi.api.Response;
 import com.juno.normalapi.docs.TestSupport;
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
-import com.juno.normalapi.domain.vo.member.LoginMember;
+import com.juno.normalapi.domain.vo.member.LoginMemberVo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,7 +37,7 @@ class MemberControllerTest extends TestSupport {
     @Test
     @DisplayName("회원 가입 성공")
     void joinMemberSuccess() throws Exception {
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("test@naver.com")
                 .password("test123!")
                 .name("테스터")
@@ -49,7 +50,7 @@ class MemberControllerTest extends TestSupport {
 
         ResultActions perform = mock.perform(
                 post(URL + "/join").contentType(MediaType.APPLICATION_JSON)
-                .content(convertToString(requestJoinMember))
+                .content(convertToString(joinMemberDto))
         );
         perform.andDo(print());
     }
@@ -80,21 +81,21 @@ class MemberControllerTest extends TestSupport {
         ).andDo(print());
 
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        Response<LoginMember> response = objectMapper.readValue(contentAsString, new TypeReference<Response<LoginMember>>() {});
-        LoginMember loginMember = response.getData();
+        Response<LoginMemberVo> response = objectMapper.readValue(contentAsString, new TypeReference<Response<LoginMemberVo>>() {});
+        LoginMemberVo loginMemberVo = response.getData();
 
-        String accessToken = (String) redisTemplate.opsForHash().get(loginMember.getAccessToken(), "access_token");
-        String refreshToken = (String) redisTemplate.opsForHash().get(loginMember.getRefreshToken(), "refresh_token");
+        String accessToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getAccessToken(), "access_token");
+        String refreshToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getRefreshToken(), "refresh_token");
 
-        assertEquals(Long.valueOf(accessToken) ,saveMember.getMemberId());
-        assertEquals(Long.valueOf(refreshToken) ,saveMember.getMemberId());
+        assertEquals(Long.valueOf(accessToken) ,saveMember.getId());
+        assertEquals(Long.valueOf(refreshToken) ,saveMember.getId());
     }
 
     @Test
     @DisplayName("토큰 재발급 성공")
     void refreshSuccess() throws Exception {
         //given
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("refresh_temp@mail.com")
                 .password("test123!")
                 .name("테스터")
@@ -104,10 +105,10 @@ class MemberControllerTest extends TestSupport {
                 .address("경기도 성남시 중원구 자혜로17번길 16")
                 .addressDetail("상세 주소")
                 .build();
-        Member member = memberRepository.save(Member.of(requestJoinMember, JoinType.EMAIL));
+        Member member = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         String token = "refresh_temp_token";
-        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getId()));
 
         //when
         ResultActions perform = mock.perform(
@@ -129,5 +130,17 @@ class MemberControllerTest extends TestSupport {
         //then
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertTrue(contentAsString.contains("토큰 값이 유효하지 않습니다."));
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 회원은 조회에 실패")
+    void getMemberFail1() throws Exception {
+        // given
+        // when
+        ResultActions perform = mock.perform(get(URL + "/{member_id}", "0"))
+                .andDo(print());
+        // then
+        perform.andExpect(status().is4xxClientError());
+        assertTrue(perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8).contains("유효하지 않은 회원입니다."));
     }
 }

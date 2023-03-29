@@ -1,8 +1,8 @@
 package com.juno.normalapi.controller.member;
 
 import com.juno.normalapi.docs.DocsSupport;
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
-import com.juno.normalapi.domain.dto.member.RequestLoginMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
+import com.juno.normalapi.domain.dto.member.LoginMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.repository.member.MemberRepository;
@@ -46,7 +46,7 @@ class MemberControllerDocs extends DocsSupport {
 
     @BeforeAll
     void setUp(){
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email(EMAIL)
                 .password(passwordEncoder.encode(PASSWORD))
                 .name("테스터")
@@ -56,13 +56,13 @@ class MemberControllerDocs extends DocsSupport {
                 .address("경기도 성남시 중원구")
                 .addressDetail("상세 주소")
                 .build();
-        memberRepository.save(Member.of(requestJoinMember, JoinType.EMAIL));
+        memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
     }
 
     @Test
     @DisplayName(URL+"/join")
     void join() throws Exception {
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("docs1@email.com")
                 .password(PASSWORD)
                 .name("테스터")
@@ -75,7 +75,7 @@ class MemberControllerDocs extends DocsSupport {
 
         ResultActions perform = mock.perform(
                 post(URL + "/join").contentType(MediaType.APPLICATION_JSON)
-                .content(convertToString(requestJoinMember))
+                .content(convertToString(joinMemberDto))
         );
 
         perform.andDo(docs.document(
@@ -108,14 +108,14 @@ class MemberControllerDocs extends DocsSupport {
     @Test
     @DisplayName(URL+"/login")
     void login() throws Exception {
-        RequestLoginMember requestLoginMember = RequestLoginMember.builder()
+        LoginMemberDto loginMemberDto = LoginMemberDto.builder()
                 .email(EMAIL)
                 .password(PASSWORD)
                 .build();
 
         ResultActions perform = mock.perform(
                 post(URL + "/login").contentType(MediaType.APPLICATION_JSON)
-                        .content(convertToString(requestLoginMember))
+                        .content(convertToString(loginMemberDto))
         );
 
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -142,7 +142,7 @@ class MemberControllerDocs extends DocsSupport {
     @DisplayName(URL+"/refresh")
     void refresh() throws Exception {
         //given
-        RequestJoinMember requestJoinMember = RequestJoinMember.builder()
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("refresh@mail.com")
                 .password("test123!")
                 .name("테스터")
@@ -152,10 +152,10 @@ class MemberControllerDocs extends DocsSupport {
                 .address("경기도 성남시 중원구 자혜로17번길 16")
                 .addressDetail("상세 주소")
                 .build();
-        Member member = memberRepository.save(Member.of(requestJoinMember, JoinType.EMAIL));
+        Member member = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         String token = "refresh_token";
-        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getMemberId()));
+        redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(member.getId()));
 
         //when
         ResultActions perform = mock.perform(
@@ -172,6 +172,50 @@ class MemberControllerDocs extends DocsSupport {
                     fieldWithPath("data.access_token").type(JsonFieldType.STRING).description("access token 1시간 (재발급)"),
                     fieldWithPath("data.access_token_expiration").type(JsonFieldType.NUMBER).description("access token 파기일 1시간")
             )
+        ));
+    }
+
+    @Test
+    @DisplayName(URL+"/{member_id} (GET)")
+    void getMember() throws Exception {
+        // given
+        JoinMemberDto joinMemberDto = JoinMemberDto.builder()
+                .email("get@mail.com")
+                .password("test123!")
+                .name("조회")
+                .nickname("검색되는")
+                .tel("01012341234")
+                .zipCode("12345")
+                .address("경기도 성남시 중원구 자혜로17번길 16")
+                .addressDetail("상세 주소")
+                .build();
+        Member saveMember = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
+        // when
+        ResultActions perform = mock.perform(
+                RestDocumentationRequestBuilders.get(URL + "/{member_id}", saveMember.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+        // then
+        perform.andDo(docs.document(
+                pathParameters(
+                        parameterWithName("member_id").description("조회할 회원 id")
+                ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("회원 id"),
+                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("회원 email"),
+                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("회원 이름"),
+                        fieldWithPath("data.nickname").type(JsonFieldType.STRING).description("회원 닉네임"),
+                        fieldWithPath("data.tel").type(JsonFieldType.STRING).description("회원 전화번호"),
+                        fieldWithPath("data.join_type").type(JsonFieldType.STRING).description("회원 가입 경로"),
+                        fieldWithPath("data.zip_code").type(JsonFieldType.STRING).description("회원 우편번호"),
+                        fieldWithPath("data.address").type(JsonFieldType.STRING).description("회원 주소"),
+                        fieldWithPath("data.address_detail").type(JsonFieldType.STRING).description("회원 상세 주소"),
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("회원 가입일"),
+                        fieldWithPath("data.modified_at").type(JsonFieldType.STRING).description("회원 수정일")
+
+                )
         ));
     }
 }

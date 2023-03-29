@@ -1,10 +1,11 @@
 package com.juno.normalapi.service.member;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
-import com.juno.normalapi.domain.vo.member.JoinMember;
-import com.juno.normalapi.domain.vo.member.LoginMember;
+import com.juno.normalapi.domain.vo.member.JoinMemberVo;
+import com.juno.normalapi.domain.vo.member.LoginMemberVo;
+import com.juno.normalapi.domain.vo.member.MemberVo;
 import com.juno.normalapi.repository.member.MemberRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,15 +32,15 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public JoinMember join(RequestJoinMember requestJoinMember) {
-        Member member = Member.of(requestJoinMember, JoinType.EMAIL);
+    public JoinMemberVo join(JoinMemberDto joinMemberDto) {
+        Member member = Member.of(joinMemberDto, JoinType.EMAIL);
         member.encryptPassword(member, passwordEncoder);
         Member saveMember = memberRepository.save(member);
-        return JoinMember.of(saveMember);
+        return JoinMemberVo.of(saveMember);
     }
 
     @Override
-    public LoginMember refresh(String token) {
+    public LoginMemberVo refresh(String token) {
         String memberIdStr = (String) redisTemplate.opsForHash().get(token, "refresh_token");
         if(memberIdStr == null){
             throw new IllegalArgumentException("토큰 값이 유효하지 않습니다.");
@@ -49,7 +50,7 @@ public class MemberServiceImpl implements MemberService{
             () -> new IllegalArgumentException("유효하지 않은 회원입니다. 관리자에게 문의해주세요!")
         );
 
-        Long memberId = findMember.getMemberId();
+        Long memberId = findMember.getId();
         String roles = findMember.getRole();
         String[] authorities = roles.split(",");
 
@@ -68,11 +69,31 @@ public class MemberServiceImpl implements MemberService{
         redisTemplate.opsForHash().put(accessToken, "access_token", String.valueOf(memberId));
         redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
 
-        LoginMember loginMember = LoginMember.builder()
+        LoginMemberVo loginMemberVo = LoginMemberVo.builder()
                 .accessToken(accessToken)
                 .accessTokenExpiration(accessTokenExpirationToLong)
                 .build();
 
-        return loginMember;
+        return loginMemberVo;
+    }
+
+    @Override
+    public MemberVo getMember(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                ()-> new IllegalArgumentException("유효하지 않은 회원입니다.")
+        );
+        return MemberVo.builder()
+                .id(member.getId())
+                .email(member.getEmail())
+                .name(member.getName())
+                .nickname(member.getNickname())
+                .tel(member.getTel())
+                .joinType(member.getType())
+                .zipCode(member.getZipCode())
+                .address(member.getAddress())
+                .addressDetail(member.getAddressDetail())
+                .createdAt(member.getCreatedAt())
+                .modifiedAt(member.getModifiedAt())
+                .build();
     }
 }

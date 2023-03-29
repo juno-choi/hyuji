@@ -1,11 +1,12 @@
 package com.juno.normalapi.domain.entity.member;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.enums.JoinType;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,7 +17,8 @@ import javax.persistence.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    @Column(name = "member_id")
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -35,19 +37,25 @@ public class Member {
     private String addressDetail;
     private String role;
 
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+
     // 일반 유저
-    public static Member of(RequestJoinMember requestJoinMember, JoinType joinType){
+    public static Member of(JoinMemberDto joinMemberDto, JoinType joinType){
+        LocalDateTime now = LocalDateTime.now();
         return Member.builder()
-                .email(requestJoinMember.getEmail())
-                .password(requestJoinMember.getPassword())
-                .name(requestJoinMember.getName())
-                .nickname(requestJoinMember.getNickname())
-                .tel(requestJoinMember.getTel())
-                .zipCode(requestJoinMember.getZipCode())
-                .address(requestJoinMember.getAddress())
-                .addressDetail(requestJoinMember.getAddressDetail())
+                .email(joinMemberDto.getEmail())
+                .password(joinMemberDto.getPassword())
+                .name(joinMemberDto.getName())
+                .nickname(joinMemberDto.getNickname())
+                .tel(joinMemberDto.getTel())
+                .zipCode(joinMemberDto.getZipCode())
+                .address(joinMemberDto.getAddress())
+                .addressDetail(joinMemberDto.getAddressDetail())
                 .type(joinType)
                 .role("USER")
+                .createdAt(now)
+                .modifiedAt(now)
                 .build();
     }
 

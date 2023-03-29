@@ -1,8 +1,8 @@
 package com.juno.normalapi.controller.board;
 
 import com.juno.normalapi.docs.TestSupport;
-import com.juno.normalapi.domain.dto.board.RequestBoard;
-import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.dto.board.BoardDto;
+import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.entity.board.Board;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.repository.board.BoardRepository;
@@ -45,11 +45,11 @@ class BoardControllerTest extends TestSupport {
     @DisplayName("게시글 등록에 성공한다.")
     void postBoardSuccess() throws Exception {
         //given
-        RequestBoard requestBoard = RequestBoard.builder().title("테스트 글").content("테스트 내용").build();
+        BoardDto boardDto = BoardDto.builder().title("테스트 글").content("테스트 내용").build();
         //when
         ResultActions perform = mock.perform(post(URL).header(AUTHORIZATION, accessToken)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(convertToString(requestBoard))
+                .content(convertToString(boardDto))
         ).andDo(print());
         //then
         assertTrue(perform.andReturn().getResponse().getContentAsString().contains("SUCCESS"));
@@ -90,7 +90,7 @@ class BoardControllerTest extends TestSupport {
                 post(URL + "/reply")
                         .header(AUTHORIZATION, accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(convertToString(RequestReply.builder().build()))
+                        .content(convertToString(ReplyDto.builder().build()))
         ).andDo(print());
 
         // then

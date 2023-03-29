@@ -10,7 +10,7 @@ import lombok.Getter;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class LoginMember {
+public class LoginMemberVo {
     private String accessToken;
     private String refreshToken;
     private Long accessTokenExpiration;

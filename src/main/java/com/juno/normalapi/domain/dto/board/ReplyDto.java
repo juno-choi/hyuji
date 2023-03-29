@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RequestReply {
+public class ReplyDto {
     @NotNull(message = "board_id는 필수 값입니다.")
     private Long boardId;
     @NotNull(message = "content는 필수 값 입니다.")

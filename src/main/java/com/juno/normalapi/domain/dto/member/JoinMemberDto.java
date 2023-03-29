@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RequestJoinMember {
+public class JoinMemberDto {
     private String email;
     private String password;
     private String name;

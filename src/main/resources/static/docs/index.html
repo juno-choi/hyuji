@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_회원_가입">📄 회원 가입</a></li>
 <li><a href="#_로그인">📄 로그인</a></li>
 <li><a href="#_토큰_재발급">📄 토큰 재발급</a></li>
+<li><a href="#_회원_상세_불러오기">📄 회원 상세 불러오기</a></li>
 </ul>
 </li>
 <li><a href="#_게시판">📗 게시판</a>
@@ -724,10 +725,10 @@ Content-Length: 544
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMDU0NDA3LCJyb2xlcyI6WyJVU0VSIl19.T33kXSXAziAt1I9bRbgOga4j4IBCzBaKsrvC2IXuBeWg5exZVq3oUwOSJbFQbDbT7443th27EhAJizJPQuMe4Q",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNjQyODA3fQ.OwCPNuLB-lQEUKCzwTcAxBv14gYzANOqakcvz-hn2hUacj172XfheEIwIqPhzoqgqWXPAo7QonZAoDwDSE-TBA",
-    "access_token_expiration" : 1680054407438,
-    "refresh_token_expiration" : 1682642807438
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMDY4ODg0LCJyb2xlcyI6WyJVU0VSIl19.qrQ6H7EwCP3XIrRo6IFoc1j12eToHfjGAzHClHPHyYX-x9z_QaH81VTxeFxiHExEyHxa17uw7uHZli0e9KSw8w",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNjU3Mjg0fQ.4tFk-KszG7PubexeqBp4Vmc5mFIhH9tGkt3mBWaZ6oXlqponW32bH_BF-zVWTd7j0KibDVrjt1NKetHdSOXJAQ",
+    "access_token_expiration" : 1680068884732,
+    "refresh_token_expiration" : 1682657284732
   }
 }</code></pre>
 </div>
@@ -831,8 +832,8 @@ Content-Length: 329
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwMDU0NDA3LCJyb2xlcyI6WyJVU0VSIl19.X5ZUGcQoPk-Fy6klBiXkm07r2foGdM4ZP2AwHmsPLDkJdmZH99fxwCmBCjpD2m7yvw48JV1jArv7idrlR4nQCg",
-    "access_token_expiration" : 1680054407474
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwMDY4ODg0LCJyb2xlcyI6WyJVU0VSIl19.W-716E1HBkvxwTL6J6918yFtCSr4yY3XTTfKvrk-GHHMWshWnrpIOMAxTlfwV6hr351HJcOXT9fguPbPmYo0Og",
+    "access_token_expiration" : 1680068884776
   }
 }</code></pre>
 </div>
@@ -878,6 +879,156 @@ Content-Length: 329
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_회원_상세_불러오기"><a class="link" href="#_회원_상세_불러오기">📄 회원 상세 불러오기</a></h3>
+<div class="sect3">
+<h4 id="_request_4"><a class="link" href="#_request_4">✅ REQUEST</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /auth/member/3 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: 127.0.0.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_parameter_2"><a class="link" href="#_request_parameter_2">✅ REQUEST PARAMETER</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>member_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 회원 id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_4"><a class="link" href="#_response_4">✅ RESPONSE</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 470
+
+{
+  "code" : "SUCCESS",
+  "message" : "성공",
+  "data" : {
+    "id" : 3,
+    "email" : "get@mail.com",
+    "name" : "조회",
+    "nickname" : "검색되는",
+    "tel" : "01012341234",
+    "join_type" : "EMAIL",
+    "zip_code" : "12345",
+    "address" : "경기도 성남시 중원구 자혜로17번길 16",
+    "address_detail" : "상세 주소",
+    "created_at" : "2023-03-29T14:43:11.137461",
+    "modified_at" : "2023-03-29T14:43:11.137461"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_field_4"><a class="link" href="#_response_field_4">✅ RESPONSE FIELD</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 email</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이름</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 닉네임</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.tel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 전화번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.join_type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 가입 경로</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.zip_code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.address</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.address_detail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.created_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 가입일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 수정일</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -886,7 +1037,7 @@ Content-Length: 329
 <div class="sect2">
 <h3 id="_게시글_등록"><a class="link" href="#_게시글_등록">📄 게시글 등록</a></h3>
 <div class="sect3">
-<h4 id="_request_4"><a class="link" href="#_request_4">✅ REQUEST</a></h4>
+<h4 id="_request_5"><a class="link" href="#_request_5">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board HTTP/1.1
@@ -936,12 +1087,12 @@ Host: 127.0.0.1
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_4"><a class="link" href="#_response_4">✅ RESPONSE</a></h4>
+<h4 id="_response_5"><a class="link" href="#_response_5">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 337
+Content-Length: 339
 
 {
   "code" : "SUCCESS",
@@ -953,15 +1104,15 @@ Content-Length: 337
     "content" : "테스트 내용",
     "writer" : "닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-29T09:46:44.925636",
-    "modified_at" : "2023-03-29T09:46:44.925636"
+    "created_at" : "2023-03-29T13:48:01.9811674",
+    "modified_at" : "2023-03-29T13:48:01.9811674"
   }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_4"><a class="link" href="#_response_field_4">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_5"><a class="link" href="#_response_field_5">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1033,7 +1184,7 @@ Content-Length: 337
 <div class="sect2">
 <h3 id="_게시글_불러오기_리스트"><a class="link" href="#_게시글_불러오기_리스트">📄 게시글 불러오기 (리스트)</a></h3>
 <div class="sect3">
-<h4 id="_request_5"><a class="link" href="#_request_5">✅ REQUEST</a></h4>
+<h4 id="_request_6"><a class="link" href="#_request_6">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board?page=0&amp;size=5 HTTP/1.1
@@ -1043,7 +1194,7 @@ Host: 127.0.0.1</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_request_parameter_2"><a class="link" href="#_request_parameter_2">✅ REQUEST PARAMETER</a></h4>
+<h4 id="_request_parameter_3"><a class="link" href="#_request_parameter_3">✅ REQUEST PARAMETER</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1072,12 +1223,12 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_5"><a class="link" href="#_response_5">✅ RESPONSE</a></h4>
+<h4 id="_response_6"><a class="link" href="#_response_6">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1633
+Content-Length: 1631
 
 {
   "code" : "SUCCESS",
@@ -1095,8 +1246,8 @@ Content-Length: 1633
       "content" : "내용 19",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:46:44.185162",
-      "modified_at" : "2023-03-29T09:46:44.185162"
+      "created_at" : "2023-03-29T13:48:01.23717",
+      "modified_at" : "2023-03-29T13:48:01.23717"
     }, {
       "board_id" : 19,
       "member_id" : 1,
@@ -1104,8 +1255,8 @@ Content-Length: 1633
       "content" : "내용 18",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:46:44.184161",
-      "modified_at" : "2023-03-29T09:46:44.184161"
+      "created_at" : "2023-03-29T13:48:01.235167",
+      "modified_at" : "2023-03-29T13:48:01.235167"
     }, {
       "board_id" : 18,
       "member_id" : 1,
@@ -1113,8 +1264,8 @@ Content-Length: 1633
       "content" : "내용 17",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:46:44.183162",
-      "modified_at" : "2023-03-29T09:46:44.183162"
+      "created_at" : "2023-03-29T13:48:01.234168",
+      "modified_at" : "2023-03-29T13:48:01.234168"
     }, {
       "board_id" : 17,
       "member_id" : 1,
@@ -1122,8 +1273,8 @@ Content-Length: 1633
       "content" : "내용 16",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:46:44.182162",
-      "modified_at" : "2023-03-29T09:46:44.182162"
+      "created_at" : "2023-03-29T13:48:01.233167",
+      "modified_at" : "2023-03-29T13:48:01.233167"
     }, {
       "board_id" : 16,
       "member_id" : 1,
@@ -1131,8 +1282,8 @@ Content-Length: 1633
       "content" : "내용 15",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-29T09:46:44.182162",
-      "modified_at" : "2023-03-29T09:46:44.182162"
+      "created_at" : "2023-03-29T13:48:01.232167",
+      "modified_at" : "2023-03-29T13:48:01.232167"
     } ]
   }
 }</code></pre>
@@ -1140,7 +1291,7 @@ Content-Length: 1633
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_5"><a class="link" href="#_response_field_5">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_6"><a class="link" href="#_response_field_6">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1237,7 +1388,7 @@ Content-Length: 1633
 <div class="sect2">
 <h3 id="_게시글_불러오기_상세"><a class="link" href="#_게시글_불러오기_상세">📄 게시글 불러오기 (상세)</a></h3>
 <div class="sect3">
-<h4 id="_request_6"><a class="link" href="#_request_6">✅ REQUEST</a></h4>
+<h4 id="_request_7"><a class="link" href="#_request_7">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/22 HTTP/1.1
@@ -1247,7 +1398,7 @@ Host: 127.0.0.1</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_request_parameter_3"><a class="link" href="#_request_parameter_3">✅ REQUEST PARAMETER</a></h4>
+<h4 id="_request_parameter_4"><a class="link" href="#_request_parameter_4">✅ REQUEST PARAMETER</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1271,7 +1422,7 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_6"><a class="link" href="#_response_6">✅ RESPONSE</a></h4>
+<h4 id="_response_7"><a class="link" href="#_response_7">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -1288,15 +1439,15 @@ Content-Length: 323
     "content" : "내용",
     "writer" : "닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-29T09:46:44.717638",
-    "modified_at" : "2023-03-29T09:46:44.717638"
+    "created_at" : "2023-03-29T13:48:01.834169",
+    "modified_at" : "2023-03-29T13:48:01.834169"
   }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_6"><a class="link" href="#_response_field_6">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_7"><a class="link" href="#_response_field_7">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1368,7 +1519,7 @@ Content-Length: 323
 <div class="sect2">
 <h3 id="_댓글_등록"><a class="link" href="#_댓글_등록">📄 댓글 등록</a></h3>
 <div class="sect3">
-<h4 id="_request_7"><a class="link" href="#_request_7">✅ REQUEST</a></h4>
+<h4 id="_request_8"><a class="link" href="#_request_8">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board/reply HTTP/1.1
@@ -1385,7 +1536,7 @@ Host: 127.0.0.1
 </div>
 </div>
 <div class="sect3">
-<h4 id="_request_parameter_4"><a class="link" href="#_request_parameter_4">✅ REQUEST PARAMETER</a></h4>
+<h4 id="_request_parameter_5"><a class="link" href="#_request_parameter_5">✅ REQUEST PARAMETER</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1418,7 +1569,7 @@ Host: 127.0.0.1
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_7"><a class="link" href="#_response_7">✅ RESPONSE</a></h4>
+<h4 id="_response_8"><a class="link" href="#_response_8">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
@@ -1432,8 +1583,8 @@ Content-Length: 281
     "id" : 101,
     "board_id" : 24,
     "content" : "댓글 달었지롱",
-    "created_at" : "2023-03-29T09:46:44.9946412",
-    "modified_at" : "2023-03-29T09:46:44.9946412",
+    "created_at" : "2023-03-29T13:48:02.0251742",
+    "modified_at" : "2023-03-29T13:48:02.0251742",
     "writer" : "닉네임"
   }
 }</code></pre>
@@ -1441,7 +1592,7 @@ Content-Length: 281
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_7"><a class="link" href="#_response_field_7">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_8"><a class="link" href="#_response_field_8">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1503,7 +1654,7 @@ Content-Length: 281
 <div class="sect2">
 <h3 id="_댓글_불러오기_리스트"><a class="link" href="#_댓글_불러오기_리스트">📄 댓글 불러오기 (리스트)</a></h3>
 <div class="sect3">
-<h4 id="_request_8"><a class="link" href="#_request_8">✅ REQUEST</a></h4>
+<h4 id="_request_9"><a class="link" href="#_request_9">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/reply?board_id=21&amp;page=1&amp;size=10 HTTP/1.1
@@ -1513,7 +1664,7 @@ Host: 127.0.0.1</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_request_parameter_5"><a class="link" href="#_request_parameter_5">✅ REQUEST PARAMETER</a></h4>
+<h4 id="_request_parameter_6"><a class="link" href="#_request_parameter_6">✅ REQUEST PARAMETER</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1547,12 +1698,12 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_8"><a class="link" href="#_response_8">✅ RESPONSE</a></h4>
+<h4 id="_response_9"><a class="link" href="#_response_9">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 2388
+Content-Length: 2390
 
 {
   "code" : "SUCCESS",
@@ -1567,71 +1718,71 @@ Content-Length: 2388
       "id" : 90,
       "board_id" : 21,
       "content" : "댓글89",
-      "created_at" : "2023-03-29T09:46:44.58764",
-      "modified_at" : "2023-03-29T09:46:44.58764",
+      "created_at" : "2023-03-29T13:48:01.73417",
+      "modified_at" : "2023-03-29T13:48:01.73417",
       "writer" : "닉네임"
     }, {
       "id" : 89,
       "board_id" : 21,
       "content" : "댓글88",
-      "created_at" : "2023-03-29T09:46:44.58664",
-      "modified_at" : "2023-03-29T09:46:44.58664",
+      "created_at" : "2023-03-29T13:48:01.732171",
+      "modified_at" : "2023-03-29T13:48:01.732171",
       "writer" : "닉네임"
     }, {
       "id" : 88,
       "board_id" : 21,
       "content" : "댓글87",
-      "created_at" : "2023-03-29T09:46:44.58664",
-      "modified_at" : "2023-03-29T09:46:44.58664",
+      "created_at" : "2023-03-29T13:48:01.72917",
+      "modified_at" : "2023-03-29T13:48:01.72917",
       "writer" : "닉네임"
     }, {
       "id" : 87,
       "board_id" : 21,
       "content" : "댓글86",
-      "created_at" : "2023-03-29T09:46:44.585636",
-      "modified_at" : "2023-03-29T09:46:44.585636",
+      "created_at" : "2023-03-29T13:48:01.727175",
+      "modified_at" : "2023-03-29T13:48:01.727175",
       "writer" : "닉네임"
     }, {
       "id" : 86,
       "board_id" : 21,
       "content" : "댓글85",
-      "created_at" : "2023-03-29T09:46:44.585636",
-      "modified_at" : "2023-03-29T09:46:44.585636",
+      "created_at" : "2023-03-29T13:48:01.725171",
+      "modified_at" : "2023-03-29T13:48:01.725171",
       "writer" : "닉네임"
     }, {
       "id" : 85,
       "board_id" : 21,
       "content" : "댓글84",
-      "created_at" : "2023-03-29T09:46:44.584639",
-      "modified_at" : "2023-03-29T09:46:44.584639",
+      "created_at" : "2023-03-29T13:48:01.72317",
+      "modified_at" : "2023-03-29T13:48:01.72317",
       "writer" : "닉네임"
     }, {
       "id" : 84,
       "board_id" : 21,
       "content" : "댓글83",
-      "created_at" : "2023-03-29T09:46:44.584639",
-      "modified_at" : "2023-03-29T09:46:44.584639",
+      "created_at" : "2023-03-29T13:48:01.721168",
+      "modified_at" : "2023-03-29T13:48:01.721168",
       "writer" : "닉네임"
     }, {
       "id" : 83,
       "board_id" : 21,
       "content" : "댓글82",
-      "created_at" : "2023-03-29T09:46:44.58364",
-      "modified_at" : "2023-03-29T09:46:44.58364",
+      "created_at" : "2023-03-29T13:48:01.718169",
+      "modified_at" : "2023-03-29T13:48:01.718169",
       "writer" : "닉네임"
     }, {
       "id" : 82,
       "board_id" : 21,
       "content" : "댓글81",
-      "created_at" : "2023-03-29T09:46:44.582636",
-      "modified_at" : "2023-03-29T09:46:44.582636",
+      "created_at" : "2023-03-29T13:48:01.717167",
+      "modified_at" : "2023-03-29T13:48:01.717167",
       "writer" : "닉네임"
     }, {
       "id" : 81,
       "board_id" : 21,
       "content" : "댓글80",
-      "created_at" : "2023-03-29T09:46:44.582636",
-      "modified_at" : "2023-03-29T09:46:44.582636",
+      "created_at" : "2023-03-29T13:48:01.716169",
+      "modified_at" : "2023-03-29T13:48:01.716169",
       "writer" : "닉네임"
     } ]
   }
@@ -1640,7 +1791,7 @@ Content-Length: 2388
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_8"><a class="link" href="#_response_field_8">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_9"><a class="link" href="#_response_field_9">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1729,7 +1880,7 @@ Content-Length: 2388
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-29 09:22:25 +0900
+Last updated 2023-03-29 14:44:53 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

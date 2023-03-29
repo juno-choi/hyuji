@@ -1,6 +1,6 @@
 package com.juno.normalapi.interceptor;
 
-import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.exception.UnauthorizedException;
@@ -47,7 +47,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 makeTestMemberProcess(request, testEmail);
                 return true;
             }
-            Long memberId = findMember.get().getMemberId();
+            Long memberId = findMember.get().getId();
             request.setAttribute(env.getProperty("normal.login.attribute"), memberId);
             return true;
         }
@@ -62,7 +62,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     private void makeTestMemberProcess(HttpServletRequest request, String testEmail) {
         Member saveMember = memberRepository.save(
-                Member.of(RequestJoinMember.builder()
+                Member.of(JoinMemberDto.builder()
                         .name("테스터")
                         .address("주소")
                         .addressDetail("상세주소")
@@ -73,7 +73,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                         .password(passwordEncoder.encode("qwer1234!"))
                         .build(), JoinType.EMAIL));
 
-        Long memberId = saveMember.getMemberId();
+        Long memberId = saveMember.getId();
         request.setAttribute(env.getProperty("normal.login.attribute"), memberId);
 
         redisTemplate.opsForHash().put(TEST_ACCESS_TOKEN, "access_token", String.valueOf(memberId));

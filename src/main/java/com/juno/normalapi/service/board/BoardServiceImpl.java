@@ -1,7 +1,7 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.board.RequestBoard;
-import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.dto.board.BoardDto;
+import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.entity.board.Board;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.entity.board.Reply;
@@ -39,15 +39,15 @@ public class BoardServiceImpl implements BoardService{
 
     @Transactional
     @Override
-    public BoardVo postBoard(RequestBoard requestBoard, HttpServletRequest request) {
+    public BoardVo postBoard(BoardDto boardDto, HttpServletRequest request) {
         Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
-        Board saveBoard = boardRepository.save(Board.of(findMember, requestBoard.getTitle(), requestBoard.getContent()));
+        Board saveBoard = boardRepository.save(Board.of(findMember, boardDto.getTitle(), boardDto.getContent()));
 
         return BoardVo.builder()
                 .boardId(saveBoard.getId())
-                .memberId(saveBoard.getMember().getMemberId())
+                .memberId(saveBoard.getMember().getId())
                 .title(saveBoard.getTitle())
                 .content(saveBoard.getContent())
                 .writer(findMember.getNickname())
@@ -81,7 +81,7 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardVo.builder()
                 .boardId(findBoard.getId())
-                .memberId(findBoard.getMember().getMemberId())
+                .memberId(findBoard.getMember().getId())
                 .title(findBoard.getTitle())
                 .content(findBoard.getContent())
                 .writer(findBoard.getMember().getNickname())
@@ -93,10 +93,10 @@ public class BoardServiceImpl implements BoardService{
 
     @Transactional
     @Override
-    public ReplyVo postReply(RequestReply requestReply, HttpServletRequest request) {
+    public ReplyVo postReply(ReplyDto replyDto, HttpServletRequest request) {
         Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
-        Long boardId = requestReply.getBoardId();
-        String content = requestReply.getContent();
+        Long boardId = replyDto.getBoardId();
+        String content = replyDto.getContent();
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
         Board findBoard = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 게시판입니다."));
