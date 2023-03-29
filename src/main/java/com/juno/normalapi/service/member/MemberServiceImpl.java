@@ -92,6 +92,8 @@ public class MemberServiceImpl implements MemberService{
                 .zipCode(member.getZipCode())
                 .address(member.getAddress())
                 .addressDetail(member.getAddressDetail())
+                .createdAt(member.getCreatedAt())
+                .modifiedAt(member.getModifiedAt())
                 .build();
     }
 }

@@ -7,6 +7,8 @@ import com.juno.normalapi.domain.enums.JoinType;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,4 +23,6 @@ public class MemberVo {
     private String zipCode;
     private String address;
     private String addressDetail;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 }

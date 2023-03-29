@@ -65,6 +65,27 @@ include::{snippets}/member-controller-docs/refresh/http-response.adoc[]
 
 include::{snippets}/member-controller-docs/refresh/response-fields.adoc[]
 
+
+### 📄 회원 상세 불러오기
+
+==== ✅ REQUEST
+include::{snippets}/member-controller-docs/get-member/http-request.adoc[]
+
+==== ✅ REQUEST PARAMETER
+
+include::{snippets}/member-controller-docs/get-member/path-parameters.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/member-controller-docs/get-member/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/member-controller-docs/get-member/response-fields.adoc[]
+
+---
+
+
 == 📗 게시판
 
 ### 📄 게시글 등록

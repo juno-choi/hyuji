@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -36,8 +37,12 @@ public class Member {
     private String addressDetail;
     private String role;
 
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+
     // 일반 유저
     public static Member of(JoinMemberDto joinMemberDto, JoinType joinType){
+        LocalDateTime now = LocalDateTime.now();
         return Member.builder()
                 .email(joinMemberDto.getEmail())
                 .password(joinMemberDto.getPassword())
@@ -49,6 +54,8 @@ public class Member {
                 .addressDetail(joinMemberDto.getAddressDetail())
                 .type(joinType)
                 .role("USER")
+                .createdAt(now)
+                .modifiedAt(now)
                 .build();
     }
 

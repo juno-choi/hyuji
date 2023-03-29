@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -129,5 +130,17 @@ class MemberControllerTest extends TestSupport {
         //then
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertTrue(contentAsString.contains("토큰 값이 유효하지 않습니다."));
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 회원은 조회에 실패")
+    void getMemberFail1() throws Exception {
+        // given
+        // when
+        ResultActions perform = mock.perform(get(URL + "/{member_id}", "0"))
+                .andDo(print());
+        // then
+        perform.andExpect(status().is4xxClientError());
+        assertTrue(perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8).contains("유효하지 않은 회원입니다."));
     }
 }
