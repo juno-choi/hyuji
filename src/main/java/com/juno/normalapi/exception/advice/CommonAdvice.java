@@ -5,6 +5,7 @@ import com.juno.normalapi.api.ResponseError;
 import com.juno.normalapi.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -36,6 +37,21 @@ public class CommonAdvice {
                         ResponseError.<String>builder()
                                 .code(ResponseCode.FAIL)
                                 .message("인증되지 않은 접근입니다.")
+                                .errors(errors)
+                                .build()
+                );
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ResponseError<String>> missingServletRequestParameterException(MissingServletRequestParameterException e){
+        List<String> errors = new ArrayList<>();
+        errors.add(String.format("%s (%s) 값이 비어있습니다.", e.getParameterName(), e.getParameterType()));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(
+                        ResponseError.<String>builder()
+                                .code(ResponseCode.FAIL)
+                                .message("파라미터를 확인해주세요.")
                                 .errors(errors)
                                 .build()
                 );

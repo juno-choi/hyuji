@@ -6,6 +6,7 @@ import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.ReplyListVo;
 import com.juno.normalapi.domain.vo.ReplyVo;
 import com.juno.normalapi.repository.board.BoardRepository;
 import com.juno.normalapi.repository.board.ReplyRepository;
@@ -135,5 +136,23 @@ class BoardServiceImplTest extends ServiceTestSupport {
 
         // then
         assertEquals(content, replyVo.getContent());
+    }
+
+    @Test
+    @DisplayName("댓글을 페이징하여 불러오는데 성공한다.")
+    void getReplyListSuccess1(){
+        // given
+        Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
+        // 댓글 100개 달기
+        for(int i=0; i<100; i++){
+            replyRepository.save(Reply.of(member, saveBoard, "댓글"+i));
+        }
+
+        Pageable pageable = Pageable.ofSize(5);
+        pageable = pageable.next();
+        // when
+        ReplyListVo replyList = boardService.getReplyList(saveBoard.getId(), pageable, request);
+        // then
+        assertTrue(!replyList.getEmpty());
     }
 }

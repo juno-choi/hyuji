@@ -137,3 +137,20 @@ include::{snippets}/board-controller-docs/post-reply/http-response.adoc[]
 
 include::{snippets}/board-controller-docs/post-reply/response-fields.adoc[]
 
+
+### 📄 댓글 불러오기 (리스트)
+
+==== ✅ REQUEST
+include::{snippets}/board-controller-docs/get-reply-list/http-request.adoc[]
+
+==== ✅ REQUEST PARAMETER
+
+include::{snippets}/board-controller-docs/get-reply-list/request-parameters.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/board-controller-docs/get-reply-list/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/board-controller-docs/get-reply-list/response-fields.adoc[]

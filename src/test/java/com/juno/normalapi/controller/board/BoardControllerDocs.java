@@ -5,8 +5,9 @@ import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.entity.Board;
 import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.repository.board.BoardRepository;
-import com.juno.normalapi.repository.member.MemberRepository;
+import com.juno.normalapi.repository.board.ReplyRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ class BoardControllerDocs extends DocsSupport {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Test
     @DisplayName(URL + " (POST)")
@@ -137,7 +141,7 @@ class BoardControllerDocs extends DocsSupport {
         //then
         perform.andDo(docs.document(
                 pathParameters(
-                        parameterWithName("board_id").description("게시판 번호").optional()
+                        parameterWithName("board_id").description("게시판 번호")
                 ),
                 responseFields(
                         fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
@@ -152,6 +156,7 @@ class BoardControllerDocs extends DocsSupport {
                 )
         ));
     }
+
     @Test
     @DisplayName(URL+"/reply (POST)")
     void postReply() throws Exception {
@@ -196,5 +201,49 @@ class BoardControllerDocs extends DocsSupport {
                         fieldWithPath("data.writer").type(JsonFieldType.STRING).description("작성자")
                 )
         ));
+    }
+
+    @Test
+    @DisplayName("/reply (GET)")
+    void getReplyList() throws Exception {
+        // given
+        Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
+        // 댓글 100개 달기
+        for(int i=0; i<100; i++){
+            replyRepository.save(Reply.of(member, saveBoard, "댓글"+i));
+        }
+
+        // when
+        ResultActions perform = mock.perform(
+                get(URL + "/reply").header(AUTHORIZATION, accessToken)
+                .param("board_id", saveBoard.getId().toString())
+                .param("page", "1")
+                .param("size", "10")
+        );
+
+        // then
+        perform.andDo(docs.document(
+                requestParameters(
+                        parameterWithName("board_id").description("게시판 id"),
+                        parameterWithName("page").description("페이지 번호 (default = 0)").optional(),
+                        parameterWithName("size").description("페이지 당 호출할 개수 (default = 5)").optional()
+                ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.total_page").type(JsonFieldType.NUMBER).description("총 페이지 수"),
+                        fieldWithPath("data.total_elements").type(JsonFieldType.NUMBER).description("총 게시글 수"),
+                        fieldWithPath("data.number_of_elements").type(JsonFieldType.NUMBER).description("호출한 페이지 게시글 수"),
+                        fieldWithPath("data.last").type(JsonFieldType.BOOLEAN).description("마지막 페이지 여부"),
+                        fieldWithPath("data.empty").type(JsonFieldType.BOOLEAN).description("호출 페이지 빈 페이지 여부"),
+                        fieldWithPath("data.list[].id").type(JsonFieldType.NUMBER).description("댓글 id"),
+                        fieldWithPath("data.list[].board_id").type(JsonFieldType.NUMBER).description("게시판 id"),
+                        fieldWithPath("data.list[].content").type(JsonFieldType.STRING).description("내용"),
+                        fieldWithPath("data.list[].writer").type(JsonFieldType.STRING).description("닉네임"),
+                        fieldWithPath("data.list[].created_at").type(JsonFieldType.STRING).description("등록일"),
+                        fieldWithPath("data.list[].modified_at").type(JsonFieldType.STRING).description("수정일")
+                )
+        ));
+
     }
 }

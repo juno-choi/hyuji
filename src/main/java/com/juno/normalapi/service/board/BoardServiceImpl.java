@@ -7,10 +7,12 @@ import com.juno.normalapi.domain.entity.Member;
 import com.juno.normalapi.domain.entity.Reply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.ReplyListVo;
 import com.juno.normalapi.domain.vo.ReplyVo;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepositoryCustom;
 import com.juno.normalapi.repository.board.ReplyRepository;
+import com.juno.normalapi.repository.board.ReplyRepositoryCustom;
 import com.juno.normalapi.repository.member.MemberRepository;
 import com.juno.normalapi.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class BoardServiceImpl implements BoardService{
     private final BoardRepository boardRepository;
     private final BoardRepositoryCustom boardRepositoryCustom;
     private final ReplyRepository replyRepository;
+    private final ReplyRepositoryCustom replyRepositoryCustom;
 
     @Transactional
     @Override
@@ -98,5 +101,19 @@ public class BoardServiceImpl implements BoardService{
         Reply saveReply = replyRepository.save(Reply.of(findMember, findBoard, content));
 
         return ReplyVo.of(saveReply.getId(), findBoard.getId(), content, findMember.getNickname());
+    }
+
+    @Override
+    public ReplyListVo getReplyList(Long boardId, Pageable pageable, HttpServletRequest request) {
+        Page<ReplyVo> page = replyRepositoryCustom.findAll(boardId, pageable);
+
+        return ReplyListVo.builder()
+                .totalPage(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .numberOfElements(page.getNumberOfElements())
+                .last(page.isLast())
+                .empty(page.isEmpty())
+                .list(page.getContent())
+                .build();
     }
 }

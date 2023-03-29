@@ -4,6 +4,7 @@ import com.juno.normalapi.domain.dto.RequestBoard;
 import com.juno.normalapi.domain.dto.RequestReply;
 import com.juno.normalapi.domain.vo.BoardListVo;
 import com.juno.normalapi.domain.vo.BoardVo;
+import com.juno.normalapi.domain.vo.ReplyListVo;
 import com.juno.normalapi.domain.vo.ReplyVo;
 import org.springframework.data.domain.Pageable;
 
@@ -17,4 +18,6 @@ public interface BoardService {
     BoardVo getBoard(Long boardId, HttpServletRequest request);
 
     ReplyVo postReply(RequestReply requestReply, HttpServletRequest request);
+
+    ReplyListVo getReplyList(Long boardId, Pageable pageable, HttpServletRequest request);
 }

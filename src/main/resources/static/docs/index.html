@@ -454,7 +454,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_게시판">📗 게시판</a>
 <ul class="sectlevel2">
 <li><a href="#_게시글_등록">📄 게시글 등록</a></li>
-<li><a href="#_게시글_불러오기">📄 게시글 불러오기</a></li>
+<li><a href="#_게시글_불러오기_리스트">📄 게시글 불러오기 (리스트)</a></li>
+<li><a href="#_게시글_불러오기_상세">📄 게시글 불러오기 (상세)</a></li>
+<li><a href="#_댓글_등록">📄 댓글 등록</a></li>
+<li><a href="#_댓글_불러오기_리스트">📄 댓글 불러오기 (리스트)</a></li>
 </ul>
 </li>
 </ul>
@@ -721,10 +724,10 @@ Content-Length: 544
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjc5OTkxMDA4LCJyb2xlcyI6WyJVU0VSIl19.RY1EdYgbhV3Y00oGYNfzmM7kWnCt34iyJwTuVzBCzkRW2xbk9ywnbm7pYJyGQmwz2bq9K4gtCLz4ZCMtyU79Zw",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNTc5NDA4fQ.LW8t2eTxWHvhotvqCVFHeNTN32orOd6KbQKdQlWRUBcyr5C0BAO4eoapOgED5Rpp4sISvBCfaL4OBwLShG1lmw",
-    "access_token_expiration" : 1679991008365,
-    "refresh_token_expiration" : 1682579408365
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMDUzMzUyLCJyb2xlcyI6WyJVU0VSIl19.VpBWZdty5a3MiRQSxKPy6dbB165XqP79btVuym-HBkWy23uRrix6KXzjWKT8AtT7WMqVEqtHCi8AbMItNKGEpQ",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyNjQxNzUyfQ.I33x3U0QDSEdScpCnMQCMZnK8DR_kG9riQaPsnxMdnmzjocvG78crXQgIkB-8Yb1B7WqGZfvJ5acftsvQ9MIiQ",
+    "access_token_expiration" : 1680053352925,
+    "refresh_token_expiration" : 1682641752925
   }
 }</code></pre>
 </div>
@@ -828,8 +831,8 @@ Content-Length: 329
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjc5OTkxMDA4LCJyb2xlcyI6WyJVU0VSIl19.cdzvkGz3NlSvgm-6rPYzAkBtnnJ_1ooVbi0tw-v19jZwmqqQbxaJ_ERRvIrq9cyCwWqUpqSRVzzZMCsuj5sNUg",
-    "access_token_expiration" : 1679991008406
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwMDUzMzUyLCJyb2xlcyI6WyJVU0VSIl19.5iIuw2cTl9cpjzoJ8gGcdn9lSfSDODBtJumMyGVSV9CSj6LWNZdtnP9wQHY7C42OioE74OEzPMmKX3bybTnBqQ",
+    "access_token_expiration" : 1680053352965
   }
 }</code></pre>
 </div>
@@ -944,13 +947,13 @@ Content-Length: 287
   "code" : "SUCCESS",
   "message" : "성공",
   "data" : {
-    "board_id" : 21,
+    "board_id" : 23,
     "member_id" : 1,
     "title" : "테스트 글",
     "content" : "테스트 내용",
     "writer" : "닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-28T16:10:06.1220668"
+    "created_at" : "2023-03-29T09:29:09.9078506"
   }
 }</code></pre>
 </div>
@@ -1022,7 +1025,7 @@ Content-Length: 287
 </div>
 </div>
 <div class="sect2">
-<h3 id="_게시글_불러오기"><a class="link" href="#_게시글_불러오기">📄 게시글 불러오기</a></h3>
+<h3 id="_게시글_불러오기_리스트"><a class="link" href="#_게시글_불러오기_리스트">📄 게시글 불러오기 (리스트)</a></h3>
 <div class="sect3">
 <h4 id="_request_5"><a class="link" href="#_request_5">✅ REQUEST</a></h4>
 <div class="listingblock">
@@ -1037,22 +1040,26 @@ Host: 127.0.0.1</code></pre>
 <h4 id="_request_parameter_2"><a class="link" href="#_request_parameter_2">✅ REQUEST PARAMETER</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">페이지 번호 (default = 0)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">페이지 당 호출할 개수 (default = 5)</p></td>
 </tr>
 </tbody>
@@ -1082,7 +1089,7 @@ Content-Length: 1368
       "content" : "내용 19",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-28T16:10:05.658013"
+      "created_at" : "2023-03-29T09:29:09.058168"
     }, {
       "board_id" : 19,
       "member_id" : 1,
@@ -1090,7 +1097,7 @@ Content-Length: 1368
       "content" : "내용 18",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-28T16:10:05.658013"
+      "created_at" : "2023-03-29T09:29:09.057168"
     }, {
       "board_id" : 18,
       "member_id" : 1,
@@ -1098,7 +1105,7 @@ Content-Length: 1368
       "content" : "내용 17",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-28T16:10:05.657013"
+      "created_at" : "2023-03-29T09:29:09.057168"
     }, {
       "board_id" : 17,
       "member_id" : 1,
@@ -1106,7 +1113,7 @@ Content-Length: 1368
       "content" : "내용 16",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-28T16:10:05.656012"
+      "created_at" : "2023-03-29T09:29:09.056168"
     }, {
       "board_id" : 16,
       "member_id" : 1,
@@ -1114,7 +1121,7 @@ Content-Length: 1368
       "content" : "내용 15",
       "writer" : "닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-28T16:10:05.655013"
+      "created_at" : "2023-03-29T09:29:09.055169"
     } ]
   }
 }</code></pre>
@@ -1211,12 +1218,496 @@ Content-Length: 1368
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_게시글_불러오기_상세"><a class="link" href="#_게시글_불러오기_상세">📄 게시글 불러오기 (상세)</a></h3>
+<div class="sect3">
+<h4 id="_request_6"><a class="link" href="#_request_6">✅ REQUEST</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/22 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Host: 127.0.0.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_parameter_3"><a class="link" href="#_request_parameter_3">✅ REQUEST PARAMETER</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시판 번호</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_6"><a class="link" href="#_response_6">✅ RESPONSE</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 272
+
+{
+  "code" : "SUCCESS",
+  "message" : "성공",
+  "data" : {
+    "board_id" : 22,
+    "member_id" : 1,
+    "title" : "테스트",
+    "content" : "내용",
+    "writer" : "닉네임",
+    "reply_count" : 0,
+    "created_at" : "2023-03-29T09:29:09.673849"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_field_6"><a class="link" href="#_response_field_6">✅ RESPONSE FIELD</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.member_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">닉네임</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reply_count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.created_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_댓글_등록"><a class="link" href="#_댓글_등록">📄 댓글 등록</a></h3>
+<div class="sect3">
+<h4 id="_request_7"><a class="link" href="#_request_7">✅ REQUEST</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board/reply HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Content-Length: 61
+Host: 127.0.0.1
+
+{
+  "board_id" : 24,
+  "content" : "댓글 달었지롱"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_parameter_4"><a class="link" href="#_request_parameter_4">✅ REQUEST PARAMETER</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 내용</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_7"><a class="link" href="#_response_7">✅ RESPONSE</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
+Content-Type: application/json;charset=UTF-8
+Content-Length: 281
+
+{
+  "code" : "SUCCESS",
+  "message" : "성공",
+  "data" : {
+    "id" : 101,
+    "board_id" : 24,
+    "content" : "댓글 달었지롱",
+    "created_at" : "2023-03-29T09:29:09.9678528",
+    "modified_at" : "2023-03-29T09:29:09.9678528",
+    "writer" : "닉네임"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_field_7"><a class="link" href="#_response_field_7">✅ RESPONSE FIELD</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시판 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.created_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작성일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작성자</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_댓글_불러오기_리스트"><a class="link" href="#_댓글_불러오기_리스트">📄 댓글 불러오기 (리스트)</a></h3>
+<div class="sect3">
+<h4 id="_request_8"><a class="link" href="#_request_8">✅ REQUEST</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/reply?board_id=21&amp;page=1&amp;size=10 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Host: 127.0.0.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_parameter_5"><a class="link" href="#_request_parameter_5">✅ REQUEST PARAMETER</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시판 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 번호 (default = 0)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 당 호출할 개수 (default = 5)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_8"><a class="link" href="#_response_8">✅ RESPONSE</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 2396
+
+{
+  "code" : "SUCCESS",
+  "message" : "성공",
+  "data" : {
+    "total_page" : 10,
+    "total_elements" : 100,
+    "number_of_elements" : 10,
+    "last" : false,
+    "empty" : false,
+    "list" : [ {
+      "id" : 90,
+      "board_id" : 21,
+      "content" : "댓글89",
+      "created_at" : "2023-03-29T09:29:09.527248",
+      "modified_at" : "2023-03-29T09:29:09.527248",
+      "writer" : "닉네임"
+    }, {
+      "id" : 89,
+      "board_id" : 21,
+      "content" : "댓글88",
+      "created_at" : "2023-03-29T09:29:09.526246",
+      "modified_at" : "2023-03-29T09:29:09.526246",
+      "writer" : "닉네임"
+    }, {
+      "id" : 88,
+      "board_id" : 21,
+      "content" : "댓글87",
+      "created_at" : "2023-03-29T09:29:09.526246",
+      "modified_at" : "2023-03-29T09:29:09.526246",
+      "writer" : "닉네임"
+    }, {
+      "id" : 87,
+      "board_id" : 21,
+      "content" : "댓글86",
+      "created_at" : "2023-03-29T09:29:09.525248",
+      "modified_at" : "2023-03-29T09:29:09.525248",
+      "writer" : "닉네임"
+    }, {
+      "id" : 86,
+      "board_id" : 21,
+      "content" : "댓글85",
+      "created_at" : "2023-03-29T09:29:09.525248",
+      "modified_at" : "2023-03-29T09:29:09.525248",
+      "writer" : "닉네임"
+    }, {
+      "id" : 85,
+      "board_id" : 21,
+      "content" : "댓글84",
+      "created_at" : "2023-03-29T09:29:09.524247",
+      "modified_at" : "2023-03-29T09:29:09.524247",
+      "writer" : "닉네임"
+    }, {
+      "id" : 84,
+      "board_id" : 21,
+      "content" : "댓글83",
+      "created_at" : "2023-03-29T09:29:09.524247",
+      "modified_at" : "2023-03-29T09:29:09.524247",
+      "writer" : "닉네임"
+    }, {
+      "id" : 83,
+      "board_id" : 21,
+      "content" : "댓글82",
+      "created_at" : "2023-03-29T09:29:09.523249",
+      "modified_at" : "2023-03-29T09:29:09.523249",
+      "writer" : "닉네임"
+    }, {
+      "id" : 82,
+      "board_id" : 21,
+      "content" : "댓글81",
+      "created_at" : "2023-03-29T09:29:09.522249",
+      "modified_at" : "2023-03-29T09:29:09.522249",
+      "writer" : "닉네임"
+    }, {
+      "id" : 81,
+      "board_id" : 21,
+      "content" : "댓글80",
+      "created_at" : "2023-03-29T09:29:09.522249",
+      "modified_at" : "2023-03-29T09:29:09.522249",
+      "writer" : "닉네임"
+    } ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_field_8"><a class="link" href="#_response_field_8">✅ RESPONSE FIELD</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.total_page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">총 페이지 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.total_elements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">총 게시글 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.number_of_elements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">호출한 페이지 게시글 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.last</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">마지막 페이지 여부</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.empty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">호출 페이지 빈 페이지 여부</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].board_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시판 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].writer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">닉네임</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].created_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.list[].modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-28 15:42:34 +0900
+Last updated 2023-03-29 09:22:25 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
