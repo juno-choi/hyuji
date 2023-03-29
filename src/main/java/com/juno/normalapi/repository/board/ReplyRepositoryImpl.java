@@ -1,7 +1,8 @@
 package com.juno.normalapi.repository.board;
 
 import com.juno.normalapi.config.QueryDslConfig;
-import com.juno.normalapi.domain.vo.ReplyVo;
+import com.juno.normalapi.domain.entity.board.QReply;
+import com.juno.normalapi.domain.vo.board.ReplyVo;
 import com.querydsl.core.types.Projections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.juno.normalapi.domain.entity.QReply.*;
+import static com.juno.normalapi.domain.entity.board.QReply.reply;
+
 
 @Repository
 @RequiredArgsConstructor

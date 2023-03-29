@@ -1,11 +1,11 @@
 package com.juno.normalapi.controller.board;
 
 import com.juno.normalapi.docs.DocsSupport;
-import com.juno.normalapi.domain.dto.RequestBoard;
-import com.juno.normalapi.domain.dto.RequestReply;
-import com.juno.normalapi.domain.entity.Board;
-import com.juno.normalapi.domain.entity.Member;
-import com.juno.normalapi.domain.entity.Reply;
+import com.juno.normalapi.domain.dto.board.RequestBoard;
+import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.entity.board.Board;
+import com.juno.normalapi.domain.entity.member.Member;
+import com.juno.normalapi.domain.entity.board.Reply;
 import com.juno.normalapi.repository.board.BoardRepository;
 import com.juno.normalapi.repository.board.ReplyRepository;
 import org.junit.jupiter.api.DisplayName;

@@ -1,9 +1,9 @@
 package com.juno.normalapi.service.member;
 
-import com.juno.normalapi.domain.dto.RequestJoinMember;
-import com.juno.normalapi.domain.entity.Member;
-import com.juno.normalapi.domain.vo.JoinMember;
-import com.juno.normalapi.domain.vo.LoginMember;
+import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.entity.member.Member;
+import com.juno.normalapi.domain.vo.member.JoinMember;
+import com.juno.normalapi.domain.vo.member.LoginMember;
 import com.juno.normalapi.repository.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

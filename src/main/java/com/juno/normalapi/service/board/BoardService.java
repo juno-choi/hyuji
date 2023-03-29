@@ -1,11 +1,11 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.RequestBoard;
-import com.juno.normalapi.domain.dto.RequestReply;
-import com.juno.normalapi.domain.vo.BoardListVo;
-import com.juno.normalapi.domain.vo.BoardVo;
-import com.juno.normalapi.domain.vo.ReplyListVo;
-import com.juno.normalapi.domain.vo.ReplyVo;
+import com.juno.normalapi.domain.dto.board.RequestBoard;
+import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.vo.board.BoardListVo;
+import com.juno.normalapi.domain.vo.board.BoardVo;
+import com.juno.normalapi.domain.vo.board.ReplyListVo;
+import com.juno.normalapi.domain.vo.board.ReplyVo;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletRequest;

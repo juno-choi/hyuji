@@ -2,8 +2,8 @@ package com.juno.normalapi.docs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juno.normalapi.domain.dto.RequestJoinMember;
-import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.dto.member.RequestJoinMember;
+import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.repository.member.MemberRepository;
 import io.jsonwebtoken.Jwts;

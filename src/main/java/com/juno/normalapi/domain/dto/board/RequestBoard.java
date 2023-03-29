@@ -1,4 +1,4 @@
-package com.juno.normalapi.domain.dto;
+package com.juno.normalapi.domain.dto.board;
 
 import lombok.*;
 

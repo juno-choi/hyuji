@@ -1,12 +1,11 @@
-package com.juno.normalapi.domain.entity;
+package com.juno.normalapi.domain.entity.board;
 
+import com.juno.normalapi.domain.entity.member.Member;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

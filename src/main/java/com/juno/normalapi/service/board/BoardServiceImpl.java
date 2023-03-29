@@ -1,14 +1,14 @@
 package com.juno.normalapi.service.board;
 
-import com.juno.normalapi.domain.dto.RequestBoard;
-import com.juno.normalapi.domain.dto.RequestReply;
-import com.juno.normalapi.domain.entity.Board;
-import com.juno.normalapi.domain.entity.Member;
-import com.juno.normalapi.domain.entity.Reply;
-import com.juno.normalapi.domain.vo.BoardListVo;
-import com.juno.normalapi.domain.vo.BoardVo;
-import com.juno.normalapi.domain.vo.ReplyListVo;
-import com.juno.normalapi.domain.vo.ReplyVo;
+import com.juno.normalapi.domain.dto.board.RequestBoard;
+import com.juno.normalapi.domain.dto.board.RequestReply;
+import com.juno.normalapi.domain.entity.board.Board;
+import com.juno.normalapi.domain.entity.member.Member;
+import com.juno.normalapi.domain.entity.board.Reply;
+import com.juno.normalapi.domain.vo.board.BoardListVo;
+import com.juno.normalapi.domain.vo.board.BoardVo;
+import com.juno.normalapi.domain.vo.board.ReplyListVo;
+import com.juno.normalapi.domain.vo.board.ReplyVo;
 import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.board.BoardRepositoryCustom;
 import com.juno.normalapi.repository.board.ReplyRepository;

@@ -1,8 +1,8 @@
-package com.juno.normalapi.domain.vo;
+package com.juno.normalapi.domain.vo.member;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.entity.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 

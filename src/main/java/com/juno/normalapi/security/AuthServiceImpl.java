@@ -1,6 +1,6 @@
 package com.juno.normalapi.security;
 
-import com.juno.normalapi.domain.entity.Member;
+import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

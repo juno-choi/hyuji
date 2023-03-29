@@ -1,4 +1,4 @@
-package com.juno.normalapi.domain.vo;
+package com.juno.normalapi.domain.vo.board;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

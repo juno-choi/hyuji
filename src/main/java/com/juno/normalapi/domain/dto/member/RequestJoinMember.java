@@ -1,4 +1,4 @@
-package com.juno.normalapi.domain.dto;
+package com.juno.normalapi.domain.dto.member;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
