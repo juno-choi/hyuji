@@ -1,6 +1,8 @@
 package com.juno.normalapi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juno.normalapi.security.oauth2.Oauth2SuccessHandler;
+import com.juno.normalapi.security.oauth2.Oauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,6 +23,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final BCryptPasswordEncoder passwordEncoder;
     private final Environment env;
     private final RedisTemplate<String, ?> redisTemplate;
+    private final Oauth2SuccessHandler oauth2SuccessHandler;
+    private final Oauth2UserService oauth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,6 +34,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.formLogin().disable();
         http.httpBasic().disable();
+
+        http.oauth2Login()
+                .successHandler(oauth2SuccessHandler) // 성공 핸들링
+                .userInfoEndpoint()
+                .userService(oauth2UserService);    // 성공 후처리 service ex) 로그인 처리나 회원가입 진행
 
         http.authorizeRequests().antMatchers("/**").permitAll()
         .and().addFilter(getAuthFilter());

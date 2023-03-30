@@ -22,13 +22,10 @@ public class Member {
 
     @Column(unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String nickname;
-    @Column(nullable = false)
     private String tel;
 
     private JoinType type;
@@ -36,9 +33,12 @@ public class Member {
     private String address;
     private String addressDetail;
     private String role;
+    @Column(unique = true)
+    private Long snsId;
 
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private LocalDateTime lastConnect;
 
     // 일반 유저
     public static Member of(JoinMemberDto joinMemberDto, JoinType joinType){
@@ -56,6 +56,22 @@ public class Member {
                 .role("USER")
                 .createdAt(now)
                 .modifiedAt(now)
+                .lastConnect(now)
+                .build();
+    }
+
+    // 카카오 유저
+    public static Member ofKakao(Long snsId, String nickname, String email){
+        LocalDateTime now = LocalDateTime.now();
+        return Member.builder()
+                .email(email)
+                .nickname(nickname)
+                .type(JoinType.KAKAO)
+                .role("USER")
+                .createdAt(now)
+                .modifiedAt(now)
+                .lastConnect(now)
+                .snsId(snsId)
                 .build();
     }
 
@@ -65,5 +81,9 @@ public class Member {
 
     public void changeRole(String role){
         this.role = role;
+    }
+
+    public void updateConnect(){
+        this.lastConnect = LocalDateTime.now();
     }
 }
