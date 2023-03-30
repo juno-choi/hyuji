@@ -33,7 +33,7 @@ public class Member {
     private String address;
     private String addressDetail;
     private String role;
-    @Column(nullable = false)
+    @Column(unique = true)
     private Long snsId;
 
     private LocalDateTime createdAt;

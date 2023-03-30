@@ -10,6 +10,9 @@ logging:
     root: info
     com.juno.normalapi: info
 
+server:
+  port: 8000
+
 normal:
   login:
     attribute: loginMemberId
@@ -43,7 +46,7 @@ spring:
   jpa:
     #open-in-view: true #OSIV(Open Session In View) false일 경우 영속성 컨텍스트가 서비스까지만 존재
     hibernate:
-      ddl-auto: create  #절대 수정 금지
+      ddl-auto: create-drop  #절대 수정 금지
     show-sql: true
   datasource:
     hikari:
@@ -54,3 +57,23 @@ spring:
   redis:
     host: localhost
     port: 6379
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 04376f3d0a7618a3622f9c541d90d272
+            redirect-uri: http://localhost:8000/login/oauth2/code/kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: POST
+            client-name: Kakao
+            scope:
+              - profile_nickname
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+--- #dev
