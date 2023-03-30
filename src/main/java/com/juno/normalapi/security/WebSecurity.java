@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -25,6 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final RedisTemplate<String, ?> redisTemplate;
     private final Oauth2SuccessHandler oauth2SuccessHandler;
     private final Oauth2UserService oauth2UserService;
+    private final AuthUtil authUtil;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,7 +45,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     // 로그인 요청시 filter
     private AuthFilter getAuthFilter() throws Exception {
-        AuthFilter filter = new AuthFilter(env, objectMapper, redisTemplate);
+        AuthFilter filter = new AuthFilter(objectMapper, authUtil);
         filter.setAuthenticationManager(authenticationManager());
         filter.setFilterProcessesUrl("/auth/member/login");
         return filter;

@@ -2,6 +2,7 @@ package com.juno.normalapi.docs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.security.AuthFilter;
+import com.juno.normalapi.security.AuthUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,6 +34,9 @@ public class DocsSupport extends TestSupport{
 
     @Autowired
     private RedisTemplate<String, ?> redisTemplate;
+
+    @Autowired
+    private AuthUtil authUtil;
 
     @BeforeEach
     void setUp(final WebApplicationContext context,
@@ -56,7 +59,7 @@ public class DocsSupport extends TestSupport{
     }
 
     private AuthFilter getAuthFilter() throws Exception {
-        AuthFilter authFilter = new AuthFilter(env, objectMapper, redisTemplate);
+        AuthFilter authFilter = new AuthFilter(objectMapper, authUtil);
         authFilter.setAuthenticationManager(authenticationManager());
         authFilter.setFilterProcessesUrl("/auth/member/login");
         return authFilter;
