@@ -2,7 +2,6 @@ package com.juno.normalapi.domain.entity.board;
 
 import com.juno.normalapi.domain.entity.member.Member;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
