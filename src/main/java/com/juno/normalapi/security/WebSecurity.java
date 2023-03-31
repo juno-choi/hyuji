@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.security.oauth2.Oauth2SuccessHandler;
 import com.juno.normalapi.security.oauth2.Oauth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,8 +17,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final ObjectMapper objectMapper;
     private final AuthService authService;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final Environment env;
-    private final RedisTemplate<String, ?> redisTemplate;
     private final Oauth2SuccessHandler oauth2SuccessHandler;
     private final Oauth2UserService oauth2UserService;
     private final AuthUtil authUtil;

@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
@@ -27,13 +25,7 @@ public class DocsSupport extends TestSupport{
     protected RestDocumentationResultHandler docs;
 
     @Autowired
-    private Environment env;
-
-    @Autowired
     private ObjectMapper objectMapper;
-
-    @Autowired
-    private RedisTemplate<String, ?> redisTemplate;
 
     @Autowired
     private AuthUtil authUtil;

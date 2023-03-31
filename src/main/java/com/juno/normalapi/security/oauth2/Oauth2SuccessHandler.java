@@ -1,13 +1,10 @@
 package com.juno.normalapi.security.oauth2;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.repository.member.MemberRepository;
 import com.juno.normalapi.security.AuthUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -28,10 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    private final ObjectMapper objectMapper;
-    private final Environment env;
     private final MemberRepository memberRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
     private final AuthUtil authUtil;
 
     @Override
@@ -45,7 +39,6 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         if(registrationId.equals("kakao")){
             OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
             Long snsId = (Long) oAuth2User.getAttributes().get("id");
-            Map<String, Object> kakao_account = (Map<String, Object>) oAuth2User.getAttributes().get("kakao_account");
             member = memberRepository.findBySnsId(snsId).orElseThrow(()-> new IllegalArgumentException("유효하지 않은 회원입니다. 관리자에게 문의해주세요."));
         }
         memberId = member.getId();
