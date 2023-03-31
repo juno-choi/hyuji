@@ -38,6 +38,10 @@ jacocoTestReport {
                             '**/enums/**',
                             '**/api/**',
                             '**/config/**',
+                            '**/entity/**/Q**',
+                            '**/entity/member/Member*',
+                            '**/TokenInterceptor*',
+                            '**/security/**',
                             // ...
                     ])
                 })
@@ -63,12 +67,15 @@ jacocoTestCoverageVerification {
                     '*.api.*',
                     '*.config.*',
                     '*.security.*',
+                    '*.entity.*.Q*',
+                    '*.entity.member.Member',
+                    '*.TokenInterceptor',
             ]
 
             limit {
                 counter = 'METHOD'
                 value = 'COVEREDRATIO'
-                minimum = 0.50
+                minimum = 0.80
             }
         }
 
@@ -86,12 +93,15 @@ jacocoTestCoverageVerification {
                     '*.api.*',
                     '*.config.*',
                     '*.security.*',
+                    '*.entity.*.Q*',
+                    '*.entity.member.Member',
+                    '*.TokenInterceptor',
             ]
 
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 0.50
+                minimum = 0.80
             }
         }
     }

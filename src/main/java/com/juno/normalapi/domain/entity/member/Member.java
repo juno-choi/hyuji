@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -77,10 +76,6 @@ public class Member {
 
     public void encryptPassword(Member member, BCryptPasswordEncoder encoder){
         this.password = encoder.encode(member.getPassword());
-    }
-
-    public void changeRole(String role){
-        this.role = role;
     }
 
     public void updateConnect(){
