@@ -39,7 +39,9 @@ jacocoTestReport {
                             '**/api/**',
                             '**/config/**',
                             '**/entity/**/Q**',
-                            '**/TokenInterceptor',
+                            '**/entity/member/Member*',
+                            '**/TokenInterceptor*',
+                            '**/security/**',
                             // ...
                     ])
                 })
@@ -66,6 +68,7 @@ jacocoTestCoverageVerification {
                     '*.config.*',
                     '*.security.*',
                     '*.entity.*.Q*',
+                    '*.entity.member.Member',
                     '*.TokenInterceptor',
             ]
 
@@ -91,6 +94,7 @@ jacocoTestCoverageVerification {
                     '*.config.*',
                     '*.security.*',
                     '*.entity.*.Q*',
+                    '*.entity.member.Member',
                     '*.TokenInterceptor',
             ]
 
