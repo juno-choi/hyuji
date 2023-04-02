@@ -30,7 +30,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.formLogin().disable();
         http.httpBasic().disable();
 
-        http.oauth2Login()
+        http.authorizeRequests().antMatchers("/**").permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
                 .successHandler(oauth2SuccessHandler) // 성공 핸들링
                 .userInfoEndpoint()
                 .userService(oauth2UserService);    // 성공 후처리 service ex) 로그인 처리나 회원가입 진행
