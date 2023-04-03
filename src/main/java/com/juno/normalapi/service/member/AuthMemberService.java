@@ -10,5 +10,5 @@ public interface AuthMemberService {
 
     LoginMemberVo refresh(String token);
 
-    MemberVo getMember(Long memberId);
+
 }

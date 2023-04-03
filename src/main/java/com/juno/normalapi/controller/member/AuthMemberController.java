@@ -36,13 +36,4 @@ public class AuthMemberController {
                 .data(authMemberService.refresh(token))
                 .build());
     }
-
-    @GetMapping("/{member_id}")
-    public ResponseEntity<Response<MemberVo>> getMember(@PathVariable(name = "member_id") Long memberId){
-        return ResponseEntity.ok(Response.<MemberVo>builder()
-                .code(ResponseCode.SUCCESS)
-                .message("성공")
-                .data(authMemberService.getMember(memberId))
-                .build());
-    }
 }
