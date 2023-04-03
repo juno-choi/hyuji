@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class MemberControllerDocs extends DocsSupport {
+class AuthMemberControllerDocs extends DocsSupport {
     @Autowired
     private MemberRepository memberRepository;
 

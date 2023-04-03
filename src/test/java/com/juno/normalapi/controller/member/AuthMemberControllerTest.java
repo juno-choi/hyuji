@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MemberControllerTest extends TestSupport {
+class AuthMemberControllerTest extends TestSupport {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 

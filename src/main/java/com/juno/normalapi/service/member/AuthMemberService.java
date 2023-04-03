@@ -5,7 +5,7 @@ import com.juno.normalapi.domain.vo.member.JoinMemberVo;
 import com.juno.normalapi.domain.vo.member.LoginMemberVo;
 import com.juno.normalapi.domain.vo.member.MemberVo;
 
-public interface MemberService {
+public interface AuthMemberService {
     JoinMemberVo join(JoinMemberDto joinMemberDto);
 
     LoginMemberVo refresh(String token);

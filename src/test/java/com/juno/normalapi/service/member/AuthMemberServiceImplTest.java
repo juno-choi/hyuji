@@ -18,9 +18,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class MemberServiceImplTest {
+class AuthMemberServiceImplTest {
     @Autowired
-    private MemberService memberService;
+    private AuthMemberService authMemberService;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -43,7 +43,7 @@ class MemberServiceImplTest {
                 .addressDetail("상세 주소")
                .build();
         // when
-        JoinMemberVo joinMemberVo = memberService.join(joinMemberDto);
+        JoinMemberVo joinMemberVo = authMemberService.join(joinMemberDto);
 
         // then
         List<Member> all = memberRepository.findAll();
@@ -55,7 +55,7 @@ class MemberServiceImplTest {
     void refreshFail1(){
         // given & when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> memberService.refresh("invalid_token")
+                () -> authMemberService.refresh("invalid_token")
         );
 
         // then
@@ -71,7 +71,7 @@ class MemberServiceImplTest {
 
         // when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> memberService.refresh(token)
+                () -> authMemberService.refresh(token)
         );
 
         // then
@@ -92,13 +92,13 @@ class MemberServiceImplTest {
                 .address("경기도 성남시 중원구 자혜로17번길 16")
                 .addressDetail("상세 주소")
                 .build();
-        JoinMemberVo joinMemberVo = memberService.join(joinMemberDto);
+        JoinMemberVo joinMemberVo = authMemberService.join(joinMemberDto);
 
         String token = "token";
         redisTemplate.opsForHash().put(token, "refresh_token", String.valueOf(joinMemberVo.getMemberId()));
 
         // when
-        LoginMemberVo loginMemberVo = memberService.refresh(token);
+        LoginMemberVo loginMemberVo = authMemberService.refresh(token);
 
         // then
         assertNotNull(loginMemberVo.getAccessToken());
@@ -109,7 +109,7 @@ class MemberServiceImplTest {
     void getMemberFail1(){
         // given
         // when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> memberService.getMember(0L));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> authMemberService.getMember(0L));
         // then
         assertEquals("유효하지 않은 회원입니다.", ex.getMessage());
     }
@@ -131,7 +131,7 @@ class MemberServiceImplTest {
         Member saveMember = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         // when
-        MemberVo findMember = memberService.getMember(saveMember.getId());
+        MemberVo findMember = authMemberService.getMember(saveMember.getId());
 
         // then
         assertEquals(saveMember.getId(), findMember.getId());
