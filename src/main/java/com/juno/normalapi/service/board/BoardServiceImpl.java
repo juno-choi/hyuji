@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
     @Override
     public BoardVo postBoard(BoardDto boardDto, HttpServletRequest request) {
-        Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
+        Long loginUserId = Long.valueOf(request.getAttribute(env.getProperty("normal.login.attribute")).toString());
 
         Member findMember = memberRepository.findById(loginUserId).orElseThrow(() -> new UnauthorizedException("잘못된 접근입니다."));
         Board saveBoard = boardRepository.save(Board.of(findMember, boardDto.getTitle(), boardDto.getContent()));
@@ -94,7 +94,7 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
     @Override
     public ReplyVo postReply(ReplyDto replyDto, HttpServletRequest request) {
-        Long loginUserId = (Long) request.getAttribute(env.getProperty("normal.login.attribute"));
+        Long loginUserId = Long.valueOf(request.getAttribute(env.getProperty("normal.login.attribute")).toString());
         Long boardId = replyDto.getBoardId();
         String content = replyDto.getContent();
 
