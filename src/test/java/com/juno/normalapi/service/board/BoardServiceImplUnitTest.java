@@ -53,6 +53,7 @@ class BoardServiceImplUnitTest {
                 .build();
 
         given(env.getProperty(anyString())).willReturn("loginMemberId");
+        request.setAttribute("loginMemberId", 0);
 
         // when
         UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postBoard(boardDto, request));
@@ -66,6 +67,7 @@ class BoardServiceImplUnitTest {
     void postReplyFail1(){
         // given
         given(env.getProperty(anyString())).willReturn("loginMemberId");
+        request.setAttribute("loginMemberId", 0);
         // when
         UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postReply(
                 ReplyDto.builder()
