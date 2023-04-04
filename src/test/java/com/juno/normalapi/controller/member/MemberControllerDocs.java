@@ -29,7 +29,7 @@ class MemberControllerDocs extends DocsSupport {
     private final String URL = "/v1/member";
 
     @Test
-    @DisplayName(URL+"/{member_id} (GET)")
+    @DisplayName(URL+"/{member_id}")
     void getMemberById() throws Exception {
         // given
         JoinMemberDto joinMemberDto = JoinMemberDto.builder()
@@ -54,6 +54,38 @@ class MemberControllerDocs extends DocsSupport {
                 pathParameters(
                         parameterWithName("member_id").description("조회할 회원 id")
                 ),
+                responseFields(
+                        fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),
+                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("회원 id"),
+                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("회원 email"),
+                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("회원 이름"),
+                        fieldWithPath("data.nickname").type(JsonFieldType.STRING).description("회원 닉네임"),
+                        fieldWithPath("data.tel").type(JsonFieldType.STRING).description("회원 전화번호"),
+                        fieldWithPath("data.join_type").type(JsonFieldType.STRING).description("회원 가입 경로"),
+                        fieldWithPath("data.zip_code").type(JsonFieldType.STRING).description("회원 우편번호"),
+                        fieldWithPath("data.address").type(JsonFieldType.STRING).description("회원 주소"),
+                        fieldWithPath("data.address_detail").type(JsonFieldType.STRING).description("회원 상세 주소"),
+                        fieldWithPath("data.created_at").type(JsonFieldType.STRING).description("회원 가입일"),
+                        fieldWithPath("data.modified_at").type(JsonFieldType.STRING).description("회원 수정일")
+
+                )
+        ));
+    }
+
+
+    @Test
+    @DisplayName(URL)
+    void getMember() throws Exception {
+        // given
+        // when
+        ResultActions perform = mock.perform(
+                RestDocumentationRequestBuilders.get(URL)
+                        .header(AUTHORIZATION, ACCESS_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+        // then
+        perform.andDo(docs.document(
                 responseFields(
                         fieldWithPath("code").type(JsonFieldType.STRING).description("결과 코드"),
                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메세지"),

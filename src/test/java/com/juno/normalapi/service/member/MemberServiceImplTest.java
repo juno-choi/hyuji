@@ -4,11 +4,13 @@ import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.domain.vo.member.MemberVo;
+import com.juno.normalapi.exception.UnauthorizedException;
 import com.juno.normalapi.repository.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +21,8 @@ class MemberServiceImplTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    private MockHttpServletRequest request = new MockHttpServletRequest();
 
     @Test
     @DisplayName("유효하지 않은 회원 번호는 조회에 실패한다.")
@@ -51,5 +55,16 @@ class MemberServiceImplTest {
 
         // then
         assertEquals(saveMember.getId(), findMember.getId());
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 회원은 조회에 실패한다.")
+    void getMemberFail1(){
+        // given
+        request.setAttribute("loginMemberId", "0");
+        // when
+        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> memberService.getMember(request));
+        // then
+        assertEquals("잘못된 접근입니다.", ex.getMessage());
     }
 }
