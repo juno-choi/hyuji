@@ -450,6 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_로그인">📄 로그인</a></li>
 <li><a href="#_토큰_재발급">📄 토큰 재발급</a></li>
 <li><a href="#_회원_상세_불러오기">📄 회원 상세 불러오기</a></li>
+<li><a href="#_회원_상세_불러오기_다른_회원_조회">📄 회원 상세 불러오기 (다른 회원 조회)</a></li>
 <li><a href="#_카카오_로그인_간편_회원가입">📄 카카오 로그인 (간편 회원가입)</a></li>
 </ul>
 </li>
@@ -477,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/join HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 255
+Content-Length: 246
 Host: 127.0.0.1
 
 {
@@ -568,7 +569,7 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 366
+Content-Length: 352
 
 {
   "code" : "SUCCESS",
@@ -671,7 +672,7 @@ Content-Length: 366
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 62
+Content-Length: 59
 Host: 127.0.0.1
 
 {
@@ -720,16 +721,16 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 544
+Content-Length: 535
 
 {
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwMjMzOTA5LCJyb2xlcyI6WyJVU0VSIl19.BgXd3p4sDMPAzkVmNYM-gJZvPgDWAhl8YX2MUcW6PEHo51G9mMyKeJTph08jhXurAhC4JGBv22oOUF1mGHwzWg",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgyODIyMzA5fQ.iV5i14rXkI1fUashw2ZK0rTFIo0Z5giwFvNycNwELQ5uunNce4B-wIqvd8V4S5GT1IKMO911IJvueZpE9xL3RA",
-    "access_token_expiration" : 1680233909621,
-    "refresh_token_expiration" : 1682822309622
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwNjE3MjA0LCJyb2xlcyI6WyJVU0VSIl19.sKT28FZQ6xWz_tC4iP_4kXKSA6rCQeWK400oixgi7louwC0nysyd7eidbXHxxlwkgwlQV-KOSy5AfkNznCW5HQ",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgzMjA1NjA0fQ.FK4qHyxuSL38apAJHtHT7IyyzjRuebpeZ_lbNwiTTXgE9LIOgXxIsvyTr2u0Puh8MgRW32ar-BVMUEJ7bKRKHQ",
+    "access_token_expiration" : 1680617204347,
+    "refresh_token_expiration" : 1683205604348
   }
 }</code></pre>
 </div>
@@ -827,14 +828,14 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 329
+Content-Length: 322
 
 {
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiZXhwIjoxNjgwMjMzOTA5LCJyb2xlcyI6WyJVU0VSIl19.CQYWnI5ymAUJ0berudT_LZnAKTKfuRNMJ2FynO770ga3ZYw8mgGYhtTQsUF0lFi2ZiO4_vwv3Noo_JqVbh_eqw",
-    "access_token_expiration" : 1680233909757
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwNjE3MjA0LCJyb2xlcyI6WyJVU0VSIl19.7cRnN_nrAn0dydDiMPc9Gja4QKW_rc0WInvB5fX3NUIVa0BpP8K-jHrmN9JfVQnPfAQ6Aq9FIUeGVwi-cAUQMg",
+    "access_token_expiration" : 1680617204376
   }
 }</code></pre>
 </div>
@@ -886,35 +887,12 @@ Content-Length: 329
 <h4 id="_request_4"><a class="link" href="#_request_4">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /auth/member/4 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/member HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: Bearer test
 Host: 127.0.0.1</code></pre>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_request_parameter_2"><a class="link" href="#_request_parameter_2">✅ REQUEST PARAMETER</a></h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">필수여부</th>
-<th class="tableblock halign-left valign-top">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>member_id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 회원 id</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sect3">
 <h4 id="_response_4"><a class="link" href="#_response_4">✅ RESPONSE</a></h4>
@@ -922,23 +900,23 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 470
+Content-Length: 426
 
 {
   "code" : "SUCCESS",
   "message" : "성공",
   "data" : {
-    "id" : 4,
-    "email" : "get@mail.com",
-    "name" : "조회",
-    "nickname" : "검색되는",
+    "id" : 1,
+    "email" : "juno@test.com",
+    "name" : "테스터",
+    "nickname" : "테스터닉네임",
     "tel" : "01012341234",
     "join_type" : "EMAIL",
-    "zip_code" : "12345",
-    "address" : "경기도 성남시 중원구 자혜로17번길 16",
-    "address_detail" : "상세 주소",
-    "created_at" : "2023-03-31T11:38:29.681632",
-    "modified_at" : "2023-03-31T11:38:29.681632"
+    "zip_code" : "우편번호",
+    "address" : "주소",
+    "address_detail" : "상세주소",
+    "created_at" : "2023-04-04T22:27:49.488438",
+    "modified_at" : "2023-04-04T22:27:49.488438"
   }
 }</code></pre>
 </div>
@@ -1030,19 +1008,169 @@ Content-Length: 470
 </div>
 </div>
 <div class="sect2">
-<h3 id="_카카오_로그인_간편_회원가입"><a class="link" href="#_카카오_로그인_간편_회원가입">📄 카카오 로그인 (간편 회원가입)</a></h3>
+<h3 id="_회원_상세_불러오기_다른_회원_조회"><a class="link" href="#_회원_상세_불러오기_다른_회원_조회">📄 회원 상세 불러오기 (다른 회원 조회)</a></h3>
 <div class="sect3">
 <h4 id="_request_5"><a class="link" href="#_request_5">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /login/oauth2/code/kakao HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/member/8 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: Bearer test
 Host: 127.0.0.1</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_request_parameter_2"><a class="link" href="#_request_parameter_2">✅ REQUEST PARAMETER</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">필수여부</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>member_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 회원 id</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_response_5"><a class="link" href="#_response_5">✅ RESPONSE</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 454
+
+{
+  "code" : "SUCCESS",
+  "message" : "성공",
+  "data" : {
+    "id" : 8,
+    "email" : "get@mail.com",
+    "name" : "조회",
+    "nickname" : "검색되는",
+    "tel" : "01012341234",
+    "join_type" : "EMAIL",
+    "zip_code" : "12345",
+    "address" : "경기도 성남시 중원구 자혜로17번길 16",
+    "address_detail" : "상세 주소",
+    "created_at" : "2023-04-04T22:06:44.750054",
+    "modified_at" : "2023-04-04T22:06:44.750054"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_field_5"><a class="link" href="#_response_field_5">✅ RESPONSE FIELD</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">결과 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 email</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이름</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 닉네임</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.tel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 전화번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.join_type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 가입 경로</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.zip_code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.address</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.address_detail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.created_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 가입일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.modified_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 수정일</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_카카오_로그인_간편_회원가입"><a class="link" href="#_카카오_로그인_간편_회원가입">📄 카카오 로그인 (간편 회원가입)</a></h3>
+<div class="sect3">
+<h4 id="_request_6"><a class="link" href="#_request_6">✅ REQUEST</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /oauth/authorize?client_id=04376f3d0a7618a3622f9c541d90d272&amp;redirect_uri=http://localhost:8000/login/oauth2/code/kakao&amp;response_type=code HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: kauth.kakao.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_6"><a class="link" href="#_response_6">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
@@ -1059,7 +1187,7 @@ Host: 127.0.0.1</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_5"><a class="link" href="#_response_field_5">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_6"><a class="link" href="#_response_field_6">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1117,13 +1245,13 @@ Host: 127.0.0.1</code></pre>
 <div class="sect2">
 <h3 id="_게시글_등록"><a class="link" href="#_게시글_등록">📄 게시글 등록</a></h3>
 <div class="sect3">
-<h4 id="_request_6"><a class="link" href="#_request_6">✅ REQUEST</a></h4>
+<h4 id="_request_7"><a class="link" href="#_request_7">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
-Content-Length: 68
+Authorization: Bearer test
+Content-Length: 65
 Host: 127.0.0.1
 
 {
@@ -1167,12 +1295,12 @@ Host: 127.0.0.1
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_6"><a class="link" href="#_response_6">✅ RESPONSE</a></h4>
+<h4 id="_response_7"><a class="link" href="#_response_7">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 339
+Content-Length: 333
 
 {
   "code" : "SUCCESS",
@@ -1182,17 +1310,17 @@ Content-Length: 339
     "member_id" : 1,
     "title" : "테스트 글",
     "content" : "테스트 내용",
-    "writer" : "닉네임",
+    "writer" : "테스터닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-31T11:38:26.5376152",
-    "modified_at" : "2023-03-31T11:38:26.5376152"
+    "created_at" : "2023-04-04T22:06:42.813658",
+    "modified_at" : "2023-04-04T22:06:42.813658"
   }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_6"><a class="link" href="#_response_field_6">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_7"><a class="link" href="#_response_field_7">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1264,11 +1392,11 @@ Content-Length: 339
 <div class="sect2">
 <h3 id="_게시글_불러오기_리스트"><a class="link" href="#_게시글_불러오기_리스트">📄 게시글 불러오기 (리스트)</a></h3>
 <div class="sect3">
-<h4 id="_request_7"><a class="link" href="#_request_7">✅ REQUEST</a></h4>
+<h4 id="_request_8"><a class="link" href="#_request_8">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board?page=0&amp;size=5 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Authorization: Bearer test
 Host: 127.0.0.1</code></pre>
 </div>
 </div>
@@ -1303,12 +1431,12 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_7"><a class="link" href="#_response_7">✅ RESPONSE</a></h4>
+<h4 id="_response_8"><a class="link" href="#_response_8">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1633
+Content-Length: 1622
 
 {
   "code" : "SUCCESS",
@@ -1324,46 +1452,46 @@ Content-Length: 1633
       "member_id" : 1,
       "title" : "테스트 19",
       "content" : "내용 19",
-      "writer" : "닉네임",
+      "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-31T11:38:25.851603",
-      "modified_at" : "2023-03-31T11:38:25.851603"
+      "created_at" : "2023-04-04T22:06:42.415397",
+      "modified_at" : "2023-04-04T22:06:42.415397"
     }, {
       "board_id" : 19,
       "member_id" : 1,
       "title" : "테스트 18",
       "content" : "내용 18",
-      "writer" : "닉네임",
+      "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-31T11:38:25.850604",
-      "modified_at" : "2023-03-31T11:38:25.850604"
+      "created_at" : "2023-04-04T22:06:42.415036",
+      "modified_at" : "2023-04-04T22:06:42.415036"
     }, {
       "board_id" : 18,
       "member_id" : 1,
       "title" : "테스트 17",
       "content" : "내용 17",
-      "writer" : "닉네임",
+      "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-31T11:38:25.849604",
-      "modified_at" : "2023-03-31T11:38:25.849604"
+      "created_at" : "2023-04-04T22:06:42.414356",
+      "modified_at" : "2023-04-04T22:06:42.414356"
     }, {
       "board_id" : 17,
       "member_id" : 1,
       "title" : "테스트 16",
       "content" : "내용 16",
-      "writer" : "닉네임",
+      "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-31T11:38:25.848603",
-      "modified_at" : "2023-03-31T11:38:25.848603"
+      "created_at" : "2023-04-04T22:06:42.413994",
+      "modified_at" : "2023-04-04T22:06:42.413994"
     }, {
       "board_id" : 16,
       "member_id" : 1,
       "title" : "테스트 15",
       "content" : "내용 15",
-      "writer" : "닉네임",
+      "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-03-31T11:38:25.846603",
-      "modified_at" : "2023-03-31T11:38:25.846603"
+      "created_at" : "2023-04-04T22:06:42.413558",
+      "modified_at" : "2023-04-04T22:06:42.413558"
     } ]
   }
 }</code></pre>
@@ -1371,7 +1499,7 @@ Content-Length: 1633
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_7"><a class="link" href="#_response_field_7">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_8"><a class="link" href="#_response_field_8">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1468,11 +1596,11 @@ Content-Length: 1633
 <div class="sect2">
 <h3 id="_게시글_불러오기_상세"><a class="link" href="#_게시글_불러오기_상세">📄 게시글 불러오기 (상세)</a></h3>
 <div class="sect3">
-<h4 id="_request_8"><a class="link" href="#_request_8">✅ REQUEST</a></h4>
+<h4 id="_request_9"><a class="link" href="#_request_9">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/22 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Authorization: Bearer test
 Host: 127.0.0.1</code></pre>
 </div>
 </div>
@@ -1502,12 +1630,12 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_8"><a class="link" href="#_response_8">✅ RESPONSE</a></h4>
+<h4 id="_response_9"><a class="link" href="#_response_9">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 323
+Content-Length: 319
 
 {
   "code" : "SUCCESS",
@@ -1517,17 +1645,17 @@ Content-Length: 323
     "member_id" : 1,
     "title" : "테스트",
     "content" : "내용",
-    "writer" : "닉네임",
+    "writer" : "테스터닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-03-31T11:38:26.410617",
-    "modified_at" : "2023-03-31T11:38:26.410617"
+    "created_at" : "2023-04-04T22:06:42.731476",
+    "modified_at" : "2023-04-04T22:06:42.731476"
   }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_8"><a class="link" href="#_response_field_8">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_9"><a class="link" href="#_response_field_9">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1599,13 +1727,13 @@ Content-Length: 323
 <div class="sect2">
 <h3 id="_댓글_등록"><a class="link" href="#_댓글_등록">📄 댓글 등록</a></h3>
 <div class="sect3">
-<h4 id="_request_9"><a class="link" href="#_request_9">✅ REQUEST</a></h4>
+<h4 id="_request_10"><a class="link" href="#_request_10">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board/reply HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
-Content-Length: 61
+Authorization: Bearer test
+Content-Length: 58
 Host: 127.0.0.1
 
 {
@@ -1649,12 +1777,12 @@ Host: 127.0.0.1
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_9"><a class="link" href="#_response_9">✅ RESPONSE</a></h4>
+<h4 id="_response_10"><a class="link" href="#_response_10">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 281
+Content-Length: 277
 
 {
   "code" : "SUCCESS",
@@ -1663,16 +1791,16 @@ Content-Length: 281
     "id" : 101,
     "board_id" : 24,
     "content" : "댓글 달었지롱",
-    "created_at" : "2023-03-31T11:38:26.5856176",
-    "modified_at" : "2023-03-31T11:38:26.5856176",
-    "writer" : "닉네임"
+    "created_at" : "2023-04-04T22:06:42.849272",
+    "modified_at" : "2023-04-04T22:06:42.849272",
+    "writer" : "테스터닉네임"
   }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_9"><a class="link" href="#_response_field_9">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_10"><a class="link" href="#_response_field_10">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1734,11 +1862,11 @@ Content-Length: 281
 <div class="sect2">
 <h3 id="_댓글_불러오기_리스트"><a class="link" href="#_댓글_불러오기_리스트">📄 댓글 불러오기 (리스트)</a></h3>
 <div class="sect3">
-<h4 id="_request_10"><a class="link" href="#_request_10">✅ REQUEST</a></h4>
+<h4 id="_request_11"><a class="link" href="#_request_11">✅ REQUEST</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /v1/board/reply?board_id=21&amp;page=1&amp;size=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiVVNFUiIsIk1BTkFHRVIiLCJBRE1JTiJdfQ.1tpRQO06LfXR6BL-ZXnESMLHgvPv3g8EoF4YLy9BUtJdFkiWs3XncSUBmcoghSDO8tDECq4xJ99RGCmtBut7hg
+Authorization: Bearer test
 Host: 127.0.0.1</code></pre>
 </div>
 </div>
@@ -1778,12 +1906,12 @@ Host: 127.0.0.1</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_response_10"><a class="link" href="#_response_10">✅ RESPONSE</a></h4>
+<h4 id="_response_11"><a class="link" href="#_response_11">✅ RESPONSE</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 2394
+Content-Length: 2405
 
 {
   "code" : "SUCCESS",
@@ -1798,72 +1926,72 @@ Content-Length: 2394
       "id" : 90,
       "board_id" : 21,
       "content" : "댓글89",
-      "created_at" : "2023-03-31T11:38:26.317625",
-      "modified_at" : "2023-03-31T11:38:26.317625",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.681409",
+      "modified_at" : "2023-04-04T22:06:42.681409",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 89,
       "board_id" : 21,
       "content" : "댓글88",
-      "created_at" : "2023-03-31T11:38:26.315615",
-      "modified_at" : "2023-03-31T11:38:26.315615",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.681093",
+      "modified_at" : "2023-04-04T22:06:42.681093",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 88,
       "board_id" : 21,
       "content" : "댓글87",
-      "created_at" : "2023-03-31T11:38:26.31462",
-      "modified_at" : "2023-03-31T11:38:26.31462",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.680764",
+      "modified_at" : "2023-04-04T22:06:42.680764",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 87,
       "board_id" : 21,
       "content" : "댓글86",
-      "created_at" : "2023-03-31T11:38:26.313617",
-      "modified_at" : "2023-03-31T11:38:26.313617",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.680457",
+      "modified_at" : "2023-04-04T22:06:42.680457",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 86,
       "board_id" : 21,
       "content" : "댓글85",
-      "created_at" : "2023-03-31T11:38:26.311617",
-      "modified_at" : "2023-03-31T11:38:26.311617",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.680142",
+      "modified_at" : "2023-04-04T22:06:42.680142",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 85,
       "board_id" : 21,
       "content" : "댓글84",
-      "created_at" : "2023-03-31T11:38:26.309618",
-      "modified_at" : "2023-03-31T11:38:26.309618",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.679828",
+      "modified_at" : "2023-04-04T22:06:42.679828",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 84,
       "board_id" : 21,
       "content" : "댓글83",
-      "created_at" : "2023-03-31T11:38:26.308617",
-      "modified_at" : "2023-03-31T11:38:26.308617",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.679472",
+      "modified_at" : "2023-04-04T22:06:42.679472",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 83,
       "board_id" : 21,
       "content" : "댓글82",
-      "created_at" : "2023-03-31T11:38:26.307618",
-      "modified_at" : "2023-03-31T11:38:26.307618",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.679106",
+      "modified_at" : "2023-04-04T22:06:42.679106",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 82,
       "board_id" : 21,
       "content" : "댓글81",
-      "created_at" : "2023-03-31T11:38:26.306618",
-      "modified_at" : "2023-03-31T11:38:26.306618",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.678788",
+      "modified_at" : "2023-04-04T22:06:42.678788",
+      "writer" : "테스터닉네임"
     }, {
       "id" : 81,
       "board_id" : 21,
       "content" : "댓글80",
-      "created_at" : "2023-03-31T11:38:26.305616",
-      "modified_at" : "2023-03-31T11:38:26.305616",
-      "writer" : "닉네임"
+      "created_at" : "2023-04-04T22:06:42.678437",
+      "modified_at" : "2023-04-04T22:06:42.678437",
+      "writer" : "테스터닉네임"
     } ]
   }
 }</code></pre>
@@ -1871,7 +1999,7 @@ Content-Length: 2394
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_field_10"><a class="link" href="#_response_field_10">✅ RESPONSE FIELD</a></h4>
+<h4 id="_response_field_11"><a class="link" href="#_response_field_11">✅ RESPONSE FIELD</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1960,7 +2088,7 @@ Content-Length: 2394
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-31 14:09:50 +0900
+Last updated 2023-04-04 22:29:40 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
