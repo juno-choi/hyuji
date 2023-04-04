@@ -21,7 +21,7 @@ public class MemberController {
         return ResponseEntity.ok(Response.<MemberVo>builder()
                 .code(ResponseCode.SUCCESS)
                 .message("성공")
-                .data(memberService.getMember(memberId))
+                .data(memberService.getMemberById(memberId))
                 .build());
     }
 }

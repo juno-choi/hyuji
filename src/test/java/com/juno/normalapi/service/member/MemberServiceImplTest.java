@@ -22,17 +22,17 @@ class MemberServiceImplTest {
 
     @Test
     @DisplayName("유효하지 않은 회원 번호는 조회에 실패한다.")
-    void getMemberFail1(){
+    void getMemberByIdFail1(){
         // given
         // when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> memberService.getMember(0L));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> memberService.getMemberById(0L));
         // then
         assertEquals("유효하지 않은 회원입니다.", ex.getMessage());
     }
 
     @Test
     @DisplayName("회원 상세 조회에 성공한다.")
-    void getMemberSuccess1(){
+    void getMemberByIdSuccess1(){
         // given
         JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("detail@naver.com")
@@ -47,7 +47,7 @@ class MemberServiceImplTest {
         Member saveMember = memberRepository.save(Member.of(joinMemberDto, JoinType.EMAIL));
 
         // when
-        MemberVo findMember = memberService.getMember(saveMember.getId());
+        MemberVo findMember = memberService.getMemberById(saveMember.getId());
 
         // then
         assertEquals(saveMember.getId(), findMember.getId());

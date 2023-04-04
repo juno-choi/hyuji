@@ -23,7 +23,7 @@ class MemberControllerTest extends TestSupport {
 
     @Test
     @DisplayName("유효하지 않은 회원은 조회에 실패")
-    void getMemberFail1() throws Exception {
+    void getMemberByIdFail1() throws Exception {
         // given
         // when
         ResultActions perform = mock.perform(get(URL + "/{member_id}", "0")

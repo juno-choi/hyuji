@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberVo getMember(Long memberId) {
+    public MemberVo getMemberById(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 ()-> new IllegalArgumentException("유효하지 않은 회원입니다.")
         );

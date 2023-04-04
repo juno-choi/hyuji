@@ -30,7 +30,7 @@ class MemberControllerDocs extends DocsSupport {
 
     @Test
     @DisplayName(URL+"/{member_id} (GET)")
-    void getMember() throws Exception {
+    void getMemberById() throws Exception {
         // given
         JoinMemberDto joinMemberDto = JoinMemberDto.builder()
                 .email("get@mail.com")
