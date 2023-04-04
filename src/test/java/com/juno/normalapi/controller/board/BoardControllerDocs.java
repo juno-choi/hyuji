@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -34,9 +33,6 @@ class BoardControllerDocs extends DocsSupport {
     private final String URL = "/v1/board";
 
     @Autowired
-    private Environment env;
-
-    @Autowired
     private BoardRepository boardRepository;
 
     @Autowired
@@ -48,7 +44,7 @@ class BoardControllerDocs extends DocsSupport {
         //given
         BoardDto boardDto = BoardDto.builder().title("테스트 글").content("테스트 내용").build();
         //when
-        ResultActions perform = mock.perform(post(URL).header(AUTHORIZATION, accessToken)
+        ResultActions perform = mock.perform(post(URL).header(AUTHORIZATION, ACCESS_TOKEN)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(convertToString(boardDto))
         ).andDo(print());
@@ -92,7 +88,7 @@ class BoardControllerDocs extends DocsSupport {
         }
         //when
         ResultActions perform = mock.perform(
-                get(URL).param("page", "0").param("size", "5").header(AUTHORIZATION, accessToken)
+                get(URL).param("page", "0").param("size", "5").header(AUTHORIZATION, ACCESS_TOKEN)
         );
         //then
         perform.andDo(docs.document(
@@ -123,6 +119,8 @@ class BoardControllerDocs extends DocsSupport {
     @Test
     @DisplayName(URL + "/{board_id} (GET)")
     void getBoard() throws Exception {
+        String testEmail = env.getProperty("normal.test.email");
+        Member member = memberRepository.findByEmail(testEmail).get();
         //given
         LocalDateTime now = LocalDateTime.now();
         Board saveBoard = boardRepository.save(
@@ -137,7 +135,7 @@ class BoardControllerDocs extends DocsSupport {
 
         //when
         ResultActions perform = mock.perform(
-                RestDocumentationRequestBuilders.get(URL+"/{board_id}",saveBoard.getId()).header(AUTHORIZATION, accessToken)
+                RestDocumentationRequestBuilders.get(URL+"/{board_id}",saveBoard.getId()).header(AUTHORIZATION, ACCESS_TOKEN)
         );
         
         //then
@@ -164,6 +162,9 @@ class BoardControllerDocs extends DocsSupport {
     @DisplayName(URL+"/reply (POST)")
     void postReply() throws Exception {
         // given
+        String testEmail = env.getProperty("normal.test.email");
+        Member member = memberRepository.findByEmail(testEmail).get();
+
         LocalDateTime now = LocalDateTime.now();
         Board saveBoard = boardRepository.save(
                 Board.builder()
@@ -182,7 +183,7 @@ class BoardControllerDocs extends DocsSupport {
 
         // when
         ResultActions perform = mock.perform(
-                post(URL+"/reply").header(AUTHORIZATION, accessToken)
+                post(URL+"/reply").header(AUTHORIZATION, ACCESS_TOKEN)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(convertToString(replyDto))
         );
@@ -210,6 +211,8 @@ class BoardControllerDocs extends DocsSupport {
     @DisplayName("/reply (GET)")
     void getReplyList() throws Exception {
         // given
+        String testEmail = env.getProperty("normal.test.email");
+        Member member = memberRepository.findByEmail(testEmail).get();
         Board saveBoard = boardRepository.save(Board.of(member, "댓글 달려", "댓글이 달려요"));
         // 댓글 100개 달기
         for(int i=0; i<100; i++){
@@ -218,7 +221,7 @@ class BoardControllerDocs extends DocsSupport {
 
         // when
         ResultActions perform = mock.perform(
-                get(URL + "/reply").header(AUTHORIZATION, accessToken)
+                get(URL + "/reply").header(AUTHORIZATION, ACCESS_TOKEN)
                 .param("board_id", saveBoard.getId().toString())
                 .param("page", "1")
                 .param("size", "10")

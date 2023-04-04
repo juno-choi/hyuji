@@ -47,7 +47,7 @@ class BoardControllerTest extends TestSupport {
         //given
         BoardDto boardDto = BoardDto.builder().title("테스트 글").content("테스트 내용").build();
         //when
-        ResultActions perform = mock.perform(post(URL).header(AUTHORIZATION, accessToken)
+        ResultActions perform = mock.perform(post(URL).header(AUTHORIZATION, ACCESS_TOKEN)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(convertToString(boardDto))
         ).andDo(print());
@@ -75,7 +75,7 @@ class BoardControllerTest extends TestSupport {
 
         //when
         ResultActions perform = mock.perform(
-                get(URL + "?page=0&size=5").header(AUTHORIZATION, accessToken)
+                get(URL + "?page=0&size=5").header(AUTHORIZATION, ACCESS_TOKEN)
         ).andDo(print());
         //then
         perform.andReturn().getResponse().getContentAsString().contains("SUCCESS");
@@ -88,7 +88,7 @@ class BoardControllerTest extends TestSupport {
         // when
         ResultActions perform = mock.perform(
                 post(URL + "/reply")
-                        .header(AUTHORIZATION, accessToken)
+                        .header(AUTHORIZATION, ACCESS_TOKEN)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(convertToString(ReplyDto.builder().build()))
         ).andDo(print());
@@ -108,7 +108,7 @@ class BoardControllerTest extends TestSupport {
         // when
         ResultActions perform = mock.perform(
                 get(URL + "/{boardId}", 0L)
-                        .header(AUTHORIZATION, accessToken)
+                        .header(AUTHORIZATION, ACCESS_TOKEN)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andDo(print());
         // then
@@ -126,7 +126,7 @@ class BoardControllerTest extends TestSupport {
         // given
         // when
         ResultActions perform = mock.perform(
-                get(URL + "/reply").header(AUTHORIZATION, accessToken)
+                get(URL + "/reply").header(AUTHORIZATION, ACCESS_TOKEN)
                         .param("page", "1")
                         .param("size", "10")
         ).andDo(print());
