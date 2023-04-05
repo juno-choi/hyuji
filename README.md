@@ -33,7 +33,8 @@
 1. email 회원가입
 2. redis jwt access, refresh token 등록하여 expire 시간에 따라 토큰 유효 체크
 3. token 재발급 기능
-4. 회원 상세보기 (회원 ID 기준)
+4. 회원 상세보기 
+5. 회원 상세보기 (다른 회원 조회)
 
 ### ✅ Oauth2 로그인 구현
 
