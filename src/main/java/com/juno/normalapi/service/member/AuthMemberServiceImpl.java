@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,11 @@ public class AuthMemberServiceImpl implements AuthMemberService {
     @Transactional
     @Override
     public JoinMemberVo join(JoinMemberDto joinMemberDto) {
+        Optional<Member> findMember = memberRepository.findByEmail(joinMemberDto.getEmail());
+        if(findMember.isPresent()){
+            throw new IllegalArgumentException("이미 존재하는 이메일 입니다.");
+        }
+
         Member member = Member.of(joinMemberDto, JoinType.EMAIL);
         member.encryptPassword(member, passwordEncoder);
         Member saveMember = memberRepository.save(member);
