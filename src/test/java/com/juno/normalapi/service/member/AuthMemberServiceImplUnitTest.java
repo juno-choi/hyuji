@@ -21,9 +21,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-public class MemberServiceImplUnitTest {
+public class AuthMemberServiceImplUnitTest {
     @InjectMocks
-    private MemberServiceImpl memberService;
+    private AuthMemberServiceImpl authMemberService;
 
     @Mock
     private MemberRepository memberRepository;
@@ -34,4 +34,22 @@ public class MemberServiceImplUnitTest {
     @Mock
     private Environment env;
 
+    @Test
+    @DisplayName("이미 가입한 이메일은 회원가입에 실패한다.")
+    void joinFail1(){
+        // given
+        JoinMemberDto dto = JoinMemberDto.builder()
+                .email("mail@mail.com")
+                .name("test")
+                .nickname("테스터")
+                .build();
+        Member member = Member.of(dto, JoinType.EMAIL);
+        given(memberRepository.findByEmail(anyString())).willReturn(Optional.of(member));
+
+        // when
+        Throwable ex = catchThrowable(() -> authMemberService.join(dto));
+        // then
+        assertThat(ex).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("이미 존재하는 이메일 입니다.");
+    }
 }
