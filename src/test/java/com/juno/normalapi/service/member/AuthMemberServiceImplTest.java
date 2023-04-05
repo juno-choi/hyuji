@@ -2,11 +2,10 @@ package com.juno.normalapi.service.member;
 
 import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
-import com.juno.normalapi.domain.enums.JoinType;
 import com.juno.normalapi.domain.vo.member.JoinMemberVo;
 import com.juno.normalapi.domain.vo.member.LoginMemberVo;
-import com.juno.normalapi.domain.vo.member.MemberVo;
 import com.juno.normalapi.repository.member.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @SpringBootTest
 class AuthMemberServiceImplTest {
@@ -47,19 +47,18 @@ class AuthMemberServiceImplTest {
 
         // then
         List<Member> all = memberRepository.findAll();
-        assertTrue(all.size() > 0);
+        Assertions.assertThat(all.size()).isGreaterThan(0);
     }
 
     @Test
     @DisplayName("유효하지 않은 토큰은 실패한다.")
     void refreshFail1(){
         // given & when
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> authMemberService.refresh("invalid_token")
-        );
+        Throwable throwable = catchThrowable(() -> authMemberService.refresh("invalid_token"));
 
         // then
-        assertEquals("토큰 값이 유효하지 않습니다.", exception.getMessage());
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("토큰 값이 유효하지 않습니다.");
     }
 
     @Test
@@ -70,12 +69,11 @@ class AuthMemberServiceImplTest {
         redisTemplate.opsForHash().put(token, "refresh_token", "0");
 
         // when
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> authMemberService.refresh(token)
-        );
+        Throwable throwable = catchThrowable(() -> authMemberService.refresh(token));
 
         // then
-        assertEquals("유효하지 않은 회원입니다. 관리자에게 문의해주세요!", exception.getMessage());
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 회원입니다. 관리자에게 문의해주세요!");
     }
 
     @Test
@@ -101,6 +99,6 @@ class AuthMemberServiceImplTest {
         LoginMemberVo loginMemberVo = authMemberService.refresh(token);
 
         // then
-        assertNotNull(loginMemberVo.getAccessToken());
+        assertThat(loginMemberVo.getAccessToken()).isNotNull();
     }
 }

@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @SpringBootTest
 class MemberServiceImplTest {
@@ -29,9 +30,10 @@ class MemberServiceImplTest {
     void getMemberByIdFail1(){
         // given
         // when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> memberService.getMemberById(0L));
+        Throwable throwable = catchThrowable(() -> memberService.getMemberById(0L));
         // then
-        assertEquals("유효하지 않은 회원입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 회원입니다.");
     }
 
     @Test
@@ -54,7 +56,7 @@ class MemberServiceImplTest {
         MemberVo findMember = memberService.getMemberById(saveMember.getId());
 
         // then
-        assertEquals(saveMember.getId(), findMember.getId());
+        assertThat(findMember.getId()).isEqualTo(saveMember.getId());
     }
 
     @Test
@@ -63,8 +65,9 @@ class MemberServiceImplTest {
         // given
         request.setAttribute("loginMemberId", "0");
         // when
-        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> memberService.getMember(request));
+        Throwable throwable = catchThrowable(() -> memberService.getMember(request));
         // then
-        assertEquals("잘못된 접근입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(UnauthorizedException.class)
+                .hasMessage("잘못된 접근입니다.");
     }
 }

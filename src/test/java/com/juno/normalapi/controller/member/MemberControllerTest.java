@@ -1,6 +1,7 @@
 package com.juno.normalapi.controller.member;
 
 import com.juno.normalapi.docs.TestSupport;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,6 +32,7 @@ class MemberControllerTest extends TestSupport {
                 .andDo(print());
         // then
         perform.andExpect(status().is4xxClientError());
-        assertTrue(perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8).contains("유효하지 않은 회원입니다."));
+        String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        Assertions.assertThat(contentAsString).contains("유효하지 않은 회원입니다.");
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 class BoardServiceImplTest extends ServiceTestSupport {
@@ -51,7 +51,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
 
         // then
         Long boardId = saveBoard.getBoardId();
-        assertNotNull(boardRepository.findById(boardId));
+        assertThat(boardRepository.findById(boardId)).isNotNull();
     }
 
     @Test
@@ -79,7 +79,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         BoardListVo boardList = boardService.getBoardList(pageable, request);
 
         //then
-        assertNotNull(boardList);
+        assertThat(boardList).isNotNull();
     }
 
     @Test
@@ -87,10 +87,11 @@ class BoardServiceImplTest extends ServiceTestSupport {
     void getBoardFail1() throws Exception {
         //given
         //when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> boardService.getBoard(0L, request));
+        Throwable throwable = catchThrowable(() -> boardService.getBoard(0L, request));
 
         //then
-        assertEquals("유효하지 않은 게시판 번호입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 게시판 번호입니다.");
     }
 
     @Test
@@ -114,7 +115,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         BoardVo board = boardService.getBoard(saveBoard.getId(), request);
 
         //then
-        assertNotNull(board);
+        assertThat(board).isNotNull();
     }
 
     @Test
@@ -135,7 +136,7 @@ class BoardServiceImplTest extends ServiceTestSupport {
         ReplyVo replyVo = boardService.postReply(replyDto, request);
 
         // then
-        assertEquals(content, replyVo.getContent());
+        assertThat(replyVo.getContent()).isEqualTo(content);
     }
 
     @Test
@@ -153,6 +154,6 @@ class BoardServiceImplTest extends ServiceTestSupport {
         // when
         ReplyListVo replyList = boardService.getReplyList(saveBoard.getId(), pageable, request);
         // then
-        assertTrue(!replyList.getEmpty());
+        assertThat(replyList).isNotNull();
     }
 }

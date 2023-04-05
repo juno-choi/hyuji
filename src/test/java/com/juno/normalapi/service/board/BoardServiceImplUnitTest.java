@@ -18,8 +18,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -56,10 +56,11 @@ class BoardServiceImplUnitTest {
         request.setAttribute("loginMemberId", 0);
 
         // when
-        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postBoard(boardDto, request));
+        Throwable throwable = catchThrowable(() -> boardService.postBoard(boardDto, request));
 
         // then
-        assertEquals("잘못된 접근입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(UnauthorizedException.class)
+                .hasMessage("잘못된 접근입니다.");
     }
     
     @Test
@@ -69,7 +70,7 @@ class BoardServiceImplUnitTest {
         given(env.getProperty(anyString())).willReturn("loginMemberId");
         request.setAttribute("loginMemberId", 0);
         // when
-        UnauthorizedException ex = assertThrows(UnauthorizedException.class, () -> boardService.postReply(
+        Throwable throwable = catchThrowable(() -> boardService.postReply(
                 ReplyDto.builder()
                         .boardId(1L)
                         .content("테스트")
@@ -77,7 +78,8 @@ class BoardServiceImplUnitTest {
                 request
         ));
         // then
-        assertEquals("잘못된 접근입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(UnauthorizedException.class)
+                .hasMessage("잘못된 접근입니다.");
     }
 
     @Test
@@ -89,7 +91,7 @@ class BoardServiceImplUnitTest {
         request.setAttribute("loginMemberId", 1L);
 
         // when
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> boardService.postReply(
+        Throwable throwable = catchThrowable(() -> boardService.postReply(
                 ReplyDto.builder()
                         .boardId(1L)
                         .content("테스트")
@@ -98,6 +100,7 @@ class BoardServiceImplUnitTest {
         ));
 
         // then
-        assertEquals("유효하지 않은 게시판입니다.", ex.getMessage());
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 게시판입니다.");
     }
 }

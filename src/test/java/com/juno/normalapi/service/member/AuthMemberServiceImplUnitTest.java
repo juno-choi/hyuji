@@ -47,9 +47,9 @@ public class AuthMemberServiceImplUnitTest {
         given(memberRepository.findByEmail(anyString())).willReturn(Optional.of(member));
 
         // when
-        Throwable ex = catchThrowable(() -> authMemberService.join(dto));
+        Throwable throwable = catchThrowable(() -> authMemberService.join(dto));
         // then
-        assertThat(ex).isInstanceOf(IllegalArgumentException.class)
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이미 존재하는 이메일 입니다.");
     }
 }

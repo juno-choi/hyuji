@@ -20,11 +20,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -87,8 +86,8 @@ class AuthMemberControllerTest extends TestSupport {
         String accessToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getAccessToken(), "access_token");
         String refreshToken = (String) redisTemplate.opsForHash().get(loginMemberVo.getRefreshToken(), "refresh_token");
 
-        assertEquals(Long.valueOf(accessToken) ,saveMember.getId());
-        assertEquals(Long.valueOf(refreshToken) ,saveMember.getId());
+        assertThat(saveMember.getId()).isEqualTo(Long.valueOf(accessToken));
+        assertThat(saveMember.getId()).isEqualTo(Long.valueOf(refreshToken));
     }
 
     @Test
@@ -116,7 +115,7 @@ class AuthMemberControllerTest extends TestSupport {
         ).andDo(print());
         //then
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        assertTrue(contentAsString.contains("토큰 재발급 성공"));
+        assertThat(contentAsString).contains("토큰 재발급 성공");
     }
 
     @Test
@@ -129,7 +128,7 @@ class AuthMemberControllerTest extends TestSupport {
         ).andDo(print());
         //then
         String contentAsString = perform.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        assertTrue(contentAsString.contains("토큰 값이 유효하지 않습니다."));
+        assertThat(contentAsString).contains("토큰 값이 유효하지 않습니다.");
     }
 
 }
