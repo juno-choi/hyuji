@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  ballmate:
+    container_name: normal
+    build: .
+    ports:
+      - 8000:8000
+    command: "java -jar normal.jar --server.profile=local"
+    environment:
+      - TZ=Asia/Seoul
