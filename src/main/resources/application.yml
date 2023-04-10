@@ -2,61 +2,6 @@ spring:
   #profile 설정
   profiles:
     active: ${server.profile:local}
-
-logging:
-  pattern:
-    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
-  level:
-    root: info
-    com.juno.normalapi: info
-
-server:
-  port: 8000
-
-normal:
-  login:
-    attribute: loginMemberId
-  test:
-    email: juno@test.com
---- #local
-logging:
-  pattern:
-    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
-  level:
-    root: info
-    com.juno.normalapi: debug
-
-token:
-  secret: juno-secret-key-value
-  access:
-    expiration: 3600 # 1시간
-  refresh:
-    expiration: 2592000 # 1달
-
-spring:
-  config:
-    activate:
-      on-profile: local
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
-  jpa:
-    #open-in-view: true #OSIV(Open Session In View) false일 경우 영속성 컨텍스트가 서비스까지만 존재
-    hibernate:
-      ddl-auto: create-drop  #절대 수정 금지
-    show-sql: true
-  datasource:
-    hikari:
-      driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:mem:normal
-      username: sa
-      password:
-  redis:
-    host: localhost
-    port: 6379
   security:
     oauth2:
       client:
@@ -80,4 +25,74 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    root: info
+    com.juno.normalapi: info
+
+server:
+  port: 8000
+
+normal:
+  login:
+    attribute: loginMemberId
+  test:
+    email: juno@test.com
+token:
+  secret: juno-secret-key-value
+  access:
+    expiration: 3600 # 1시간
+  refresh:
+    expiration: 2592000 # 1달
+--- #local
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    root: info
+    com.juno.normalapi: debug
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  #절대 수정 금지
+    show-sql: true
+  datasource:
+    hikari:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:normal
+      username: sa
+      password:
+  redis:
+    host: localhost
+    port: 6379
 --- #dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+  jpa:
+    hibernate:
+      ddl-auto: update  #절대 수정 금지
+    show-sql: true
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${db.url:jdbc:mysql://localhost/normal}
+      username: ${db.username:juno}
+      password: ${db.password:password}
+  redis:
+    host: redis
+    port: 6379

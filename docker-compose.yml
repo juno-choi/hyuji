@@ -5,6 +5,13 @@ services:
     build: .
     ports:
       - 8000:8000
-    command: "java -jar normal.jar --server.profile=local"
     environment:
+      - server.profile=dev
       - TZ=Asia/Seoul
+      - db.url=jdbc:mysql://master/normal
+      - db.username=juno
+      - db.password=password
+networks:
+  default:
+    external:
+      name: normal
