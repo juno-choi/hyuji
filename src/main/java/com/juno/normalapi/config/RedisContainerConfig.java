@@ -1,11 +1,11 @@
 package com.juno.normalapi.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.context.annotation.Profile;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
 
-@ActiveProfiles("local")
+@Profile("local")
 @Configuration
 public class RedisContainerConfig {
     private static final String REDIS_DOCKER_IMAGE = "redis:5.0.3-alpine";
