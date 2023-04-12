@@ -1,6 +1,6 @@
 package com.juno.normalapi.controller.member;
 
-import com.juno.normalapi.docs.TestSupport;
+import com.juno.normalapi.config.TestSupport;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

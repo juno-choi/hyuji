@@ -2,7 +2,7 @@ package com.juno.normalapi.controller.member;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.juno.normalapi.api.Response;
-import com.juno.normalapi.docs.TestSupport;
+import com.juno.normalapi.config.TestSupport;
 import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;

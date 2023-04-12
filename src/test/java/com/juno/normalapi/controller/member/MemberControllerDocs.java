@@ -1,6 +1,6 @@
 package com.juno.normalapi.controller.member;
 
-import com.juno.normalapi.docs.DocsSupport;
+import com.juno.normalapi.config.DocsSupport;
 import com.juno.normalapi.domain.dto.member.JoinMemberDto;
 import com.juno.normalapi.domain.entity.member.Member;
 import com.juno.normalapi.domain.enums.JoinType;

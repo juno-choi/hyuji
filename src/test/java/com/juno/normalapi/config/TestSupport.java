@@ -1,4 +1,4 @@
-package com.juno.normalapi.docs;
+package com.juno.normalapi.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
