@@ -1,6 +1,6 @@
 package com.juno.normalapi.controller.board;
 
-import com.juno.normalapi.docs.DocsSupport;
+import com.juno.normalapi.config.DocsSupport;
 import com.juno.normalapi.domain.dto.board.BoardDto;
 import com.juno.normalapi.domain.dto.board.ReplyDto;
 import com.juno.normalapi.domain.entity.board.Board;

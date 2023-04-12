@@ -128,7 +128,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation ('it.ozimov:embedded-redis:0.7.3') { exclude group: "org.slf4j", module: "slf4j-simple" }
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -142,6 +141,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation "org.testcontainers:testcontainers:1.18.0"
+    implementation platform('org.testcontainers:testcontainers-bom:1.18.0') //import bom
+    implementation('org.testcontainers:mysql') //no version specified
 }
 
 tasks.named('test') {

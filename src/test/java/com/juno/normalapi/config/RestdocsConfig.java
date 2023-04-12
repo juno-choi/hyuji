@@ -1,4 +1,4 @@
-package com.juno.normalapi.docs;
+package com.juno.normalapi.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

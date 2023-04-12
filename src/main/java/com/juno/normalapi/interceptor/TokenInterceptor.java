@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 
-import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Slf4j
 @RequiredArgsConstructor
