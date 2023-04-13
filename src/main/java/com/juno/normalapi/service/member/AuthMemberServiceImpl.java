@@ -72,7 +72,7 @@ public class AuthMemberServiceImpl implements AuthMemberService {
                 .compact();
 
         redisTemplate.opsForHash().put(accessToken, "access_token", String.valueOf(memberId));
-        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
+        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.MILLISECONDS);
 
         LoginMemberVo loginMemberVo = LoginMemberVo.builder()
                 .accessToken(accessToken)

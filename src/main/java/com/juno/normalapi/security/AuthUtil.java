@@ -89,8 +89,8 @@ public class AuthUtil {
         HashOperations<String, Object, Object> opsHash = redisTemplate.opsForHash();
         opsHash.put(accessToken, "access_token", memberIdAsString);
         opsHash.put(refreshToken, "refresh_token", memberIdAsString);
-        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.SECONDS);
-        redisTemplate.expire(refreshToken, refreshTokenExpirationToLong, TimeUnit.SECONDS);
+        redisTemplate.expire(accessToken, accessTokenExpirationToLong, TimeUnit.MILLISECONDS);
+        redisTemplate.expire(refreshToken, refreshTokenExpirationToLong, TimeUnit.MILLISECONDS);
     }
 
     private void writeResponse(HttpServletResponse response, LoginMemberVo loginMemberVo) throws IOException {
