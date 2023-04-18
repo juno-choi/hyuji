@@ -31,7 +31,7 @@ logging:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     root: info
-    com.juno.normalapi: info
+    com.juno.hyugi: info
 
 server:
   port: 8000
@@ -53,7 +53,7 @@ logging:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     root: info
-    com.juno.normalapi: debug
+    com.juno.hyugi: debug
 
 spring:
   config:
@@ -72,7 +72,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:mem:normal
+      jdbc-url: jdbc:h2:mem:hyugi
       username: sa
       password:
   redis:
@@ -90,7 +90,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: ${db.url:jdbc:mysql://localhost/normal}
+      jdbc-url: ${db.url:jdbc:mysql://localhost/hyugi}
       username: ${db.username:juno}
       password: ${db.password:password}
   redis:

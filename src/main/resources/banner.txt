@@ -1,3 +1,4 @@
+${AnsiColor.BRIGHT_WHITE} 🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻🧻
 ${AnsiColor.RED}  _        _  _            __ _     _
 ${AnsiColor.BRIGHT_RED} | |_     | || |  _  _    / _` |   (_)
 ${AnsiColor.BRIGHT_YELLOW} | ' \     \_, | | +| |   \__, |   | |

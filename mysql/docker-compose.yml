@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: master
     environment:
-      MYSQL_DATABASE: 'normal'
+      MYSQL_DATABASE: 'hyugi'
       MYSQL_USER: 'juno'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
@@ -27,7 +27,7 @@ volumes:
 networks:
   net:
     external:
-      name: normal
+      name: hyugi
 
-# docker network create normal --subnet=192.168.14.0/24
+# docker network create hyugi --subnet=192.168.14.0/24
 # CHANGE MASTER TO MASTER_HOST='192.168.14.3', MASTER_USER='root', MASTER_PASSWORD='password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=0, GET_MASTER_PUBLIC_KEY=1;

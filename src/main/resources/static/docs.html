@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.16">
-<title>👏 normal API</title>
+<title>🧻 hyugi API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>👏 normal API</h1>
+<h1>🧻 hyugi API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">molu api</div>
 <ul class="sectlevel1">
@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/join HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 246
+Content-Length: 255
 Host: 127.0.0.1
 
 {
@@ -569,7 +569,7 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 352
+Content-Length: 366
 
 {
   "code" : "SUCCESS",
@@ -672,7 +672,7 @@ Content-Length: 352
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/member/login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 59
+Content-Length: 62
 Host: 127.0.0.1
 
 {
@@ -721,16 +721,16 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 535
+Content-Length: 544
 
 {
   "code" : "SUCCESS",
   "message" : "로그인 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgwNjE3MjA0LCJyb2xlcyI6WyJVU0VSIl19.sKT28FZQ6xWz_tC4iP_4kXKSA6rCQeWK400oixgi7louwC0nysyd7eidbXHxxlwkgwlQV-KOSy5AfkNznCW5HQ",
-    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgzMjA1NjA0fQ.FK4qHyxuSL38apAJHtHT7IyyzjRuebpeZ_lbNwiTTXgE9LIOgXxIsvyTr2u0Puh8MgRW32ar-BVMUEJ7bKRKHQ",
-    "access_token_expiration" : 1680617204347,
-    "refresh_token_expiration" : 1683205604348
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjgxNzgyMTM1LCJyb2xlcyI6WyJVU0VSIl19.9dcy16F4_mo2rGBdoQ60_oFw-ZS-y5TChSlWkhZgFh2cdZiCUOQj6zhAyCwqc9LoIDWooBFGQwBLXh4zgbMZ5w",
+    "refresh_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjg0MzcwNTM1fQ.XyZQaBs54KE-8CPp4S3RKwuvIVvBqi8w-q6vgUNqcEDLUB_aYmpccBbLwXJ9K4viKboIgxjI8lxmqxCg38vcCw",
+    "access_token_expiration" : 1681782135534,
+    "refresh_token_expiration" : 1684370535534
   }
 }</code></pre>
 </div>
@@ -828,14 +828,14 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 322
+Content-Length: 329
 
 {
   "code" : "SUCCESS",
   "message" : "토큰 재발급 성공",
   "data" : {
-    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgwNjE3MjA0LCJyb2xlcyI6WyJVU0VSIl19.7cRnN_nrAn0dydDiMPc9Gja4QKW_rc0WInvB5fX3NUIVa0BpP8K-jHrmN9JfVQnPfAQ6Aq9FIUeGVwi-cAUQMg",
-    "access_token_expiration" : 1680617204376
+    "access_token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjgxNzgyMTM1LCJyb2xlcyI6WyJVU0VSIl19.s79ytNllCnL__1QWk_JoOZa8Z8bNDpqJQXElePuPIV83OeAV5P-1qdqpGkzpqXbmcSMrQ4ov2PGnorVgL0RyrA",
+    "access_token_expiration" : 1681782135610
   }
 }</code></pre>
 </div>
@@ -900,7 +900,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 426
+Content-Length: 442
 
 {
   "code" : "SUCCESS",
@@ -915,8 +915,8 @@ Content-Length: 426
     "zip_code" : "우편번호",
     "address" : "주소",
     "address_detail" : "상세주소",
-    "created_at" : "2023-04-04T22:27:49.488438",
-    "modified_at" : "2023-04-04T22:27:49.488438"
+    "created_at" : "2023-04-18T09:42:14.826114",
+    "modified_at" : "2023-04-18T09:42:14.826114"
   }
 }</code></pre>
 </div>
@@ -1050,7 +1050,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 454
+Content-Length: 472
 
 {
   "code" : "SUCCESS",
@@ -1065,8 +1065,8 @@ Content-Length: 454
     "zip_code" : "12345",
     "address" : "경기도 성남시 중원구 자혜로17번길 16",
     "address_detail" : "상세 주소",
-    "created_at" : "2023-04-04T22:06:44.750054",
-    "modified_at" : "2023-04-04T22:06:44.750054"
+    "created_at" : "2023-04-18T09:42:16.0306798",
+    "modified_at" : "2023-04-18T09:42:16.0306798"
   }
 }</code></pre>
 </div>
@@ -1251,7 +1251,7 @@ Host: kauth.kakao.com</code></pre>
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Authorization: Bearer test
-Content-Length: 65
+Content-Length: 68
 Host: 127.0.0.1
 
 {
@@ -1300,7 +1300,7 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 333
+Content-Length: 348
 
 {
   "code" : "SUCCESS",
@@ -1312,8 +1312,8 @@ Content-Length: 333
     "content" : "테스트 내용",
     "writer" : "테스터닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-04-04T22:06:42.813658",
-    "modified_at" : "2023-04-04T22:06:42.813658"
+    "created_at" : "2023-04-18T09:42:13.0043798",
+    "modified_at" : "2023-04-18T09:42:13.0043798"
   }
 }</code></pre>
 </div>
@@ -1436,7 +1436,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1622
+Content-Length: 1678
 
 {
   "code" : "SUCCESS",
@@ -1454,8 +1454,8 @@ Content-Length: 1622
       "content" : "내용 19",
       "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-04-04T22:06:42.415397",
-      "modified_at" : "2023-04-04T22:06:42.415397"
+      "created_at" : "2023-04-18T09:42:12.222182",
+      "modified_at" : "2023-04-18T09:42:12.222182"
     }, {
       "board_id" : 19,
       "member_id" : 1,
@@ -1463,8 +1463,8 @@ Content-Length: 1622
       "content" : "내용 18",
       "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-04-04T22:06:42.415036",
-      "modified_at" : "2023-04-04T22:06:42.415036"
+      "created_at" : "2023-04-18T09:42:12.221182",
+      "modified_at" : "2023-04-18T09:42:12.221182"
     }, {
       "board_id" : 18,
       "member_id" : 1,
@@ -1472,8 +1472,8 @@ Content-Length: 1622
       "content" : "내용 17",
       "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-04-04T22:06:42.414356",
-      "modified_at" : "2023-04-04T22:06:42.414356"
+      "created_at" : "2023-04-18T09:42:12.221182",
+      "modified_at" : "2023-04-18T09:42:12.221182"
     }, {
       "board_id" : 17,
       "member_id" : 1,
@@ -1481,8 +1481,8 @@ Content-Length: 1622
       "content" : "내용 16",
       "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-04-04T22:06:42.413994",
-      "modified_at" : "2023-04-04T22:06:42.413994"
+      "created_at" : "2023-04-18T09:42:12.220182",
+      "modified_at" : "2023-04-18T09:42:12.220182"
     }, {
       "board_id" : 16,
       "member_id" : 1,
@@ -1490,8 +1490,8 @@ Content-Length: 1622
       "content" : "내용 15",
       "writer" : "테스터닉네임",
       "reply_count" : 0,
-      "created_at" : "2023-04-04T22:06:42.413558",
-      "modified_at" : "2023-04-04T22:06:42.413558"
+      "created_at" : "2023-04-18T09:42:12.219182",
+      "modified_at" : "2023-04-18T09:42:12.219182"
     } ]
   }
 }</code></pre>
@@ -1635,7 +1635,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 319
+Content-Length: 334
 
 {
   "code" : "SUCCESS",
@@ -1647,8 +1647,8 @@ Content-Length: 319
     "content" : "내용",
     "writer" : "테스터닉네임",
     "reply_count" : 0,
-    "created_at" : "2023-04-04T22:06:42.731476",
-    "modified_at" : "2023-04-04T22:06:42.731476"
+    "created_at" : "2023-04-18T09:42:12.8633798",
+    "modified_at" : "2023-04-18T09:42:12.8633798"
   }
 }</code></pre>
 </div>
@@ -1733,7 +1733,7 @@ Content-Length: 319
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/board/reply HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Authorization: Bearer test
-Content-Length: 58
+Content-Length: 61
 Host: 127.0.0.1
 
 {
@@ -1782,7 +1782,7 @@ Host: 127.0.0.1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 277
+Content-Length: 288
 
 {
   "code" : "SUCCESS",
@@ -1791,8 +1791,8 @@ Content-Length: 277
     "id" : 101,
     "board_id" : 24,
     "content" : "댓글 달었지롱",
-    "created_at" : "2023-04-04T22:06:42.849272",
-    "modified_at" : "2023-04-04T22:06:42.849272",
+    "created_at" : "2023-04-18T09:42:13.054382",
+    "modified_at" : "2023-04-18T09:42:13.054382",
     "writer" : "테스터닉네임"
   }
 }</code></pre>
@@ -1911,7 +1911,7 @@ Host: 127.0.0.1</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 2405
+Content-Length: 2486
 
 {
   "code" : "SUCCESS",
@@ -1926,71 +1926,71 @@ Content-Length: 2405
       "id" : 90,
       "board_id" : 21,
       "content" : "댓글89",
-      "created_at" : "2023-04-04T22:06:42.681409",
-      "modified_at" : "2023-04-04T22:06:42.681409",
+      "created_at" : "2023-04-18T09:42:12.731378",
+      "modified_at" : "2023-04-18T09:42:12.731378",
       "writer" : "테스터닉네임"
     }, {
       "id" : 89,
       "board_id" : 21,
       "content" : "댓글88",
-      "created_at" : "2023-04-04T22:06:42.681093",
-      "modified_at" : "2023-04-04T22:06:42.681093",
+      "created_at" : "2023-04-18T09:42:12.730379",
+      "modified_at" : "2023-04-18T09:42:12.730379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 88,
       "board_id" : 21,
       "content" : "댓글87",
-      "created_at" : "2023-04-04T22:06:42.680764",
-      "modified_at" : "2023-04-04T22:06:42.680764",
+      "created_at" : "2023-04-18T09:42:12.730379",
+      "modified_at" : "2023-04-18T09:42:12.730379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 87,
       "board_id" : 21,
       "content" : "댓글86",
-      "created_at" : "2023-04-04T22:06:42.680457",
-      "modified_at" : "2023-04-04T22:06:42.680457",
+      "created_at" : "2023-04-18T09:42:12.729379",
+      "modified_at" : "2023-04-18T09:42:12.729379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 86,
       "board_id" : 21,
       "content" : "댓글85",
-      "created_at" : "2023-04-04T22:06:42.680142",
-      "modified_at" : "2023-04-04T22:06:42.680142",
+      "created_at" : "2023-04-18T09:42:12.729379",
+      "modified_at" : "2023-04-18T09:42:12.729379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 85,
       "board_id" : 21,
       "content" : "댓글84",
-      "created_at" : "2023-04-04T22:06:42.679828",
-      "modified_at" : "2023-04-04T22:06:42.679828",
+      "created_at" : "2023-04-18T09:42:12.728379",
+      "modified_at" : "2023-04-18T09:42:12.728379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 84,
       "board_id" : 21,
       "content" : "댓글83",
-      "created_at" : "2023-04-04T22:06:42.679472",
-      "modified_at" : "2023-04-04T22:06:42.679472",
+      "created_at" : "2023-04-18T09:42:12.728379",
+      "modified_at" : "2023-04-18T09:42:12.728379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 83,
       "board_id" : 21,
       "content" : "댓글82",
-      "created_at" : "2023-04-04T22:06:42.679106",
-      "modified_at" : "2023-04-04T22:06:42.679106",
+      "created_at" : "2023-04-18T09:42:12.727379",
+      "modified_at" : "2023-04-18T09:42:12.727379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 82,
       "board_id" : 21,
       "content" : "댓글81",
-      "created_at" : "2023-04-04T22:06:42.678788",
-      "modified_at" : "2023-04-04T22:06:42.678788",
+      "created_at" : "2023-04-18T09:42:12.727379",
+      "modified_at" : "2023-04-18T09:42:12.727379",
       "writer" : "테스터닉네임"
     }, {
       "id" : 81,
       "board_id" : 21,
       "content" : "댓글80",
-      "created_at" : "2023-04-04T22:06:42.678437",
-      "modified_at" : "2023-04-04T22:06:42.678437",
+      "created_at" : "2023-04-18T09:42:12.726379",
+      "modified_at" : "2023-04-18T09:42:12.726379",
       "writer" : "테스터닉네임"
     } ]
   }
@@ -2088,7 +2088,7 @@ Content-Length: 2405
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-04 22:29:40 +0900
+Last updated 2023-04-18 09:12:05 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

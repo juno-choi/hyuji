@@ -8,7 +8,7 @@ endif::[]
 :source-highlighter: highlightjs
 :sectlinks:
 
-= 👏 normal API
+= 🧻 hyugi API
 
 == 📗 회원
 

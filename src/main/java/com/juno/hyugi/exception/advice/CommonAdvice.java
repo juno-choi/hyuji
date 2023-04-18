@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestControllerAdvice(basePackages = "com.juno.normalapi")
+@RestControllerAdvice(basePackages = "com.juno.hyugi")
 public class CommonAdvice {
     @ExceptionHandler
     public ResponseEntity<ResponseError<String>> illegalArgumentException(IllegalArgumentException e){

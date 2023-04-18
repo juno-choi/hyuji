@@ -1,8 +1,8 @@
-# 📗 Normal API
+# 🧻 Hyugi API
 
-일반적인 사이트에서 사용되는 API
+휴게소 지도의 줄임말 <span style="background-color: #F00">휴지</sapn>
 
-👉 [깃허브 주소](https://github.com/juno-choi/normal-api)
+👉 [깃허브 주소](https://github.com/juno-choi/hyuji)
 
 👉 [서버 실행 후 문서 url](http://localhost:8000/docs.html)
 

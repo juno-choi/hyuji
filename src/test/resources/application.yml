@@ -8,7 +8,7 @@ logging:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     root: info
-    com.juno.normalapi: info
+    com.juno.hyugi: info
 
 server:
   port: 8000
@@ -24,7 +24,7 @@ logging:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     root: info
-    com.juno.normalapi: debug
+    com.juno.hyugi: debug
 
 token:
   secret: juno-secret-key-value
@@ -51,7 +51,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:mem:normal
+      jdbc-url: jdbc:h2:mem:hyugi
       username: sa
       password:
   redis:

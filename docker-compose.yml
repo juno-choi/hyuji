@@ -1,17 +1,17 @@
 version: '3.7'
 services:
-  ballmate:
-    container_name: normal
+  hyugi:
+    container_name: hyugi
     build: .
     ports:
       - 8000:8000
     environment:
       - server.profile=dev
       - TZ=Asia/Seoul
-      - db.url=jdbc:mysql://master/normal
+      - db.url=jdbc:mysql://master/hyugi
       - db.username=juno
       - db.password=password
 networks:
   default:
     external:
-      name: normal
+      name: hyugi
