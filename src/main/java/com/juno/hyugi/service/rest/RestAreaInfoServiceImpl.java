@@ -6,6 +6,7 @@ import com.juno.hyugi.repository.rest.RestAreaInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,19 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class RestAreaInfoServiceImpl implements RestAresInfoService{
     private final RestAreaInfoRepository restAreaInfoRepository;
 
     @Override
     public List<RestAreaInfoVo> getRestAreaInfo(String keyword) {
         log.info("keyword = {}", keyword);
-        List<RestAreaInfo> bySvarNmLike = restAreaInfoRepository.findBySvarNmLike(keyword);
+        StringBuilder sb = new StringBuilder();
+        sb.append("%");
+        sb.append(keyword);
+        sb.append("%");
+
+        List<RestAreaInfo> bySvarNmLike = restAreaInfoRepository.findBySvarNmLike(sb.toString());
         List<RestAreaInfoVo> list = new ArrayList<>();
         for(RestAreaInfo i : bySvarNmLike){
             list.add(
