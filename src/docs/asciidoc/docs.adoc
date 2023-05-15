@@ -247,3 +247,22 @@ include::{snippets}/board-controller-docs/get-reply-list/http-response.adoc[]
 ==== ✅ RESPONSE FIELD
 
 include::{snippets}/board-controller-docs/get-reply-list/response-fields.adoc[]
+
+## 📗 휴게소
+
+### 📄 휴게소 정보 불러오기소
+
+==== ✅ REQUEST
+include::{snippets}/rest-area-controller-docs/rest-area-search/http-request.adoc[]
+
+==== ✅ REQUEST PARAMETER
+
+include::{snippets}/rest-area-controller-docs/rest-area-search/request-parameters.adoc[]
+
+==== ✅ RESPONSE
+
+include::{snippets}/rest-area-controller-docs/rest-area-search/http-response.adoc[]
+
+==== ✅ RESPONSE FIELD
+
+include::{snippets}/rest-area-controller-docs/rest-area-search/response-fields.adoc[]

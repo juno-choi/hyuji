@@ -1,9 +1,8 @@
 package com.juno.hyugi.service.rest;
 
-import com.juno.hyugi.domain.vo.rest.RestAreaInfoVo;
+import com.juno.hyugi.domain.vo.rest.RestAreaInfoListVo;
 
-import java.util.List;
 
 public interface RestAresInfoService {
-    List<RestAreaInfoVo> getRestAreaInfo(String keyword);
+    RestAreaInfoListVo getRestAreaInfo(String keyword);
 }

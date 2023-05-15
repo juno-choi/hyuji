@@ -1,6 +1,7 @@
 package com.juno.hyugi.service.rest;
 
 import com.juno.hyugi.domain.entity.rest.RestAreaInfo;
+import com.juno.hyugi.domain.vo.rest.RestAreaInfoListVo;
 import com.juno.hyugi.domain.vo.rest.RestAreaInfoVo;
 import com.juno.hyugi.repository.rest.RestAreaInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class RestAreaInfoServiceImpl implements RestAresInfoService{
     private final RestAreaInfoRepository restAreaInfoRepository;
 
     @Override
-    public List<RestAreaInfoVo> getRestAreaInfo(String keyword) {
+    public RestAreaInfoListVo getRestAreaInfo(String keyword) {
         log.info("keyword = {}", keyword);
         StringBuilder sb = new StringBuilder();
         sb.append("%");
@@ -54,6 +55,8 @@ public class RestAreaInfoServiceImpl implements RestAresInfoService{
                             .build()
             );
         }
-        return list;
+        return RestAreaInfoListVo.builder()
+                .list(list)
+                .build();
     }
 }

@@ -1,15 +1,13 @@
 package com.juno.hyugi.service.rest;
 
 import com.juno.hyugi.domain.entity.rest.RestAreaInfo;
-import com.juno.hyugi.domain.vo.rest.RestAreaInfoVo;
+import com.juno.hyugi.domain.vo.rest.RestAreaInfoListVo;
 import com.juno.hyugi.repository.rest.RestAreaInfoRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 
 @SpringBootTest
@@ -33,10 +31,10 @@ class RestAreaInfoServiceImplTest {
         );
 
         // when
-        List<RestAreaInfoVo> list = restAresInfoService.getRestAreaInfo("%평택%");
+        RestAreaInfoListVo listVo = restAresInfoService.getRestAreaInfo("%평택%");
 
         // then
-        Assertions.assertThat(list.stream().filter(
+        Assertions.assertThat(listVo.getList().stream().filter(
                 f -> f.getSvarNm().equals("평택휴게소")
         ).findFirst().get().getSvarNm()).isEqualTo(restName);
     }
